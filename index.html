@@ -1216,8 +1216,62 @@
     </div>
   </div>
 
-  <!-- Chinese Festival Dragon (cursor-following) -->
-  <div id="parade-dragon" aria-hidden="true"></div>
+  <!-- Floating Chinese Dragon -->
+  <div id="floating-dragon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none">
+      <!-- Tail flame -->
+      <path d="M12 58c-4-8 2-18 8-14s-2 12-2 12c6-6 12-4 8 4s-10 6-14-2z" fill="#FFA726"/>
+      <path d="M16 56c-2-5 2-10 5-8s0 8 0 8c3-4 7-2 5 3s-7 3-10-3z" fill="#FF7043"/>
+      <!-- Body (S-curve, thick red) -->
+      <path d="M18 60 C40 45, 55 30, 80 35 C105 40, 100 75, 125 80 C150 85, 155 50, 180 45 C205 40, 210 70, 235 75 C255 79, 265 60, 275 55" stroke="#EF4444" stroke-width="28" stroke-linecap="round" fill="none"/>
+      <!-- Yellow underbelly scallops -->
+      <path d="M22 62 C35 52, 48 40, 65 40 C82 40, 85 55, 100 60 C115 65, 125 75, 140 72 C155 69, 158 55, 175 50 C192 45, 198 55, 215 60 C230 65, 245 72, 258 68 C265 66, 270 60, 275 58" stroke="#FBBF24" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <!-- Body stripe details -->
+      <circle cx="60" cy="36" r="3" fill="#DC2626"/>
+      <circle cx="100" cy="65" r="3" fill="#DC2626"/>
+      <circle cx="145" cy="68" r="2.5" fill="#DC2626"/>
+      <circle cx="190" cy="48" r="3" fill="#DC2626"/>
+      <circle cx="230" cy="70" r="2.5" fill="#DC2626"/>
+      <!-- Front arm -->
+      <g transform="translate(240,78)">
+        <path d="M0 0c5 8 2 18 2 18" stroke="#EF4444" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M0 16c-3 3-1 6-1 6M2 17c0 4 2 6 2 6M4 16c3 3 3 6 3 6" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </g>
+      <!-- Back arm -->
+      <g transform="translate(75,42)">
+        <path d="M0 0c-4 7-2 15-2 15" stroke="#EF4444" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        <path d="M-4 13c-2 2-1 5-1 5M-2 14c0 3 1 5 1 5M0 13c2 2 2 5 2 5" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </g>
+      <!-- Head -->
+      <ellipse cx="285" cy="52" rx="28" ry="24" fill="#EF4444"/>
+      <!-- Yellow mane/ruff -->
+      <path d="M262 35c-5-10 0-18 6-14s2 10 2 10c4-6 10-6 10 0s-6 8-6 8" fill="#FBBF24"/>
+      <path d="M258 45c-8-6-6-16 0-14s4 10 4 10" fill="#FBBF24"/>
+      <path d="M260 58c-8 2-10-6-6-10s8 2 8 2" fill="#FBBF24"/>
+      <path d="M265 28c-2-10 4-14 8-10s0 10 0 10" fill="#FBBF24"/>
+      <path d="M275 22c0-8 6-10 9-6s-1 10-1 10" fill="#FBBF24"/>
+      <path d="M288 20c2-8 8-8 9-3s-4 8-4 8" fill="#FBBF24"/>
+      <path d="M298 24c4-6 10-4 9 1s-6 6-6 6" fill="#FBBF24"/>
+      <!-- Horns -->
+      <path d="M278 28c-2-12 3-18 6-16s1 10-2 14" fill="#DC2626"/>
+      <path d="M292 26c0-12 5-16 8-13s-1 10-4 13" fill="#DC2626"/>
+      <!-- Eyes -->
+      <ellipse cx="280" cy="48" rx="5" ry="5.5" fill="white"/>
+      <ellipse cx="296" cy="46" rx="5" ry="5.5" fill="white"/>
+      <circle cx="282" cy="49" r="2.5" fill="#1a1a1a"/>
+      <circle cx="298" cy="47" r="2.5" fill="#1a1a1a"/>
+      <circle cx="283" cy="48" r="1" fill="white"/>
+      <circle cx="299" cy="46" r="1" fill="white"/>
+      <!-- Nostrils -->
+      <ellipse cx="304" cy="52" rx="2" ry="1.5" fill="#B91C1C"/>
+      <ellipse cx="308" cy="51" rx="1.5" ry="1" fill="#B91C1C"/>
+      <!-- Smile -->
+      <path d="M295 58c4 3 10 3 14 0" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <!-- Whiskers -->
+      <path d="M308 56c8 4 16 2 20-2" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M306 62c6 6 14 8 20 6" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
 
   <!-- ============================================ -->
   <!-- SCRIPTS -->
