@@ -743,63 +743,74 @@
   <!-- ============================================ -->
   <!-- 6. WHY CHOOSE US -->
   <!-- ============================================ -->
-  <section id="why-choose-us" class="mt-28 py-20 bg-white-grid section-animate">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
+  <section id="why-choose-us" class="mt-28 py-20 bg-white-grid">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 section-animate">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">
           Why <span class="gradient-text gradient-text-glow">Choose Us</span>
         </h2>
-        <p class="text-white/50 text-base max-w-2xl mx-auto">
+        <p class="text-white/50 text-base max-w-xl mx-auto">
           We deliver optimized, reliable solutions that integrate smoothly and perform <strong class="text-white">consistently</strong> on your server.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        <!-- Card 1: Support & Community -->
-        <div class="card-bg feature-card-glow border border-white/5 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <i class="fa-brands fa-discord text-accent text-xl"></i>
+      <!-- Asymmetric bento grid -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-5">
+
+        <!-- Card 1: Support & Community — hero card, 3 cols -->
+        <div class="bento-card bento-discord md:col-span-3 border border-white/5 rounded-lg p-7 sm:p-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(18,18,18,0.95) 0%, rgba(30,20,35,0.85) 100%);">
+          <div class="flex items-start justify-between mb-5">
+            <div>
+              <h3 class="text-white font-bold text-xl mb-1">Support & Community</h3>
+              <p class="text-white/40 text-sm">Real humans. Real help. Not a ticket queue.</p>
             </div>
-            <h3 class="text-white font-bold text-lg">Support & Community</h3>
+            <div class="bento-discord-badge flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium" style="background: rgba(88,101,242,0.15); border: 1px solid rgba(88,101,242,0.25); color: #7c8af4;">
+              <span class="inline-block w-2 h-2 rounded-full bg-green-500 bento-online-dot"></span>
+              127 online
+            </div>
           </div>
-          <p class="text-white/50 text-sm mb-4">Join our active Discord community for instant support, updates, and discussions with other server owners and our development team.</p>
-          <a href="#" class="text-accent text-sm font-medium hover:underline">Join our Discord!</a>
+          <p class="text-white/50 text-sm leading-relaxed mb-5 max-w-md">Join our active Discord community for instant support, updates, and discussions with other server owners and our development team.</p>
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium transition-colors" style="color: #7c8af4;">
+            <i class="fa-brands fa-discord"></i>
+            Join our Discord
+            <span class="text-white/20">&rarr;</span>
+          </a>
         </div>
 
-        <!-- Card 2: Quality & Performance -->
-        <div class="card-bg feature-card-glow border border-white/5 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <i class="fa-solid fa-file-lines text-accent text-xl"></i>
-            </div>
-            <h3 class="text-white font-bold text-lg">Quality & Performance</h3>
+        <!-- Card 2: Quality & Performance — stat-led, 2 cols -->
+        <div class="bento-card bento-perf md:col-span-2 border-l-2 border border-white/5 rounded-lg p-6 relative" style="background: linear-gradient(180deg, rgba(18,18,18,0.95) 0%, rgba(16,24,20,0.9) 100%); border-left-color: rgba(16,185,129,0.35);">
+          <div class="mb-4">
+            <span class="bento-perf-stat font-mono text-3xl font-bold tracking-tight" style="color: #34d399;">0.01<span class="text-lg">ms</span></span>
+            <p class="text-white/30 text-xs mt-1 font-mono tracking-wide uppercase">avg. resource usage</p>
           </div>
-          <p class="text-white/50 text-sm mb-4">Every script is thoroughly tested and optimized to ensure minimal resource usage while delivering maximum functionality for your server.</p>
-          <a href="#" class="text-accent text-sm font-medium hover:underline">Read our Docs!</a>
+          <h3 class="text-white font-semibold text-base mb-2">Quality & Performance</h3>
+          <p class="text-white/40 text-sm leading-relaxed mb-4">Every script is thoroughly tested and optimized to ensure minimal resource usage while delivering maximum functionality.</p>
+          <a href="#" class="text-accent text-sm font-medium hover:underline">Read our Docs &rarr;</a>
         </div>
 
-        <!-- Card 3: Easy to Use -->
-        <div class="card-bg feature-card-glow border border-white/5 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <i class="fa-solid fa-wand-magic-sparkles text-accent text-xl"></i>
-            </div>
-            <h3 class="text-white font-bold text-lg">Easy to Use</h3>
+        <!-- Card 3: Easy to Use — compact, declarative, 2 cols -->
+        <div class="bento-card bento-easy md:col-span-2 border border-white/5 rounded-lg p-5 relative" style="background: #161616;">
+          <h3 class="text-white font-semibold text-base mb-3">Easy to Use</h3>
+          <p class="text-white/60 text-sm font-medium leading-snug mb-4">Install in minutes.<br>Configure in seconds.</p>
+          <div class="font-mono text-xs px-3 py-2 rounded" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.45);">
+            <span style="color: #FF3A52;">$</span> ensure 0r-vehicle<span class="bento-cursor">|</span>
           </div>
-          <p class="text-white/50 text-sm">Our scripts come with detailed documentation and intuitive configuration files, making installation and customization simple for everyone.</p>
         </div>
 
-        <!-- Card 4: Tebex Security -->
-        <div class="card-bg feature-card-glow border border-white/5 rounded-lg p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <i class="fa-solid fa-shield-halved text-accent text-xl"></i>
-            </div>
-            <h3 class="text-white font-bold text-lg">Tebex Security</h3>
+        <!-- Card 4: Tebex Security — wide banner, 3 cols -->
+        <div class="bento-card bento-tebex md:col-span-3 border border-dashed border-white/10 rounded-lg px-6 py-4 flex items-center gap-5" style="background: rgba(18,18,18,0.9);">
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex.png" alt="Tebex" class="w-8 h-8 opacity-60 shrink-0">
+          <div class="flex-1 min-w-0">
+            <span class="text-white font-semibold text-sm">Tebex Security</span>
+            <span class="text-white/30 mx-2">&middot;</span>
+            <span class="text-white/40 text-sm">Industry-standard encryption. Safe payments. Instant delivery.</span>
           </div>
-          <p class="text-white/50 text-sm">All transactions are secured through Tebex with industry-standard encryption, ensuring safe payments and instant delivery of your purchases.</p>
+          <div class="hidden sm:flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded" style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15); color: rgba(16,185,129,0.6);">
+            <i class="fa-solid fa-lock text-[10px]"></i>
+            SECURED
+          </div>
         </div>
+
       </div>
     </div>
   </section>

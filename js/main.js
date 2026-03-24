@@ -195,6 +195,27 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    // Bento "Why Choose Us" choreographed entrance
+    const bentoSection = document.querySelector('#why-choose-us');
+    if (bentoSection) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: bentoSection,
+          start: 'top 80%',
+          once: true,
+        }
+      });
+      const discord = bentoSection.querySelector('.bento-discord');
+      const perf = bentoSection.querySelector('.bento-perf');
+      const easy = bentoSection.querySelector('.bento-easy');
+      const tebex = bentoSection.querySelector('.bento-tebex');
+
+      if (discord) tl.from(discord, { y: 40, opacity: 0, duration: 0.7, ease: 'power2.out' });
+      if (perf) tl.from(perf, { y: 30, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.35');
+      if (easy) tl.from(easy, { y: 20, opacity: 0, duration: 0.5, ease: 'back.out(1.4)' }, '-=0.25');
+      if (tebex) tl.from(tebex, { y: 15, opacity: 0, duration: 0.4, ease: 'power1.out' }, '-=0.15');
+    }
+
     // Achievement counter animation
     const counterElements = document.querySelectorAll('.counter-value[data-target]');
     counterElements.forEach(el => {
