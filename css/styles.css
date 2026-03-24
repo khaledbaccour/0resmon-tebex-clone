@@ -1130,6 +1130,113 @@ a[class*="btn-red-glow"] {
   margin: 0 auto;
 }
 
+/* --- YouTube Section --- */
+.yt-featured {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+}
+.yt-featured:hover {
+  transform: scale(1.015);
+  box-shadow: 0 0 40px rgba(255, 58, 82, 0.15), 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.yt-featured-img {
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), filter 0.6s ease;
+}
+.yt-featured:hover .yt-featured-img {
+  transform: scale(1.04);
+  filter: brightness(1.08);
+}
+
+.yt-play-btn {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 58, 82, 0.9);
+  backdrop-filter: blur(4px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 30px rgba(255, 58, 82, 0.4), 0 0 60px rgba(255, 58, 82, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  animation: ytPlayPulse 2.5s ease-in-out infinite;
+}
+@keyframes ytPlayPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(255, 58, 82, 0.4), 0 0 60px rgba(255, 58, 82, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(255, 58, 82, 0.55), 0 0 80px rgba(255, 58, 82, 0.25); }
+}
+.yt-featured:hover .yt-play-btn {
+  transform: scale(1.12);
+  background: rgba(255, 58, 82, 0.95);
+  box-shadow: 0 0 50px rgba(255, 58, 82, 0.5), 0 0 80px rgba(255, 58, 82, 0.2);
+}
+
+.yt-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #FF3A52;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.yt-duration {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.75);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+
+/* Side cards — each varies */
+.yt-side-card {
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease;
+}
+.yt-side-card:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.yt-side-card--accent {
+  border-left: 2px solid rgba(255, 58, 82, 0.35);
+  border-radius: 2px 6px 6px 2px;
+}
+.yt-side-card--accent:hover {
+  border-left-color: rgba(255, 58, 82, 0.7);
+}
+.yt-side-card--dashed {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 6px 6px 2px 2px;
+}
+
+.yt-side-img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.yt-side-card:hover .yt-side-img {
+  transform: scale(1.06);
+  filter: brightness(1.1);
+}
+
+.yt-watch-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: rgba(255, 58, 82, 0.6);
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+.yt-side-card:hover .yt-watch-link {
+  color: rgba(255, 58, 82, 1);
+  gap: 6px;
+}
+
 /* --- Responsive Utilities --- */
 @media (max-width: 768px) {
   .hero-logos-container {

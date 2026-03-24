@@ -248,7 +248,35 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // YouTube: slide from right
+    // YouTube: asymmetric entrance — featured from left, side cards stagger from right
+    var ytSection = document.getElementById('youtube');
+    if (ytSection) {
+      var ytFeatured = ytSection.querySelector('.yt-featured');
+      var ytSideCards = ytSection.querySelectorAll('.yt-side-card');
+      var ytHeader = ytSection.querySelector('.yt-header');
+
+      // Use individual ScrollTriggers to avoid hash-nav timing issues
+      if (ytHeader) {
+        gsap.from(ytHeader, {
+          opacity: 0, x: -25, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: ytSection, start: 'top 85%', once: true }
+        });
+      }
+      if (ytFeatured) {
+        gsap.from(ytFeatured, {
+          opacity: 0, x: -50, rotation: -0.8, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: ytSection, start: 'top 85%', once: true }
+        });
+      }
+      if (ytSideCards.length) {
+        gsap.from(ytSideCards, {
+          opacity: 0, x: 35, duration: 0.5, ease: 'power2.out', stagger: 0.15,
+          scrollTrigger: { trigger: ytSection, start: 'top 85%', once: true }
+        });
+      }
+    }
+
+    // Generic slide-right (other sections)
     gsap.utils.toArray('.anim-slide-right').forEach(el => {
       gsap.from(el, {
         opacity: 0, x: 40, duration: 0.9, ease: 'power3.out',
