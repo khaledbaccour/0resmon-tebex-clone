@@ -113,14 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currencyDropdown) currencyDropdown.classList.remove('open');
   });
 
-  // ---- Swiper Product Carousel ----
+  // ---- Swiper Product Carousel (continuous smooth scroll) ----
   const productSwiper = new Swiper('.product-swiper', {
     slidesPerView: 'auto',
     spaceBetween: 24,
     centeredSlides: true,
     loop: true,
+    speed: 8000,
+    allowTouchMove: true,
+    freeMode: {
+      enabled: true,
+      momentum: false,
+    },
     autoplay: {
-      delay: 3000,
+      delay: 0,
       disableOnInteraction: false,
     },
     breakpoints: {
@@ -129,6 +135,15 @@ document.addEventListener('DOMContentLoaded', () => {
       1024: { spaceBetween: 24 },
     }
   });
+
+  // Force linear easing for continuous smooth motion
+  const swiperWrapper = document.querySelector('.product-swiper .swiper-wrapper');
+  if (swiperWrapper) {
+    swiperWrapper.style.transitionTimingFunction = 'linear';
+    const swiperEl = document.querySelector('.product-swiper');
+    swiperEl.addEventListener('mouseenter', () => productSwiper.autoplay.stop());
+    swiperEl.addEventListener('mouseleave', () => productSwiper.autoplay.start());
+  }
 
   // ---- Review Marquee (GSAP-driven) ----
   const reviewMarquee = document.getElementById('review-marquee');

@@ -595,6 +595,9 @@ swiper-slide {
   display: flex;
   justify-content: center;
 }
+.product-swiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
 
 /* --- Payment Entry --- */
 .payment-entry {
