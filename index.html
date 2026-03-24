@@ -479,7 +479,7 @@
   <!-- ============================================ -->
   <!-- 5. CUSTOMER REVIEWS -->
   <!-- ============================================ -->
-  <section id="reviews" class="mt-32 py-20 bg-red-grid section-animate">
+  <section id="reviews" class="mt-40 py-20 bg-red-grid section-animate">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-14" id="reviews-header">
         <p class="text-white/30 text-sm uppercase tracking-[0.2em] font-medium mb-2">Customer</p>
@@ -659,11 +659,11 @@
   <!-- ============================================ -->
   <section id="why-choose-us" class="mt-24 py-20 bg-white-grid anim-stagger-cards">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
+      <div class="mb-12 max-w-5xl mx-auto">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">
-          Why <span class="gradient-text gradient-text-glow">Choose Us</span>
+          Why <span class="text-white underline-accent">Choose Us</span>
         </h2>
-        <p class="text-white/50 text-base max-w-2xl mx-auto">
+        <p class="text-white/50 text-base max-w-lg">
           We deliver optimized, reliable solutions that integrate smoothly and perform <strong class="text-white">consistently</strong> on your server.
         </p>
       </div>
@@ -719,36 +719,71 @@
     </div>
   </section>
 
+  <!-- Section divider -->
+  <div class="section-divider mt-14"></div>
+
   <!-- ============================================ -->
   <!-- 7. OUR ACHIEVEMENTS -->
   <!-- ============================================ -->
-  <section id="achievements" class="mt-20 py-20 bg-red-grid">
+  <section id="achievements" class="mt-0 py-20 bg-red-grid achievements-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
-          Our <span class="gradient-text gradient-text-glow">Achievements</span>
-        </h2>
-        <p class="text-white/50 text-base max-w-2xl mx-auto">
-          Started in 2020, trusted by servers worldwide for quality FiveM resources.
-        </p>
+      <!-- Eyebrow pill instead of generic heading -->
+      <div class="mb-10">
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-[11px] uppercase tracking-[0.2em] font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent/60"></span>
+          Since 2020
+        </span>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-end justify-center gap-8 sm:gap-14">
-        <!-- Sales — large, heavy -->
-        <div class="text-center px-10 py-7 rounded-lg border border-white/10 feature-card-glow">
-          <div class="counter-value text-white" data-target="42" data-ease="linear" style="font-size: 4rem;">0</div>
-          <div class="text-white/40 text-sm mt-2 uppercase tracking-wider">K Sales</div>
+      <!-- Asymmetric stats grid -->
+      <div class="achievement-grid">
+
+        <!-- Sales — dominant, left-aligned, raw number -->
+        <div class="achievement-sales-block">
+          <div class="flex items-baseline gap-2">
+            <span class="achievement-big-number counter-value" data-target="42">0</span>
+            <span class="text-accent/70 text-2xl sm:text-3xl font-bold">K+</span>
+          </div>
+          <div class="text-white/30 text-xs uppercase tracking-[0.15em] mt-3 font-medium">Total Sales</div>
+          <div class="achievement-bar mt-4">
+            <div class="achievement-bar-fill" id="achievement-bar-fill"></div>
+          </div>
         </div>
-        <!-- Active Players — offset up, gradient, smaller -->
-        <div class="text-center px-8 py-6 rounded-lg border border-white/10 feature-card-glow sm:-mb-5">
-          <div class="counter-value gradient-text" data-target="150" data-ease="elastic" style="font-size: 2.5rem; filter: drop-shadow(0 0 20px rgba(255,58,82,0.3));">0</div>
-          <div class="text-white/40 text-xs mt-2 uppercase tracking-widest">K Active Players</div>
+
+        <!-- Active Players — glassmorphism pill with live dot -->
+        <div class="achievement-players-pill">
+          <div class="flex items-center gap-2.5 mb-3">
+            <span class="achievement-live-dot"></span>
+            <span class="text-white/40 text-[10px] uppercase tracking-[0.2em] font-medium">Live</span>
+          </div>
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-white text-3xl sm:text-4xl font-bold leading-none counter-value" data-target="150">0</span>
+            <span class="text-white/30 text-sm font-medium">K</span>
+          </div>
+          <div class="text-white/30 text-[11px] uppercase tracking-[0.12em] mt-2">Active Players</div>
         </div>
-        <!-- Active Servers — medium, text-shadow glow -->
-        <div class="text-center px-9 py-6 rounded-lg border border-white/10 feature-card-glow">
-          <div class="counter-value text-white" data-target="5" data-ease="power4" style="font-size: 3.25rem; text-shadow: 0 0 40px rgba(255,58,82,0.4), 0 0 80px rgba(255,58,82,0.15);">0</div>
-          <div class="text-white/40 text-sm mt-2 uppercase tracking-wider">K Active Servers</div>
+
+        <!-- Active Servers — SVG ring with number inside -->
+        <div class="achievement-ring-block">
+          <div class="relative inline-flex items-center justify-center">
+            <svg class="achievement-ring-svg" width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="3"/>
+              <circle id="achievement-ring-arc" cx="60" cy="60" r="52" fill="none" stroke="url(#ring-gradient)" stroke-width="3" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" transform="rotate(-90 60 60)"/>
+              <defs>
+                <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#FF3A52"/>
+                  <stop offset="100%" stop-color="#ff5e71" stop-opacity="0.4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-white text-2xl font-bold leading-none counter-value" data-target="5">0</span>
+              <span class="text-white/25 text-[9px] uppercase tracking-[0.15em] mt-1">K</span>
+            </div>
+          </div>
+          <div class="text-white/30 text-[11px] uppercase tracking-[0.12em] mt-3 text-center">Servers Running</div>
         </div>
+
       </div>
     </div>
   </section>
@@ -837,7 +872,7 @@
   <!-- ============================================ -->
   <!-- 9. FAQ SECTION -->
   <!-- ============================================ -->
-  <section id="faq" class="mt-24 py-20 bg-white-grid anim-fade-up">
+  <section id="faq" class="mt-28 py-20 bg-white-grid anim-fade-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-left mb-12 max-w-4xl mx-auto lg:mx-0">
         <span class="block text-white/40 text-lg font-light mb-1">Frequently Asked</span>
@@ -1036,17 +1071,22 @@
   <!-- ============================================ -->
   <!-- 10. RECENT PAYMENTS -->
   <!-- ============================================ -->
-  <section id="recent-payments" class="mt-20 py-20 bg-red-grid anim-payment-feed">
+  <section id="recent-payments" class="mt-16 py-20 bg-red-grid anim-payment-feed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <span class="block text-xs tracking-[0.25em] text-white/30 uppercase mb-2">Live</span>
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
-          Recent <span class="gradient-text gradient-text-glow">Payments</span>
-        </h2>
-        <p class="text-white/50 text-base max-w-2xl mx-auto">
-          Trusted by thousands of customers with over 42,000+ successful sales worldwide.
-        </p>
+      <div class="flex items-center gap-4 mb-10">
+        <div class="flex items-center gap-2">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/60"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+          </span>
+          <span class="text-accent/80 text-xs uppercase tracking-[0.2em] font-semibold">Live</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Recent Payments</h2>
+        <div class="hidden sm:block flex-1 h-px bg-gradient-to-r from-white/10 to-transparent"></div>
       </div>
+      <p class="text-white/40 text-sm mb-8 max-w-lg">
+        Trusted by thousands of customers with over 42,000+ successful sales worldwide.
+      </p>
 
       <div class="max-w-2xl mx-auto card-bg border border-white/5 rounded-lg overflow-hidden">
         <!-- Payment 1 -->
@@ -1157,34 +1197,34 @@
         <!-- Link Columns -->
         <div class="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-8">
           <!-- Pages -->
-          <div>
+          <div class="footer-col-pages">
             <h4 class="text-white font-bold text-sm mb-4">Pages</h4>
             <ul class="space-y-2">
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Open Source</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Escrow</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Map</a></li>
+              <li><a href="#" class="footer-link footer-link-left text-white/40 text-sm hover:text-white/60 transition">Open Source</a></li>
+              <li><a href="#" class="footer-link footer-link-left text-white/40 text-sm hover:text-white/60 transition">Escrow</a></li>
+              <li><a href="#" class="footer-link footer-link-left text-white/40 text-sm hover:text-white/60 transition">Map</a></li>
             </ul>
           </div>
 
           <!-- Socials -->
-          <div>
+          <div class="footer-col-socials">
             <h4 class="text-white font-bold text-sm mb-4">Socials</h4>
             <ul class="space-y-2">
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Discord</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Cfx.re</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">GitHub</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">YouTube</a></li>
+              <li><a href="#" class="footer-link footer-link-right text-white/40 text-sm hover:text-white/60 transition">Discord</a></li>
+              <li><a href="#" class="footer-link footer-link-right text-white/40 text-sm hover:text-white/60 transition">Cfx.re</a></li>
+              <li><a href="#" class="footer-link footer-link-right text-white/40 text-sm hover:text-white/60 transition">GitHub</a></li>
+              <li><a href="#" class="footer-link footer-link-right text-white/40 text-sm hover:text-white/60 transition">YouTube</a></li>
             </ul>
           </div>
 
           <!-- Legal -->
-          <div>
+          <div class="footer-col-legal">
             <h4 class="text-white font-bold text-sm mb-4">Legal</h4>
             <ul class="space-y-2">
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Terms & Refunds</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Tebex Impressum</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Tebex Terms</a></li>
-              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Tebex Privacy</a></li>
+              <li><a href="#" class="footer-link footer-link-fade text-white/40 text-sm hover:text-white/60 transition">Terms & Refunds</a></li>
+              <li><a href="#" class="footer-link footer-link-fade text-white/40 text-sm hover:text-white/60 transition">Tebex Impressum</a></li>
+              <li><a href="#" class="footer-link footer-link-fade text-white/40 text-sm hover:text-white/60 transition">Tebex Terms</a></li>
+              <li><a href="#" class="footer-link footer-link-fade text-white/40 text-sm hover:text-white/60 transition">Tebex Privacy</a></li>
             </ul>
           </div>
         </div>
