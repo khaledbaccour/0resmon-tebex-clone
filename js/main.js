@@ -592,29 +592,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---- Floating Chinese Dragon (eel-style swimming) ----
+  // ---- Floating Chinese Dragon ----
   (function() {
     if (window.innerWidth <= 768) return;
 
     var container = document.getElementById('floating-dragon');
     var bodyPath = document.getElementById('dragon-body');
     var spinePath = document.getElementById('dragon-spine');
-    var head = document.getElementById('dragon-head');
+    var headGroup = document.getElementById('dragon-head');
+    var headShape = document.getElementById('dragon-head-shape');
+    var hornL = document.getElementById('dragon-horn-l');
+    var hornR = document.getElementById('dragon-horn-r');
+    var snoutEl = document.getElementById('dragon-snout');
     var eyeL = document.getElementById('dragon-eye-l');
     var eyeR = document.getElementById('dragon-eye-r');
     var pupilL = document.getElementById('dragon-pupil-l');
     var pupilR = document.getElementById('dragon-pupil-r');
-    var tail = document.getElementById('dragon-tail');
+    var tailPath = document.getElementById('dragon-tail');
+    var whiskerL = document.getElementById('dragon-whisker-l');
+    var whiskerR = document.getElementById('dragon-whisker-r');
+    var spinesGroup = document.getElementById('dragon-spines');
 
     if (!container || !bodyPath) return;
 
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+
     // Joint-chain config
-    var JOINTS = 28;
-    var SPACING = 10;
-    var HEAD_WIDTH = 12;
-    var TAIL_WIDTH = 2;
+    var JOINTS = 32;
+    var SPACING = 9;
+    var HEAD_WIDTH = 14;
+    var TAIL_WIDTH = 1.5;
     var SPEED = 1.8;
     var MARGIN = 80;
+    var time = 0;
+
+    // Pre-create spine path elements
+    var spinePaths = [];
+    for (var s = 0; s < Math.ceil(JOINTS / 2); s++) {
+      var sp = document.createElementNS(SVG_NS, 'path');
+      sp.setAttribute('fill', '#FF3A52');
+      sp.setAttribute('opacity', '0.5');
+      spinesGroup.appendChild(sp);
+      spinePaths.push(sp);
+    }
 
     // Initialize joints at a starting position
     var startX = window.innerWidth * 0.7;
@@ -633,15 +653,41 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
-    // Catmull-Rom to cubic bezier for smooth path
-    function buildPath(pts) {
-      if (pts.length < 2) return '';
-      var d = 'M' + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
-      for (var i = 0; i < pts.length - 1; i++) {
-        var p0 = pts[Math.max(i - 1, 0)];
-        var p1 = pts[i];
-        var p2 = pts[i + 1];
-        var p3 = pts[Math.min(i + 2, pts.length - 1)];
+    // Get width at a given joint index (tapers from head to tail)
+    function widthAt(idx) {
+      var t = idx / (JOINTS - 1);
+      var belly = 1 + 0.15 * Math.sin(t * Math.PI);
+      return (HEAD_WIDTH * (1 - t) + TAIL_WIDTH * t) * belly;
+    }
+
+    // Get perpendicular direction at joint i
+    function perpAt(idx) {
+      var prev = joints[Math.max(idx - 1, 0)];
+      var next = joints[Math.min(idx + 1, JOINTS - 1)];
+      var dx = next.x - prev.x;
+      var dy = next.y - prev.y;
+      var len = Math.sqrt(dx * dx + dy * dy) || 1;
+      return { x: -dy / len, y: dx / len };
+    }
+
+    // Get direction at joint i
+    function dirAt(idx) {
+      var prev = joints[Math.max(idx - 1, 0)];
+      var next = joints[Math.min(idx + 1, JOINTS - 1)];
+      var dx = next.x - prev.x;
+      var dy = next.y - prev.y;
+      var len = Math.sqrt(dx * dx + dy * dy) || 1;
+      return { x: dx / len, y: dy / len };
+    }
+
+    // Catmull-Rom segments (no M prefix)
+    function smoothSegments(pts) {
+      var d = '';
+      for (var ci = 0; ci < pts.length - 1; ci++) {
+        var p0 = pts[Math.max(ci - 1, 0)];
+        var p1 = pts[ci];
+        var p2 = pts[ci + 1];
+        var p3 = pts[Math.min(ci + 2, pts.length - 1)];
         var cp1x = p1.x + (p2.x - p0.x) / 6;
         var cp1y = p1.y + (p2.y - p0.y) / 6;
         var cp2x = p2.x - (p3.x - p1.x) / 6;
@@ -653,12 +699,159 @@ document.addEventListener('DOMContentLoaded', () => {
       return d;
     }
 
+    // Build tapered body as filled polygon
+    function buildTaperedBody() {
+      var leftPts = [];
+      var rightPts = [];
+      for (var bi = 0; bi < JOINTS; bi++) {
+        var w = widthAt(bi) * 0.5;
+        var p = perpAt(bi);
+        leftPts.push({ x: joints[bi].x + p.x * w, y: joints[bi].y + p.y * w });
+        rightPts.push({ x: joints[bi].x - p.x * w, y: joints[bi].y - p.y * w });
+      }
+      var revRight = rightPts.slice().reverse();
+      var d = 'M' + leftPts[0].x.toFixed(1) + ',' + leftPts[0].y.toFixed(1);
+      d += smoothSegments(leftPts);
+      d += ' L' + revRight[0].x.toFixed(1) + ',' + revRight[0].y.toFixed(1);
+      d += smoothSegments(revRight);
+      d += ' Z';
+      return d;
+    }
+
+    // Build center spine path
+    function buildSpinePath() {
+      var d = 'M' + joints[0].x.toFixed(1) + ',' + joints[0].y.toFixed(1);
+      d += smoothSegments(joints);
+      return d;
+    }
+
+    // Render dorsal spines using pre-created path elements
+    function renderSpines() {
+      var si = 0;
+      for (var ri = 2; ri < JOINTS - 3; ri += 2) {
+        if (si >= spinePaths.length) break;
+        var w = widthAt(ri) * 0.5;
+        var p = perpAt(ri);
+        var dir = dirAt(ri);
+        var finH = w * 0.8 + 2;
+
+        var baseX = joints[ri].x + p.x * w;
+        var baseY = joints[ri].y + p.y * w;
+        var tipX = baseX + p.x * finH - dir.x * 3;
+        var tipY = baseY + p.y * finH - dir.y * 3;
+        var backX = joints[ri].x + p.x * w - dir.x * 4;
+        var backY = joints[ri].y + p.y * w - dir.y * 4;
+
+        spinePaths[si].setAttribute('d',
+          'M' + baseX.toFixed(1) + ',' + baseY.toFixed(1) +
+          ' L' + tipX.toFixed(1) + ',' + tipY.toFixed(1) +
+          ' L' + backX.toFixed(1) + ',' + backY.toFixed(1) + ' Z'
+        );
+        spinePaths[si].setAttribute('opacity', (0.5 + 0.3 * (1 - ri / JOINTS)).toFixed(2));
+        si++;
+      }
+      // Hide unused spine paths
+      for (; si < spinePaths.length; si++) {
+        spinePaths[si].setAttribute('d', '');
+      }
+    }
+
+    // Render head (positioned and rotated)
+    function renderHead(hangle) {
+      var hx = joints[0].x;
+      var hy = joints[0].y;
+      var deg = hangle * 180 / Math.PI;
+
+      headGroup.setAttribute('transform',
+        'translate(' + hx.toFixed(1) + ',' + hy.toFixed(1) + ') rotate(' + deg.toFixed(1) + ')');
+
+      headShape.setAttribute('d', 'M12,0 L8,-7 Q4,-9 -2,-8 L-6,-6 L-6,6 L-2,8 Q4,9 8,7 Z');
+      hornL.setAttribute('d', 'M-2,-8 Q-6,-16 -12,-18');
+      hornR.setAttribute('d', 'M-2,8 Q-6,16 -12,18');
+      snoutEl.setAttribute('d', 'M10,0 L6,-2 M10,0 L6,2');
+
+      eyeL.setAttribute('cx', '3');
+      eyeL.setAttribute('cy', '-4.5');
+      eyeR.setAttribute('cx', '3');
+      eyeR.setAttribute('cy', '4.5');
+      pupilL.setAttribute('cx', '3.8');
+      pupilL.setAttribute('cy', '-4.5');
+      pupilR.setAttribute('cx', '3.8');
+      pupilR.setAttribute('cy', '4.5');
+    }
+
+    // Render whiskers
+    function renderWhiskers(hangle) {
+      var hx = joints[0].x;
+      var hy = joints[0].y;
+      var cos = Math.cos(hangle);
+      var sin = Math.sin(hangle);
+      var pcos = Math.cos(hangle + Math.PI / 2);
+      var psin = Math.sin(hangle + Math.PI / 2);
+
+      var sx = hx + cos * 12;
+      var sy = hy + sin * 12;
+      var wave = Math.sin(time * 3) * 8;
+      var wave2 = Math.cos(time * 3 + 1) * 8;
+
+      var wl1x = sx + pcos * 4 + cos * 15;
+      var wl1y = sy + psin * 4 + sin * 15;
+      var wl2x = wl1x + pcos * wave + cos * 12;
+      var wl2y = wl1y + psin * wave + sin * 12;
+      whiskerL.setAttribute('d', 'M' + sx.toFixed(1) + ',' + sy.toFixed(1) +
+        ' Q' + wl1x.toFixed(1) + ',' + wl1y.toFixed(1) +
+        ' ' + wl2x.toFixed(1) + ',' + wl2y.toFixed(1));
+
+      var wr1x = sx - pcos * 4 + cos * 15;
+      var wr1y = sy - psin * 4 + sin * 15;
+      var wr2x = wr1x - pcos * wave2 + cos * 12;
+      var wr2y = wr1y - psin * wave2 + sin * 12;
+      whiskerR.setAttribute('d', 'M' + sx.toFixed(1) + ',' + sy.toFixed(1) +
+        ' Q' + wr1x.toFixed(1) + ',' + wr1y.toFixed(1) +
+        ' ' + wr2x.toFixed(1) + ',' + wr2y.toFixed(1));
+    }
+
+    // Render tail flourish
+    function renderTail() {
+      var last = joints[JOINTS - 1];
+      var prev = joints[JOINTS - 2];
+      var tdx = last.x - prev.x;
+      var tdy = last.y - prev.y;
+      var tlen = Math.sqrt(tdx * tdx + tdy * tdy) || 1;
+      var tdirX = tdx / tlen;
+      var tdirY = tdy / tlen;
+      var tperpX = -tdirY;
+      var tperpY = tdirX;
+
+      var tipLen = 12;
+      var forkSpread = 6;
+      var wave = Math.sin(time * 4) * 4;
+
+      var t1x = last.x + tdirX * tipLen + tperpX * (forkSpread + wave);
+      var t1y = last.y + tdirY * tipLen + tperpY * (forkSpread + wave);
+      var t2x = last.x + tdirX * tipLen - tperpX * (forkSpread - wave);
+      var t2y = last.y + tdirY * tipLen - tperpY * (forkSpread - wave);
+      var midX = last.x + tdirX * tipLen * 0.5;
+      var midY = last.y + tdirY * tipLen * 0.5;
+
+      tailPath.setAttribute('d',
+        'M' + last.x.toFixed(1) + ',' + last.y.toFixed(1) +
+        ' Q' + midX.toFixed(1) + ',' + midY.toFixed(1) +
+        ' ' + t1x.toFixed(1) + ',' + t1y.toFixed(1) +
+        ' M' + last.x.toFixed(1) + ',' + last.y.toFixed(1) +
+        ' Q' + midX.toFixed(1) + ',' + midY.toFixed(1) +
+        ' ' + t2x.toFixed(1) + ',' + t2y.toFixed(1)
+      );
+    }
+
     // Entrance
     container.style.opacity = '0';
-    gsap.to(container, { opacity: 0.5, duration: 1.5, delay: 2.5, ease: 'power2.out' });
+    gsap.to(container, { opacity: 0.55, duration: 1.5, delay: 2.5, ease: 'power2.out' });
 
     // Animation loop
     gsap.ticker.add(function() {
+      time += 0.016;
+
       // Move head toward waypoint
       var dx = waypoint.x - joints[0].x;
       var dy = waypoint.y - joints[0].y;
@@ -672,56 +865,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Constrain each joint to follow the one ahead at fixed distance
-      for (var i = 1; i < JOINTS; i++) {
-        var jdx = joints[i].x - joints[i - 1].x;
-        var jdy = joints[i].y - joints[i - 1].y;
+      for (var ji = 1; ji < JOINTS; ji++) {
+        var jdx = joints[ji].x - joints[ji - 1].x;
+        var jdy = joints[ji].y - joints[ji - 1].y;
         var jdist = Math.sqrt(jdx * jdx + jdy * jdy);
         if (jdist > 0) {
-          joints[i].x = joints[i - 1].x + (jdx / jdist) * SPACING;
-          joints[i].y = joints[i - 1].y + (jdy / jdist) * SPACING;
+          joints[ji].x = joints[ji - 1].x + (jdx / jdist) * SPACING;
+          joints[ji].y = joints[ji - 1].y + (jdy / jdist) * SPACING;
         }
       }
 
-      // Build smooth SVG path
-      var d = buildPath(joints);
-      bodyPath.setAttribute('d', d);
-      bodyPath.setAttribute('stroke-width', HEAD_WIDTH);
-      spinePath.setAttribute('d', d);
+      // Tapered body polygon
+      bodyPath.setAttribute('d', buildTaperedBody());
 
-      // Taper: use stroke-dasharray trick — not ideal, so we just set a uniform width
-      // The visual taper comes from the path naturally getting thinner via the glow falloff
+      // Spine dashed line
+      spinePath.setAttribute('d', buildSpinePath());
 
-      // Position head
-      var hx = joints[0].x;
-      var hy = joints[0].y;
-      head.setAttribute('cx', hx);
-      head.setAttribute('cy', hy);
-
-      // Head direction for eye placement
+      // Head direction
       var hdx2 = joints[0].x - joints[1].x;
       var hdy2 = joints[0].y - joints[1].y;
       var hangle = Math.atan2(hdy2, hdx2);
-      var perpAngle = hangle + Math.PI / 2;
 
-      var eyeDist = 5;
-      var eyeForward = 6;
-      var eFx = hx + Math.cos(hangle) * eyeForward;
-      var eFy = hy + Math.sin(hangle) * eyeForward;
-
-      eyeL.setAttribute('cx', eFx + Math.cos(perpAngle) * eyeDist);
-      eyeL.setAttribute('cy', eFy + Math.sin(perpAngle) * eyeDist);
-      eyeR.setAttribute('cx', eFx - Math.cos(perpAngle) * eyeDist);
-      eyeR.setAttribute('cy', eFy - Math.sin(perpAngle) * eyeDist);
-
-      pupilL.setAttribute('cx', eFx + Math.cos(perpAngle) * eyeDist + Math.cos(hangle) * 1);
-      pupilL.setAttribute('cy', eFy + Math.sin(perpAngle) * eyeDist + Math.sin(hangle) * 1);
-      pupilR.setAttribute('cx', eFx - Math.cos(perpAngle) * eyeDist + Math.cos(hangle) * 1);
-      pupilR.setAttribute('cy', eFy - Math.sin(perpAngle) * eyeDist + Math.sin(hangle) * 1);
-
-      // Tail
-      var lastJ = joints[JOINTS - 1];
-      tail.setAttribute('cx', lastJ.x);
-      tail.setAttribute('cy', lastJ.y);
+      // Render dragon features
+      renderHead(hangle);
+      renderWhiskers(hangle);
+      renderSpines();
+      renderTail();
     });
   })();
 
