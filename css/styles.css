@@ -44,6 +44,7 @@
 /* --- Base --- */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -55,6 +56,11 @@ body {
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100% auto;
+}
+@media (max-width: 640px) {
+  body {
+    background-size: cover;
+  }
 }
 
 /* --- Scrollbar --- */
@@ -1330,5 +1336,137 @@ a[class*="btn-red-glow"] {
   }
   #floating-dragon {
     display: none;
+  }
+}
+
+/* ============================================
+   MOBILE RESPONSIVENESS FIXES
+   ============================================ */
+
+/* --- Discount Banner Mobile --- */
+@media (max-width: 480px) {
+  .discount-banner .countdown-unit {
+    min-width: 28px;
+    padding: 2px 3px;
+  }
+  .discount-banner .countdown-unit span:first-child {
+    font-size: 20px !important;
+  }
+  .countdown-label {
+    font-size: 7px;
+  }
+}
+
+/* --- Hero Section Mobile --- */
+@media (max-width: 640px) {
+  #hero {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+  #hero .hero-heading {
+    font-size: 1.75rem !important;
+  }
+  /* Prevent hero pseudo-elements from causing overflow */
+  .hero-ambient-glow::before {
+    width: 250px;
+    height: 220px;
+    right: -20px;
+  }
+  .hero-ambient-glow::after {
+    width: 180px;
+    height: 160px;
+    left: 5%;
+  }
+  .hero-light-streak {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* --- Review Cards Mobile --- */
+@media (max-width: 480px) {
+  .review-card-a {
+    width: 280px;
+    padding: 1.25rem;
+  }
+  .review-card-b {
+    width: 240px;
+    padding: 0.875rem 1rem;
+  }
+  .review-card-c {
+    width: 260px;
+    padding: 1rem;
+  }
+  .review-card-a p,
+  .review-card-c p {
+    font-size: 13px;
+  }
+}
+
+/* --- Achievement Section Mobile --- */
+@media (max-width: 480px) {
+  .achievement-big-number {
+    font-size: 4rem;
+  }
+}
+
+/* --- Discord Section Mobile --- */
+@media (max-width: 640px) {
+  .discord-section .flex-1 {
+    padding: 1.5rem !important;
+  }
+  .discord-section h2 {
+    font-size: 2rem !important;
+  }
+  .discord-widget-side {
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+/* --- YouTube Side Cards Mobile --- */
+@media (max-width: 480px) {
+  .yt-side-card .aspect-video {
+    width: 110px !important;
+  }
+  .yt-play-btn {
+    width: 56px;
+    height: 56px;
+  }
+  .yt-play-btn i {
+    font-size: 1rem;
+    margin-left: 2px;
+  }
+}
+
+/* --- Footer Mobile --- */
+@media (max-width: 480px) {
+  footer .grid {
+    gap: 1.5rem;
+  }
+}
+
+/* --- FAQ Filter Chips Mobile --- */
+@media (max-width: 480px) {
+  .faq-filter-chip {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .faq-question-text {
+    font-size: 13px;
+  }
+  .faq-answer-inner {
+    padding-left: 16px;
+    margin-left: 6px;
+    font-size: 12px;
+  }
+}
+
+/* --- Payment Ticker Mobile --- */
+@media (max-width: 640px) {
+  .payment-ticker-viewport {
+    height: 280px !important;
   }
 }

@@ -48,7 +48,7 @@
     </div>
 
     <!-- Center Content -->
-    <div class="relative z-10 flex items-center justify-center h-full px-4 gap-6">
+    <div class="relative z-10 flex items-center justify-center h-full px-2 sm:px-4 gap-3 sm:gap-6">
       <!-- Discount Icon + Text -->
       <div class="hidden sm:flex items-center gap-3">
         <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/discount-banner-logo.png" alt="" class="h-7 w-7">
@@ -60,29 +60,29 @@
 
       <!-- Code Pill -->
       <div class="discount-code-pill-new flex items-center gap-3 cursor-pointer" id="copy-code-btn" title="Click to copy">
-        <div class="flex items-center gap-2 px-4 py-2 rounded-md border border-white/20 hover:border-white/40 transition-colors" style="background: radial-gradient(74.31% 154.58% at 50% 50%, #323232 0%, #717070 100%);">
-          <span class="text-white/60 text-[10px] uppercase tracking-widest font-semibold">Code</span>
-          <span class="text-white text-sm font-bold tracking-wider">RES40</span>
+        <div class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-md border border-white/20 hover:border-white/40 transition-colors" style="background: radial-gradient(74.31% 154.58% at 50% 50%, #323232 0%, #717070 100%);">
+          <span class="text-white/60 text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold">Code</span>
+          <span class="text-white text-xs sm:text-sm font-bold tracking-wider">RES40</span>
           <i class="fa-solid fa-copy text-white/40 text-xs hover:text-white/70 transition-colors"></i>
         </div>
       </div>
 
       <!-- Countdown Timer -->
-      <div class="flex items-baseline gap-[3px]">
+      <div class="flex items-baseline gap-[2px] sm:gap-[3px]">
         <div class="countdown-unit">
-          <span class="text-white font-bold text-[28px] leading-none" id="countdown-days">09</span>
+          <span class="text-white font-bold text-[20px] sm:text-[28px] leading-none" id="countdown-days">09</span>
           <span class="countdown-label">Days</span>
         </div>
         <div class="countdown-unit">
-          <span class="text-white font-bold text-[28px] leading-none" id="countdown-hrs">23</span>
+          <span class="text-white font-bold text-[20px] sm:text-[28px] leading-none" id="countdown-hrs">23</span>
           <span class="countdown-label">Hrs</span>
         </div>
         <div class="countdown-unit">
-          <span class="text-white font-bold text-[28px] leading-none" id="countdown-mins">49</span>
+          <span class="text-white font-bold text-[20px] sm:text-[28px] leading-none" id="countdown-mins">49</span>
           <span class="countdown-label">Mins</span>
         </div>
         <div class="countdown-unit">
-          <span class="text-white font-bold text-[28px] leading-none" id="countdown-secs">40</span>
+          <span class="text-white font-bold text-[20px] sm:text-[28px] leading-none" id="countdown-secs">40</span>
           <span class="countdown-label">Secs</span>
         </div>
       </div>
@@ -206,7 +206,7 @@
   <!-- ============================================ -->
   <!-- 3. HERO SECTION -->
   <!-- ============================================ -->
-  <section id="hero" class="relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center overflow-hidden hero-ambient-glow">
+  <section id="hero" class="relative h-auto min-h-[auto] sm:h-[500px] lg:h-[600px] flex items-center overflow-x-hidden overflow-y-visible hero-ambient-glow">
     <!-- Film grain overlay -->
     <div class="hero-grain-overlay"></div>
     <!-- Light streak -->
@@ -216,7 +216,7 @@
       <div class="flex items-center justify-between">
         <!-- Left Content -->
         <div class="max-w-2xl z-10">
-          <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-tight mb-6 hero-heading">
+          <h1 class="text-[1.75rem] sm:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-tight mb-4 sm:mb-6 hero-heading">
             <span class="hero-line block overflow-hidden pl-3 sm:pl-4">
               <span class="hero-line-inner block">TAKE YOUR SERVER</span>
             </span>
@@ -230,11 +230,11 @@
           <p class="hero-subtitle text-white/50 text-sm sm:text-base mb-6 sm:mb-10 max-w-md leading-relaxed tracking-wide font-light">
             Carefully crafted resources focused on performance, stability, and seamless server integration.
           </p>
-          <div class="flex items-center gap-5">
-            <a href="#products" data-magnetic class="hero-btn-browse flex items-center gap-2 px-8 py-3.5 rounded-lg bg-white text-[#121212] text-sm font-semibold relative overflow-hidden">
+          <div class="flex items-center gap-3 sm:gap-5 flex-wrap">
+            <a href="#products" data-magnetic class="hero-btn-browse flex items-center gap-2 px-5 sm:px-8 py-3 sm:py-3.5 rounded-lg bg-white text-[#121212] text-sm font-semibold relative overflow-hidden">
               <span class="relative z-10 flex items-center gap-2">Browse Products <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
             </a>
-            <a href="#" data-magnetic class="hero-btn-discord flex items-center gap-2 px-6 py-2.5 rounded-full text-white text-sm font-semibold relative overflow-hidden" style="background: linear-gradient(135deg, #FF3A52 0%, #ff5e71 100%);">
+            <a href="#" data-magnetic class="hero-btn-discord flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full text-white text-sm font-semibold relative overflow-hidden" style="background: linear-gradient(135deg, #FF3A52 0%, #ff5e71 100%);">
               <span class="relative z-10 flex items-center gap-2"><i class="fa-brands fa-discord text-base"></i> Join Discord</span>
             </a>
           </div>
@@ -262,7 +262,7 @@
   <!-- ============================================ -->
   <!-- 4. TOP-SELLING PRODUCTS -->
   <!-- ============================================ -->
-  <section id="products" class="mt-14 sm:mt-20 lg:mt-28 anim-slide-left">
+  <section id="products" class="mt-10 sm:mt-20 lg:mt-28 anim-slide-left">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Title -->
       <div class="flex items-center gap-4 mb-6 sm:mb-10">
@@ -844,7 +844,7 @@
         <div class="flex flex-col gap-4 lg:w-[38%] lg:justify-between yt-side-list">
           <!-- Card 1 — accent left border -->
           <a href="https://www.youtube.com/watch?v=G3s4IyYNP1M" target="_blank" class="group yt-side-card yt-side-card--accent flex gap-4 items-center">
-            <div class="relative w-[140px] sm:w-[160px] flex-shrink-0 aspect-video rounded-md overflow-hidden">
+            <div class="relative w-[110px] sm:w-[160px] flex-shrink-0 aspect-video rounded-md overflow-hidden">
               <img src="https://img.youtube.com/vi/G3s4IyYNP1M/maxresdefault.jpg" alt="Nail Studio Script" class="w-full h-full object-cover yt-side-img">
               <span class="yt-duration absolute bottom-1.5 right-1.5">8:47</span>
             </div>
@@ -857,7 +857,7 @@
 
           <!-- Card 2 — standard, no special border -->
           <a href="https://www.youtube.com/watch?v=Sk7nI5nt26k" target="_blank" class="group yt-side-card flex gap-4 items-center">
-            <div class="relative w-[140px] sm:w-[160px] flex-shrink-0 aspect-video rounded-md overflow-hidden">
+            <div class="relative w-[110px] sm:w-[160px] flex-shrink-0 aspect-video rounded-md overflow-hidden">
               <img src="https://img.youtube.com/vi/Sk7nI5nt26k/maxresdefault.jpg" alt="Pirate Ship Heist" class="w-full h-full object-cover yt-side-img">
               <span class="yt-duration absolute bottom-1.5 right-1.5">15:22</span>
             </div>
@@ -870,7 +870,7 @@
 
           <!-- Card 3 — dashed bottom border -->
           <a href="https://www.youtube.com/watch?v=GKOI-N5vfAs" target="_blank" class="group yt-side-card yt-side-card--dashed flex gap-4 items-center">
-            <div class="relative w-[140px] sm:w-[160px] flex-shrink-0 aspect-video rounded-md overflow-hidden">
+            <div class="relative w-[110px] sm:w-[160px] flex-shrink-0 aspect-video rounded-md overflow-hidden">
               <img src="https://img.youtube.com/vi/GKOI-N5vfAs/maxresdefault.jpg" alt="Towtruck Script" class="w-full h-full object-cover yt-side-img">
               <span class="yt-duration absolute bottom-1.5 right-1.5">10:15</span>
             </div>
@@ -888,7 +888,7 @@
   <!-- ============================================ -->
   <!-- 9. FAQ SECTION -->
   <!-- ============================================ -->
-  <section id="faq" class="mt-14 sm:mt-20 lg:mt-28 py-10 sm:py-16 lg:py-20 bg-white-grid anim-fade-up">
+  <section id="faq" class="mt-10 sm:mt-20 lg:mt-28 py-8 sm:py-16 lg:py-20 bg-white-grid anim-fade-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-left mb-8 sm:mb-12 max-w-4xl mx-auto">
         <span class="block text-white/40 text-lg font-light mb-1">Frequently Asked</span>
@@ -1102,7 +1102,7 @@
   <!-- ============================================ -->
   <!-- 10. RECENT PAYMENTS -->
   <!-- ============================================ -->
-  <section id="recent-payments" class="mt-8 sm:mt-16 py-10 sm:py-16 lg:py-20 bg-red-grid anim-payment-feed">
+  <section id="recent-payments" class="mt-6 sm:mt-16 py-8 sm:py-16 lg:py-20 bg-red-grid anim-payment-feed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-6 sm:mb-10">
         <div class="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-[#FF3A52]/20 bg-[#FF3A52]/5">
@@ -1283,7 +1283,7 @@
 
         <div class="relative z-10 flex flex-col lg:flex-row gap-0">
           <!-- Left: Content side -->
-          <div class="flex-1 p-8 sm:p-10 lg:p-14 lg:pr-8">
+          <div class="flex-1 p-5 sm:p-10 lg:p-14 lg:pr-8">
             <!-- Discord branding mark -->
             <div class="flex items-center gap-3 mb-6">
               <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #5865F2;">
@@ -1296,7 +1296,7 @@
               </span>
             </div>
 
-            <h2 class="text-[2.5rem] sm:text-5xl font-bold leading-[1.05] mb-2 tracking-tight">
+            <h2 class="text-3xl sm:text-5xl font-bold leading-[1.05] mb-2 tracking-tight">
               Join the<br>
               <span class="discord-text-accent">community</span>
             </h2>
@@ -1401,7 +1401,7 @@
             <span class="text-white/30 text-xs">Powered by</span>
             <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex-logo-gray.png" alt="Tebex" class="h-4 opacity-40">
           </div>
-          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/0resmon-drag.png" alt="" class="w-32 opacity-60">
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/0resmon-drag.png" alt="" class="w-20 sm:w-32 opacity-60">
         </div>
 
         <!-- Link Columns -->
@@ -1453,12 +1453,12 @@
   <!-- 13. TEBEX BOTTOM BAR -->
   <!-- ============================================ -->
   <div class="bg-[#151515] py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex.png" alt="Tebex" class="h-4 opacity-40">
-        <span class="text-white/20 text-xs">This website and its checkout process is owned &amp; operated by Tebex Limited, who handles product fulfillment, billing requests and refunds.</span>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex items-start sm:items-center gap-2">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex.png" alt="Tebex" class="h-4 opacity-40 flex-shrink-0 mt-0.5 sm:mt-0">
+        <span class="text-white/20 text-[10px] sm:text-xs leading-relaxed">This website and its checkout process is owned &amp; operated by Tebex Limited, who handles product fulfillment, billing requests and refunds.</span>
       </div>
-      <div class="flex items-center gap-4 text-xs">
+      <div class="flex items-center gap-3 sm:gap-4 text-[10px] sm:text-xs flex-shrink-0">
         <a href="#" class="text-white/30 hover:text-white/50 transition">Impressum</a>
         <a href="#" class="text-white/30 hover:text-white/50 transition">Terms & Conditions</a>
         <a href="#" class="text-white/30 hover:text-white/50 transition">Privacy Policy</a>
