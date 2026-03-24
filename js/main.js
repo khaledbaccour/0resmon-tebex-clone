@@ -271,11 +271,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Recent Payments: entries slide in from right as "live feed"
-    gsap.utils.toArray('.anim-payment-feed').forEach(section => {
-      var entries = section.querySelectorAll('.payment-entry, .payment-entry ~ div');
-      gsap.from(entries, {
-        opacity: 0, x: 30, duration: 0.5, ease: 'power2.out', stagger: 0.12,
+    // Recent Payments: duplicate ticker content for seamless loop, fade in columns
+    document.querySelectorAll('.payment-ticker-track').forEach(function(track) {
+      var cards = track.querySelectorAll('.payment-entry-card');
+      var originals = Array.from(cards);
+      originals.forEach(function(card) {
+        var clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      });
+    });
+
+    gsap.utils.toArray('.anim-payment-feed').forEach(function(section) {
+      var cols = section.querySelectorAll('.payment-ticker-viewport');
+      gsap.from(cols, {
+        opacity: 0, y: 40, duration: 0.8, ease: 'power2.out', stagger: 0.2,
         scrollTrigger: { trigger: section, start: 'top 80%', once: true }
       });
     });

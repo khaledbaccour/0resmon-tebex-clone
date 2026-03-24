@@ -1038,8 +1038,11 @@
   <!-- ============================================ -->
   <section id="recent-payments" class="mt-20 py-20 bg-red-grid anim-payment-feed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <span class="block text-xs tracking-[0.25em] text-white/30 uppercase mb-2">Live</span>
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-[#FF3A52]/20 bg-[#FF3A52]/5">
+          <span class="payment-live-dot w-2 h-2 rounded-full bg-[#FF3A52]"></span>
+          <span class="text-[11px] tracking-[0.2em] text-[#FF3A52] uppercase font-medium">Live Feed</span>
+        </div>
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">
           Recent <span class="gradient-text gradient-text-glow">Payments</span>
         </h2>
@@ -1048,66 +1051,156 @@
         </p>
       </div>
 
-      <div class="max-w-2xl mx-auto card-bg border border-white/5 rounded-lg overflow-hidden">
-        <!-- Payment 1 -->
-        <div class="payment-entry flex items-center justify-between px-6 py-4">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">C</div>
-            <div>
-              <p class="text-white text-sm font-medium">CityOfFallenAngels</p>
-              <p class="text-white/40 text-xs">Today 01:32</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-4xl mx-auto">
+
+        <!-- Left column — scrolls up -->
+        <div class="payment-ticker-viewport relative overflow-hidden" style="height: 340px;">
+          <div class="payment-ticker-track payment-ticker-up flex flex-col gap-3">
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #2d5a27;">C</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">CityOfFallenAngels</p>
+                  <p class="text-white/30 text-[11px]">0R-Heist Robbery Pack</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">60,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">01:32</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #5a2745;">T</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">TRICRP</p>
+                  <p class="text-white/30 text-[11px]">0R-Nail Studio Script</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">21,40 &euro;</span>
+                <p class="text-white/25 text-[10px]">01:15</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #4a3520;">M</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">marlodk215</p>
+                  <p class="text-white/30 text-[11px]">WAIS HUD V6</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">37,80 &euro;</span>
+                <p class="text-white/25 text-[10px]">23:28</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #1e3a5a;">B</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">BigEx</p>
+                  <p class="text-white/30 text-[11px]">0R-Builder Job Script</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">40,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">23:22</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #5a1e2e;">K</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">KrazyRP</p>
+                  <p class="text-white/30 text-[11px]">JOBPACK +20 JOB</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">45,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">23:01</p>
+              </div>
             </div>
           </div>
-          <span class="text-white font-bold text-sm">60,00 &euro;</span>
         </div>
 
-        <!-- Payment 2 -->
-        <div class="payment-entry flex items-center justify-between px-6 py-4">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">T</div>
-            <div>
-              <p class="text-white text-sm font-medium">TRICRP</p>
-              <p class="text-white/40 text-xs">Today 01:15</p>
+        <!-- Right column — scrolls down -->
+        <div class="payment-ticker-viewport relative overflow-hidden" style="height: 340px;">
+          <div class="payment-ticker-track payment-ticker-down flex flex-col gap-3">
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #1e3a5a;">B</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">BigEx</p>
+                  <p class="text-white/30 text-[11px]">0R-Farming Job v2</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">40,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">23:14</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #3d2d5a;">N</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">NightOwlRP</p>
+                  <p class="text-white/30 text-[11px]">Illegal Job Pack +20</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">60,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">22:58</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #5a4a1e;">D</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">DarkViper_EU</p>
+                  <p class="text-white/30 text-[11px]">Police Job Pack (15+)</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">60,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">22:41</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #2a4a3d;">S</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">SkylineGaming</p>
+                  <p class="text-white/30 text-[11px]">0R-Heist Robbery Pack</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">70,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">22:19</p>
+              </div>
+            </div>
+            <div class="payment-entry-card group">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div class="payment-avatar" style="background-color: #5a2020;">R</div>
+                <div class="min-w-0">
+                  <p class="text-white text-[13px] font-medium truncate">RazerXP</p>
+                  <p class="text-white/30 text-[11px]">0R-Nail Studio Script</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 pl-3">
+                <span class="text-white font-bold text-sm tabular-nums">30,00 &euro;</span>
+                <p class="text-white/25 text-[10px]">22:03</p>
+              </div>
             </div>
           </div>
-          <span class="text-white font-bold text-sm">21,40 &euro;</span>
         </div>
 
-        <!-- Payment 3 -->
-        <div class="payment-entry flex items-center justify-between px-6 py-4">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">M</div>
-            <div>
-              <p class="text-white text-sm font-medium">marlodk215</p>
-              <p class="text-white/40 text-xs">Today 23:28</p>
-            </div>
-          </div>
-          <span class="text-white font-bold text-sm">37,80 &euro;</span>
-        </div>
+      </div>
 
-        <!-- Payment 4 -->
-        <div class="payment-entry flex items-center justify-between px-6 py-4">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">B</div>
-            <div>
-              <p class="text-white text-sm font-medium">BigEx</p>
-              <p class="text-white/40 text-xs">Today 23:22</p>
-            </div>
-          </div>
-          <span class="text-white font-bold text-sm">40,00 &euro;</span>
-        </div>
-
-        <!-- Payment 5 -->
-        <div class="flex items-center justify-between px-6 py-4">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">B</div>
-            <div>
-              <p class="text-white text-sm font-medium">BigEx</p>
-              <p class="text-white/40 text-xs">Today 23:14</p>
-            </div>
-          </div>
-          <span class="text-white font-bold text-sm">40,00 &euro;</span>
-        </div>
+      <div class="flex items-center justify-center gap-4 mt-6 text-white/25 text-xs">
+        <span class="h-px w-12 bg-white/10"></span>
+        <span class="tabular-nums">42,847 transactions processed</span>
+        <span class="h-px w-12 bg-white/10"></span>
       </div>
     </div>
   </section>

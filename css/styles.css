@@ -541,9 +541,67 @@ swiper-slide {
   transition-timing-function: linear !important;
 }
 
-/* --- Payment Entry --- */
-.payment-entry {
-  border-bottom: 1px solid var(--color-white-5);
+/* --- Payment Ticker --- */
+.payment-live-dot {
+  animation: payment-pulse 2s ease-in-out infinite;
+}
+@keyframes payment-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 58, 82, 0.5); }
+  50% { opacity: 0.5; box-shadow: 0 0 0 4px rgba(255, 58, 82, 0); }
+}
+
+.payment-entry-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-left: 2px solid rgba(255, 58, 82, 0.15);
+  transition: border-left-color 0.2s, background 0.2s;
+}
+.payment-entry-card:hover {
+  border-left-color: rgba(255, 58, 82, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.payment-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.payment-ticker-viewport {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+@keyframes payment-scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+@keyframes payment-scroll-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.payment-ticker-up {
+  animation: payment-scroll-up 25s linear infinite;
+}
+.payment-ticker-down {
+  animation: payment-scroll-down 25s linear infinite;
+}
+
+.payment-ticker-viewport:hover .payment-ticker-track {
+  animation-play-state: paused;
 }
 
 /* --- Discord CTA Gradient Border --- */
