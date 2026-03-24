@@ -1157,23 +1157,114 @@
   <!-- ============================================ -->
   <section id="discord-cta" class="mt-32 anim-scale-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="discord-cta-border p-8 sm:p-12 flex flex-col lg:flex-row items-center gap-8">
-        <!-- Left Content -->
-        <div class="flex-1">
-          <h2 class="text-3xl sm:text-4xl font-bold mb-4">Join our Discord</h2>
-          <p class="text-white/50 text-sm mb-6 max-w-md">
-            Join our Discord community to get instant support, early access to new scripts, exclusive discounts, and connect with thousands of server owners.
-          </p>
-          <a href="#" class="inline-flex items-center gap-2 px-8 py-3 rounded-md text-white text-sm font-medium transition" style="background: #5865F2;">
-            <i class="fa-brands fa-discord"></i>
-            Discord
-          </a>
-          <p class="text-white/30 text-xs mt-4">By joining you agree to our community guidelines and privacy policy.</p>
+      <div class="discord-section relative overflow-hidden">
+        <!-- Background noise texture + blurple accent -->
+        <div class="absolute inset-0 bg-[#1a1a2e] z-0"></div>
+        <div class="discord-blurple-glow"></div>
+
+        <div class="relative z-10 flex flex-col lg:flex-row gap-0">
+          <!-- Left: Content side -->
+          <div class="flex-1 p-8 sm:p-10 lg:p-14 lg:pr-8">
+            <!-- Discord branding mark -->
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #5865F2;">
+                <i class="fa-brands fa-discord text-white text-lg"></i>
+              </div>
+              <div class="h-px flex-1 max-w-[60px] bg-white/10"></div>
+              <span class="discord-online-badge">
+                <span class="discord-pulse"></span>
+                1,247 online
+              </span>
+            </div>
+
+            <h2 class="text-[2.5rem] sm:text-5xl font-bold leading-[1.05] mb-2 tracking-tight">
+              Join the<br>
+              <span class="discord-text-accent">community</span>
+            </h2>
+            <p class="text-white/40 text-[13px] mb-8 max-w-sm leading-relaxed">
+              Get instant support, early access to scripts, exclusive discounts. Thousands of server owners are already here.
+            </p>
+
+            <div class="flex items-center gap-4 flex-wrap">
+              <a href="#" class="discord-join-btn group">
+                <i class="fa-brands fa-discord text-lg"></i>
+                <span>Join Server</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+              </a>
+              <span class="text-white/20 text-xs">4,832 members</span>
+            </div>
+
+            <p class="text-white/15 text-[10px] mt-6">By joining you agree to our community guidelines and privacy policy.</p>
+          </div>
+
+          <!-- Right: Fake Discord widget / channel preview -->
+          <div class="discord-widget-side hidden lg:flex flex-col justify-center p-6 lg:p-10">
+            <div class="discord-widget">
+              <!-- Server header -->
+              <div class="flex items-center gap-3 mb-5 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/logo.png" alt="0Resmon" class="w-8 h-8 rounded-full">
+                <div>
+                  <p class="text-white text-sm font-semibold">0Resmon</p>
+                  <p class="text-white/30 text-[10px]">FiveM Development</p>
+                </div>
+              </div>
+
+              <!-- Channel list -->
+              <div class="space-y-1 mb-5">
+                <div class="discord-channel active">
+                  <span class="text-white/30">#</span>
+                  <span>general</span>
+                  <span class="discord-unread">3</span>
+                </div>
+                <div class="discord-channel">
+                  <span class="text-white/30">#</span>
+                  <span>support</span>
+                </div>
+                <div class="discord-channel">
+                  <span class="text-white/30">#</span>
+                  <span>showcase</span>
+                </div>
+                <div class="discord-channel">
+                  <span class="text-white/30">#</span>
+                  <span>updates</span>
+                  <span class="discord-unread">1</span>
+                </div>
+                <div class="discord-channel">
+                  <span class="text-white/30">#</span>
+                  <span>off-topic</span>
+                </div>
+              </div>
+
+              <!-- Online members preview -->
+              <div class="pt-4" style="border-top: 1px solid rgba(255,255,255,0.06);">
+                <p class="text-[10px] text-white/25 uppercase tracking-wider font-semibold mb-3">Online — 1,247</p>
+                <div class="flex flex-col gap-2">
+                  <div class="discord-member">
+                    <div class="discord-member-avatar" style="background: #5865F2;">A</div>
+                    <span class="discord-member-status"></span>
+                    <span class="text-white/60 text-xs">Alex_RP</span>
+                    <span class="text-white/20 text-[10px] ml-auto">Playing FiveM</span>
+                  </div>
+                  <div class="discord-member">
+                    <div class="discord-member-avatar" style="background: #ED4245;">M</div>
+                    <span class="discord-member-status idle"></span>
+                    <span class="text-white/60 text-xs">Mike_Dev</span>
+                    <span class="text-white/20 text-[10px] ml-auto">Idle</span>
+                  </div>
+                  <div class="discord-member">
+                    <div class="discord-member-avatar" style="background: #57F287;">S</div>
+                    <span class="discord-member-status"></span>
+                    <span class="text-white/60 text-xs">Sarah_Scripts</span>
+                    <span class="text-white/20 text-[10px] ml-auto">Visual Studio Code</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- Right: Banner Image -->
-        <div class="flex-shrink-0">
-          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/discord-banner.png" alt="Discord" class="w-full max-w-[400px] rounded-lg">
-        </div>
+
+        <!-- Bottom decorative bar — not centered, intentionally off -->
+        <div class="absolute bottom-0 left-[15%] right-[35%] h-px bg-gradient-to-r from-transparent via-[#5865F2]/30 to-transparent"></div>
       </div>
     </div>
   </section>
