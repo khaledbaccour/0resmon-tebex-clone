@@ -84,6 +84,22 @@ body {
   filter: drop-shadow(0 0 20px rgba(255, 58, 82, 0.4)) drop-shadow(0 0 50px rgba(255, 58, 82, 0.15));
 }
 
+/* --- Underline Accent (replaces gradient-text on some headings) --- */
+.underline-accent {
+  position: relative;
+  display: inline;
+}
+.underline-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #FF3A52 0%, rgba(255, 94, 113, 0.2) 100%);
+  border-radius: 2px;
+}
+
 /* --- Card Background --- */
 .card-bg {
   background: var(--card-bg);
@@ -461,6 +477,14 @@ body {
 .faq-item.active .faq-toggle-icon {
   transform: rotate(45deg);
 }
+/* FAQ hover indent */
+.faq-question span {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.faq-item:hover .faq-question span {
+  transform: translateX(4px);
+}
 
 /* --- Mobile Menu --- */
 .mobile-menu {
@@ -611,12 +635,105 @@ swiper-slide {
   box-shadow: 0 0 30px rgba(255, 58, 82, 0.08), 0 0 60px rgba(255, 58, 82, 0.04);
 }
 
-/* --- Achievement Counter --- */
+/* --- Achievement Section (Redesigned) --- */
+.achievements-section {
+  position: relative;
+}
+.achievements-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+  mix-blend-mode: overlay;
+}
+.achievements-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: end;
+}
+@media (min-width: 768px) {
+  .achievement-grid {
+    grid-template-columns: 1.4fr auto 180px;
+    gap: 3rem;
+  }
+}
+
+/* Sales — dominant block */
+.achievement-big-number {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 0.85;
+  color: white;
+  letter-spacing: -0.03em;
+}
+@media (min-width: 640px) {
+  .achievement-big-number {
+    font-size: 6.5rem;
+  }
+}
+
+.achievement-bar {
+  width: 100%;
+  max-width: 280px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.achievement-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #FF3A52 0%, rgba(255, 94, 113, 0.3) 100%);
+  border-radius: 1px;
+  will-change: width;
+}
+
+/* Players — glassmorphism pill */
+.achievement-players-pill {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.achievement-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+}
+
+/* Ring block */
+.achievement-ring-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.achievement-ring-svg {
+  filter: drop-shadow(0 0 12px rgba(255, 58, 82, 0.15));
+}
+
+/* Legacy counter-value (used by counter animation JS) */
 .counter-value {
-  font-size: 3rem;
   font-weight: 700;
   line-height: 1;
-  text-shadow: 0 0 30px rgba(255, 58, 82, 0.3);
 }
 
 /* --- Glow Effects --- */
@@ -812,6 +929,58 @@ a[class*="btn-red-glow"] {
 .bento-banner:hover {
   border-style: solid !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Footer Link Variety --- */
+.footer-link {
+  position: relative;
+  display: inline-block;
+}
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Pages — underline slides from left */
+.footer-link-left::after {
+  left: 0;
+  width: 0;
+  transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.footer-link-left:hover::after {
+  width: 100%;
+}
+
+/* Socials — underline slides from right */
+.footer-link-right::after {
+  right: 0;
+  width: 0;
+  transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.footer-link-right:hover::after {
+  width: 100%;
+}
+
+/* Legal — underline fades in */
+.footer-link-fade::after {
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.footer-link-fade:hover::after {
+  opacity: 1;
+}
+
+/* --- Gradient Divider (between sections) --- */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
 /* --- Responsive Utilities --- */

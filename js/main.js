@@ -288,30 +288,47 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Achievement counter animation
-    const counterElements = document.querySelectorAll('.counter-value[data-target]');
-    counterElements.forEach(el => {
-      const target = parseInt(el.dataset.target);
+    // Achievement counter animation + extras
+    const achievementSection = document.getElementById('achievements');
+    if (achievementSection) {
+      const counterElements = achievementSection.querySelectorAll('.counter-value[data-target]');
+      const barFill = document.getElementById('achievement-bar-fill');
+      const ringArc = document.getElementById('achievement-ring-arc');
 
       ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
+        trigger: achievementSection,
+        start: 'top 80%',
         once: true,
         onEnter: () => {
-          gsap.to({ val: 0 }, {
-            val: target,
-            duration: 2,
-            ease: 'power2.out',
-            onUpdate: function() {
-              el.textContent = Math.floor(this.targets()[0].val);
-            },
-            onComplete: function() {
-              el.textContent = target;
-            }
+          // Animate all counters
+          counterElements.forEach(el => {
+            const target = parseInt(el.dataset.target);
+            gsap.to({ val: 0 }, {
+              val: target,
+              duration: 2.2,
+              ease: 'power2.out',
+              onUpdate: function() {
+                el.textContent = Math.floor(this.targets()[0].val);
+              },
+              onComplete: function() {
+                el.textContent = target;
+              }
+            });
           });
+
+          // Progress bar fill
+          if (barFill) {
+            gsap.to(barFill, { width: '85%', duration: 2, ease: 'power2.out', delay: 0.3 });
+          }
+
+          // SVG ring stroke
+          if (ringArc) {
+            // 327 is full circumference (2*PI*52). Show ~73% = offset of ~88
+            gsap.to(ringArc, { strokeDashoffset: 88, duration: 2, ease: 'power2.out', delay: 0.4 });
+          }
         }
       });
-    });
+    }
 
     // ---- Hero Entrance Timeline ----
     const heroTL = gsap.timeline({ delay: 0.2 });
@@ -483,6 +500,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+    // ---- Payment "live feed" flash ----
+    var paymentEntries = document.querySelectorAll('.payment-entry');
+    if (paymentEntries.length) {
+      setInterval(function() {
+        var randomIdx = Math.floor(Math.random() * paymentEntries.length);
+        gsap.fromTo(paymentEntries[randomIdx],
+          { backgroundColor: 'rgba(255, 58, 82, 0.05)' },
+          { backgroundColor: 'transparent', duration: 1.5, ease: 'power2.out' }
+        );
+      }, 4000);
+    }
+
+    // ---- Nav logo scroll pulse ----
+    var navLogo = document.querySelector('#navbar img');
+    if (navLogo) {
+      ScrollTrigger.create({
+        trigger: '#hero',
+        start: 'bottom 70%',
+        once: true,
+        onEnter: function() {
+          gsap.fromTo(navLogo,
+            { scale: 1 },
+            { scale: 1.08, duration: 0.25, ease: 'power2.out', yoyo: true, repeat: 1 }
+          );
+        }
+      });
+    }
   }
 
   // ---- Cursor trail (desktop only) ----
