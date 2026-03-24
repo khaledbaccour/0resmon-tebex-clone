@@ -85,10 +85,19 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+/* Glow bloom on gradient text — uses drop-shadow on parent since text-shadow doesn't work with transparent fill */
+.gradient-text-glow {
+  filter: drop-shadow(0 0 20px rgba(255, 58, 82, 0.4)) drop-shadow(0 0 50px rgba(255, 58, 82, 0.15));
+}
 
 /* --- Card Background --- */
 .card-bg {
   background: var(--card-bg);
+  box-shadow: 0 0 15px rgba(255, 58, 82, 0.06), 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+.card-bg:hover {
+  box-shadow: 0 0 30px rgba(255, 58, 82, 0.12), 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* --- Section Background Patterns --- */
@@ -97,6 +106,15 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+}
+.bg-red-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(255, 58, 82, 0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
 }
 .bg-white-grid {
   background-image: url('https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/white-grid.png');
@@ -140,11 +158,11 @@ body {
 
 /* --- Hero Floating Logos --- */
 .hero-logo-glow {
-  filter: drop-shadow(0 0 25px rgba(255, 58, 82, 0.3)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 0 35px rgba(255, 58, 82, 0.4)) drop-shadow(0 0 70px rgba(255, 58, 82, 0.15)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
   transition: filter 0.3s ease;
 }
 .hero-logo-glow:hover {
-  filter: drop-shadow(0 0 40px rgba(255, 58, 82, 0.5)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 0 50px rgba(255, 58, 82, 0.6)) drop-shadow(0 0 90px rgba(255, 58, 82, 0.2)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
 }
 .hero-logo-float-1 {
   animation: heroFloat1 6s ease-in-out infinite;
@@ -170,14 +188,16 @@ body {
 
 /* --- Section Title Gradient Lines --- */
 .section-line-left {
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 10%, #D9D9D9 100%);
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 10%, rgba(255, 58, 82, 0.3) 60%, #D9D9D9 100%);
   height: 1px;
   flex: 1;
+  box-shadow: 0 0 8px rgba(255, 58, 82, 0.1);
 }
 .section-line-right {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 10%, #D9D9D9 100%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 10%, rgba(255, 58, 82, 0.3) 60%, #D9D9D9 100%);
   height: 1px;
   flex: 1;
+  box-shadow: 0 0 8px rgba(255, 58, 82, 0.1);
 }
 
 /* --- Product Carousel Mask --- */
@@ -203,7 +223,7 @@ body {
 
 /* --- Star Glow --- */
 .star-glow {
-  filter: drop-shadow(0 2px 4px rgba(255, 58, 82, 0.5));
+  filter: drop-shadow(0 0 6px rgba(255, 58, 82, 0.6)) drop-shadow(0 0 15px rgba(255, 58, 82, 0.3));
 }
 
 /* --- FAQ Accordion --- */
@@ -245,10 +265,13 @@ body {
 /* --- Product Card Hover --- */
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 58, 82, 0.07), 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 58, 82, 0.15);
 }
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 35px rgba(255, 58, 82, 0.15), 0 8px 32px rgba(0, 0, 0, 0.35);
+  border-top-color: rgba(255, 58, 82, 0.3);
 }
 
 /* --- Section Animate (GSAP targets) --- */
@@ -281,6 +304,7 @@ swiper-slide {
 .discord-cta-border {
   border: 1px solid var(--color-white-10);
   border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 58, 82, 0.08), 0 0 60px rgba(255, 58, 82, 0.04);
 }
 
 /* --- Achievement Counter --- */
@@ -288,6 +312,64 @@ swiper-slide {
   font-size: 3rem;
   font-weight: 700;
   line-height: 1;
+  text-shadow: 0 0 30px rgba(255, 58, 82, 0.3);
+}
+
+/* --- Glow Effects --- */
+
+/* Rating pill glow */
+.rating-pill-glow {
+  box-shadow: 0 0 25px rgba(255, 58, 82, 0.1), 0 0 50px rgba(255, 58, 82, 0.05);
+}
+
+/* Button glow on hover */
+.btn-glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.btn-glow-hover:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Red button glow */
+.btn-red-glow {
+  box-shadow: 0 0 20px rgba(255, 58, 82, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+.btn-red-glow:hover {
+  box-shadow: 0 0 35px rgba(255, 58, 82, 0.5), 0 0 60px rgba(255, 58, 82, 0.2);
+}
+
+/* Feature card glow */
+.feature-card-glow {
+  box-shadow: 0 0 15px rgba(255, 58, 82, 0.06), 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.feature-card-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 58, 82, 0.12), 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Hero ambient glow */
+.hero-ambient-glow::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 58, 82, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Accent text glow for non-gradient red text */
+.accent-text-glow {
+  text-shadow: 0 0 20px rgba(255, 58, 82, 0.4), 0 0 40px rgba(255, 58, 82, 0.15);
+}
+
+/* Nav glow on scroll */
+.nav-scrolled {
+  box-shadow: 0 2px 20px rgba(255, 58, 82, 0.06), 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* --- Responsive Utilities --- */
