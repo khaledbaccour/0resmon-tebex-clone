@@ -305,11 +305,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const barFill = document.getElementById('achievement-bar-fill');
       const ringArc = document.getElementById('achievement-ring-arc');
 
+      let achievementFired = false;
       ScrollTrigger.create({
         trigger: achievementSection,
         start: 'top 80%',
-        once: true,
         onEnter: () => {
+          if (achievementFired) return;
+          achievementFired = true;
           // Animate all counters
           counterElements.forEach(el => {
             const target = parseInt(el.dataset.target);
