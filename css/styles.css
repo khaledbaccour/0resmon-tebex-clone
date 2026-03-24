@@ -1,0 +1,276 @@
+/* ========================================
+   0RESMON Tebex Clone - Custom Styles
+   ======================================== */
+
+/* --- CSS Custom Properties --- */
+:root {
+  --color-bg: #121212;
+  --color-accent: #FF3A52;
+  --color-accent-light: #ff5e71;
+  --color-white: #FFFFFF;
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-5: rgba(255, 255, 255, 0.05);
+  --color-footer-bg: #1B1B1B;
+  --card-bg: radial-gradient(74.31% 154.58% at 50% 50%, rgba(0, 0, 0, 0.31) 0%, rgba(51, 51, 51, 0.31) 100%);
+  --discount-banner-bg: radial-gradient(50% 366.3% at 50% 50%, #B4101A 0%, #4C0101 100%);
+  --discount-code-bg: radial-gradient(74.31% 154.58% at 50% 50%, #323232 0%, #717070 100%);
+}
+
+/* --- Font Face --- */
+@font-face {
+  font-family: 'Google Sans';
+  src: local('Google Sans'), local('GoogleSans-Regular');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Google Sans';
+  src: local('Google Sans Medium'), local('GoogleSans-Medium');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Google Sans';
+  src: local('Google Sans Bold'), local('GoogleSans-Bold');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Base --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Google Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  overflow-x: hidden;
+  background-image: url('https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/background.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* --- Gradient Text Utility --- */
+.gradient-text {
+  background: linear-gradient(90deg, #FF3A52 0%, #ff5e71 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Card Background --- */
+.card-bg {
+  background: var(--card-bg);
+}
+
+/* --- Section Background Patterns --- */
+.bg-red-grid {
+  background-image: url('https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/red-grid.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-white-grid {
+  background-image: url('https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/white-grid.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* --- Discount Banner --- */
+.discount-banner {
+  background: var(--discount-banner-bg);
+}
+.discount-code-pill {
+  background: var(--discount-code-bg);
+}
+
+/* --- Discount Banner Marquee --- */
+.banner-marquee {
+  display: flex;
+  animation: bannerMarquee 20s linear infinite;
+}
+@keyframes bannerMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- Hero Floating Logos --- */
+.hero-logo-float-1 {
+  animation: heroFloat1 6s ease-in-out infinite;
+}
+.hero-logo-float-2 {
+  animation: heroFloat2 5s ease-in-out infinite;
+}
+.hero-logo-float-3 {
+  animation: heroFloat3 7s ease-in-out infinite;
+}
+@keyframes heroFloat1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+@keyframes heroFloat2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(-5deg); }
+}
+@keyframes heroFloat3 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* --- Section Title Gradient Lines --- */
+.section-line-left {
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 10%, #D9D9D9 100%);
+  height: 1px;
+  flex: 1;
+}
+.section-line-right {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 10%, #D9D9D9 100%);
+  height: 1px;
+  flex: 1;
+}
+
+/* --- Product Carousel Mask --- */
+.swiper-fade-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent 5.77%, #D9D9D9 33.17%, #D9D9D9 52.88%, #D9D9D9 71.63%, transparent 93.27%);
+  mask-image: linear-gradient(90deg, transparent 5.77%, #D9D9D9 33.17%, #D9D9D9 52.88%, #D9D9D9 71.63%, transparent 93.27%);
+}
+
+/* --- Review Marquee --- */
+.review-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  animation: reviewMarquee 40s linear infinite;
+  width: max-content;
+}
+.review-marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes reviewMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- Star Glow --- */
+.star-glow {
+  filter: drop-shadow(0 2px 4px rgba(255, 58, 82, 0.5));
+}
+
+/* --- FAQ Accordion --- */
+.faq-item {
+  border-bottom: 1px solid var(--color-white-5);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  padding-bottom: 1rem;
+}
+.faq-item .faq-toggle-icon {
+  transition: transform 0.3s ease;
+}
+.faq-item.active .faq-toggle-icon {
+  transform: rotate(45deg);
+}
+
+/* --- Mobile Menu --- */
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+/* --- Sticky Nav --- */
+.nav-scrolled {
+  background: rgba(18, 18, 18, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- Product Card Hover --- */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Section Animate (GSAP targets) --- */
+/* Initial state set by GSAP, not CSS, to avoid invisible sections if JS fails */
+
+/* --- Currency Dropdown --- */
+.currency-dropdown {
+  display: none;
+}
+.currency-dropdown.open {
+  display: block;
+}
+
+/* --- Swiper Custom --- */
+swiper-container {
+  width: 100%;
+}
+swiper-slide {
+  width: auto !important;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Payment Entry --- */
+.payment-entry {
+  border-bottom: 1px solid var(--color-white-5);
+}
+
+/* --- Discord CTA Gradient Border --- */
+.discord-cta-border {
+  border: 1px solid var(--color-white-10);
+  border-radius: 12px;
+}
+
+/* --- Achievement Counter --- */
+.counter-value {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* --- Responsive Utilities --- */
+@media (max-width: 768px) {
+  .hero-logos-container {
+    display: none;
+  }
+}

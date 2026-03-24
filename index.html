@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0Resmon - FiveM Scripts & Resources</title>
+  <meta name="description" content="Take your server beyond limits with 0Resmon resources. Carefully crafted FiveM scripts focused on performance, stability, and seamless server integration.">
+  <meta name="theme-color" content="#E7434F">
+  <link rel="icon" href="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/logo.png">
+
+  <!-- Tailwind CSS v4 Browser Build -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Font Awesome 7 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-background: #121212;
+      --color-accent: #FF3A52;
+      --color-accent-light: #ff5e71;
+      --color-footer: #1B1B1B;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- 1. DISCOUNT BANNER -->
+  <!-- ============================================ -->
+  <div id="discount-banner" class="discount-banner relative w-full overflow-hidden z-50" style="height: 48px;">
+    <!-- Marquee Background Images (Left) -->
+    <div class="absolute inset-0 flex items-center overflow-hidden opacity-30 pointer-events-none">
+      <div class="banner-marquee flex-shrink-0">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
+      </div>
+    </div>
+
+    <!-- Center Content -->
+    <div class="relative z-10 flex items-center justify-center h-full px-4 gap-4">
+      <!-- Discount Icon + Text -->
+      <div class="hidden sm:flex items-center gap-2">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/discount-banner-logo.png" alt="" class="h-6 w-6">
+        <span class="text-white font-bold text-sm">Big Discount Started</span>
+        <span class="text-white/70 text-xs hidden md:inline">The 40% discount is now valid on all scripts.</span>
+      </div>
+
+      <!-- Code Pill -->
+      <div class="discount-code-pill flex items-center gap-2 px-3 py-1 rounded-md cursor-pointer" id="copy-code-btn" title="Click to copy">
+        <span class="text-white text-sm font-semibold">RES40</span>
+        <i class="fa-solid fa-copy text-white/70 text-xs"></i>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="flex items-center gap-1 text-white text-xs">
+        <div class="flex flex-col items-center">
+          <span class="font-bold text-sm" id="countdown-days">09</span>
+          <span class="text-[10px] text-white/50 uppercase">Days</span>
+        </div>
+        <span class="text-white/30 mx-0.5">:</span>
+        <div class="flex flex-col items-center">
+          <span class="font-bold text-sm" id="countdown-hrs">21</span>
+          <span class="text-[10px] text-white/50 uppercase">Hrs</span>
+        </div>
+        <span class="text-white/30 mx-0.5">:</span>
+        <div class="flex flex-col items-center">
+          <span class="font-bold text-sm" id="countdown-mins">26</span>
+          <span class="text-[10px] text-white/50 uppercase">Mins</span>
+        </div>
+        <span class="text-white/30 mx-0.5">:</span>
+        <div class="flex flex-col items-center">
+          <span class="font-bold text-sm" id="countdown-secs">04</span>
+          <span class="text-[10px] text-white/50 uppercase">Secs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 2. NAVIGATION BAR -->
+  <!-- ============================================ -->
+  <nav id="navbar" class="sticky top-0 z-40 w-full transition-all duration-300" style="background: transparent;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Left: Logo + Nav -->
+        <div class="flex items-center gap-4">
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-2">
+            <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/logo.png" alt="0Resmon" class="h-8">
+          </a>
+          <!-- Tebex Separator -->
+          <div class="hidden md:flex items-center gap-2 pl-3 border-l border-white/10">
+            <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex.png" alt="Tebex" class="h-5 opacity-50">
+          </div>
+          <!-- Nav Links -->
+          <div class="hidden md:flex items-center gap-6 ml-4">
+            <a href="#" class="text-white text-sm font-medium hover:text-white/80 transition">Home</a>
+            <div class="relative" id="scripts-dropdown-wrapper">
+              <button class="text-white text-sm font-medium hover:text-white/80 transition flex items-center gap-1" id="scripts-dropdown-btn">
+                Scripts
+                <i class="fa-solid fa-chevron-down text-[10px] text-white/50"></i>
+              </button>
+              <div id="scripts-dropdown" class="hidden absolute top-full left-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-lg py-2 min-w-[160px] shadow-xl">
+                <a href="#" class="block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 transition">Open Source</a>
+                <a href="#" class="block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 transition">Escrow</a>
+                <a href="#" class="block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 transition">Map</a>
+              </div>
+            </div>
+            <a href="#" class="text-white text-sm font-medium hover:text-white/80 transition">Documentation</a>
+          </div>
+        </div>
+
+        <!-- Right: Socials + Cart + Currency + Login -->
+        <div class="hidden md:flex items-center gap-4">
+          <!-- Social Icons -->
+          <div class="flex items-center gap-3">
+            <a href="#" class="text-white/60 hover:text-white transition text-lg"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" class="text-white/60 hover:text-white transition text-lg"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="text-white/60 hover:text-white transition text-lg"><i class="fa-brands fa-github"></i></a>
+          </div>
+
+          <!-- Cart -->
+          <button class="text-white/60 hover:text-white transition text-lg relative">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+
+          <!-- Currency Selector -->
+          <div class="relative" id="currency-wrapper">
+            <button class="flex items-center gap-1 px-3 py-1.5 rounded-md border border-white/10 text-white text-sm" id="currency-btn">
+              <span id="currency-label">EUR</span>
+              <i class="fa-solid fa-chevron-down text-[10px] text-white/50"></i>
+            </button>
+            <div id="currency-dropdown" class="currency-dropdown absolute top-full right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-lg py-2 min-w-[100px] shadow-xl z-50">
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="AUD">AUD</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="BRL">BRL</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="CAD">CAD</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="DKK">DKK</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition font-medium text-white" data-currency="EUR">EUR</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="NOK">NOK</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="NZD">NZD</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="PLN">PLN</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="GBP">GBP</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="SEK">SEK</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="TRY">TRY</button>
+              <button class="block w-full text-left px-4 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition" data-currency="USD">USD</button>
+            </div>
+          </div>
+
+          <!-- Login Button -->
+          <a href="#" class="flex items-center gap-2 px-4 py-1.5 rounded-md border border-white/20 text-white text-sm font-medium hover:bg-white/5 transition">
+            <i class="fa-solid fa-right-to-bracket text-xs"></i>
+            Login In
+          </a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button class="md:hidden text-white text-xl" id="mobile-menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 w-72 h-full bg-[#1a1a1a] z-50 p-6 md:hidden" id="mobile-menu">
+      <div class="flex justify-between items-center mb-8">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/logo.png" alt="0Resmon" class="h-7">
+        <button class="text-white text-xl" id="mobile-menu-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="flex flex-col gap-4">
+        <a href="#" class="text-white text-base font-medium">Home</a>
+        <a href="#" class="text-white/70 text-base">Open Source</a>
+        <a href="#" class="text-white/70 text-base">Escrow</a>
+        <a href="#" class="text-white/70 text-base">Map</a>
+        <a href="#" class="text-white/70 text-base">Documentation</a>
+        <hr class="border-white/10 my-2">
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-white/60 hover:text-white text-lg"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="text-white/60 hover:text-white text-lg"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="text-white/60 hover:text-white text-lg"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <a href="#" class="flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-white/20 text-white text-sm font-medium mt-2">
+          <i class="fa-solid fa-right-to-bracket text-xs"></i>
+          Login In
+        </a>
+      </div>
+    </div>
+    <!-- Mobile Menu Overlay -->
+    <div class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" id="mobile-menu-overlay"></div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- 3. HERO SECTION -->
+  <!-- ============================================ -->
+  <section id="hero" class="relative h-[600px] flex items-center overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="flex items-center justify-between">
+        <!-- Left Content -->
+        <div class="max-w-xl z-10">
+          <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-tight tracking-tight mb-6">
+            TAKE YOUR SERVER<br>
+            BEYOND LIMITS WITH<br>
+            <span class="gradient-text">0RESMON</span> RESOURCES
+          </h1>
+          <p class="text-white/50 text-base mb-8 max-w-md">
+            Carefully crafted resources focused on performance, stability, and seamless server integration.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="#products" class="flex items-center gap-2 px-6 py-2.5 rounded-md border border-white/20 text-white text-sm font-medium hover:bg-white/5 transition">
+              Browse Products
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-6 py-2.5 rounded-full text-white text-sm font-medium transition" style="background: linear-gradient(90deg, #FF3A52 0%, #ff5e71 100%);">
+              Join Discord
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Floating 3D Logos -->
+        <div class="hero-logos-container relative w-[500px] h-[400px] hidden lg:block">
+          <!-- Small Logo -->
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/small-red-resmon-logo.png" alt="" class="absolute hero-logo-float-1" style="width: 70px; top: 40px; left: 60px;">
+          <!-- Medium Logo -->
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/medium-red-resmon-logo.png" alt="" class="absolute hero-logo-float-2" style="width: 224px; top: 30px; right: 0;">
+          <!-- Big Logo -->
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-red-resmon-logo.png" alt="" class="absolute hero-logo-float-3" style="width: 350px; bottom: 0; left: 50px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4. TOP-SELLING PRODUCTS -->
+  <!-- ============================================ -->
+  <section id="products" class="mt-28 section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Title -->
+      <div class="flex items-center gap-4 mb-10">
+        <div class="section-line-left"></div>
+        <h2 class="text-xl font-bold whitespace-nowrap">Top-Selling Products</h2>
+        <div class="section-line-right"></div>
+      </div>
+    </div>
+
+    <!-- Swiper Carousel -->
+    <div class="swiper-fade-mask">
+      <div class="swiper product-swiper">
+        <div class="swiper-wrapper">
+
+          <!-- Product 1 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/eee30811b1f540c291317560e1a5d81eef504ec9.png" alt="0R-Multiplayer Heist Robbery Pack" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">0R-Multiplayer Heist Robbery Pack (15 Robbery) Escrow</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;70.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;100.00</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/c4924c0df7d3572a58ae0588f3baa2a7b0828864.png" alt="0R-Nail Studio Script" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">0R-Nail Studio Script (36 Colors, 4 Types, 11 Patterns) Escrow + Map</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;30.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;42.86</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/eac0fb0628b9f0e6386c52d331344886f8a68da9.png" alt="Frkn-Police Job Pack" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">Frkn-Police Job Pack (15+ Scripts Included) Escrow</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;60.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;85.72</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/75e201dc6274db15d32f3e4fb6cd50f12b2cf040.png" alt="WAIS HUD V6" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">WAIS HUD V6 Customizable - Positionable Map-Dynamic Elements-Car Control [STANDALONE ESCROW]</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;42.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;60.00</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/a0b12d38b96bd1eea3040078a84e77ced9276cc9.png" alt="0R-Multiplayer Builder Job Script" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">0R-Multiplayer Builder Job Script Escrow (Custom-Built Vehicle &amp; Map 12 Diffirent Mission)</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;35.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;50.00</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/08f23fec05195b4e5c99b8e599cc6a0a6b446030.png" alt="0R-Multiplayer Farming Job Script" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">0R-Multiplayer Farming Job Script v2 Escrow + (Custom 7 Seeds, 3 Diffirent Job)</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;35.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;50.00</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/62dbc0905b6080cb0f3b82e32ba3bbba50f750a0.png" alt="JOBPACK +20 JOB" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">JOBPACK +20 JOB ~ [MULTIPLAYER / SOLO] - [ESCROW]</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;45.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;64.29</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="swiper-slide" style="width: auto;">
+            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden">
+                <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/c7f9646638e6711ceddd48af4d412b2836e4027b.png" alt="Multiplayer Illegal Job Pack" class="w-full h-full object-cover">
+              </div>
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">Multiplayer Illegal Job Pack + 20 Job Escrow + (0r-lib escrow)</h3>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/esx-logo.png" alt="ESX" class="h-3">ESX</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qb-logo.png" alt="QBCore" class="h-3">QBCore</span>
+                  <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
+                </div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-white font-bold text-lg">&euro;60.00</span>
+                  <span class="text-white/40 line-through text-sm">&euro;85.72</span>
+                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
+                </div>
+                <button class="w-full bg-white text-black text-sm font-medium py-2 rounded-md hover:bg-white/90 transition">Add to Basket</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Packages -->
+    <div class="flex justify-center mt-8">
+      <a href="#" class="flex items-center gap-2 px-6 py-2.5 rounded-md border border-white/10 text-white text-sm font-medium hover:bg-white/5 transition">
+        View All Packages
+        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 5. CUSTOMER REVIEWS -->
+  <!-- ============================================ -->
+  <section id="reviews" class="mt-28 py-20 bg-red-grid section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        Customer <span class="gradient-text">Reviews</span>
+      </h2>
+
+      <!-- Rating Pill -->
+      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/10 mb-6">
+        <span class="text-white text-sm">Average</span>
+        <span class="text-white font-bold text-lg">4.8</span>
+        <div class="flex items-center gap-0.5">
+          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
+          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
+          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
+          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
+          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
+        </div>
+        <span class="text-white/50 text-sm">Based on 10.000+ reviews</span>
+      </div>
+
+      <p class="text-white/50 text-base max-w-2xl mx-auto mb-12">
+        Real feedback from our community after installing and using our <strong class="text-white">FiveM</strong> resources.
+      </p>
+    </div>
+
+    <!-- Review Marquee -->
+    <div class="overflow-hidden" style="-webkit-mask-image: linear-gradient(90deg, transparent 0%, #D9D9D9 10%, #D9D9D9 90%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #D9D9D9 10%, #D9D9D9 90%, transparent 100%);">
+      <div class="review-marquee-track" id="review-marquee">
+        <!-- Review 1 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=1" alt="Alex Johnson" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Alex Johnson</p>
+              <p class="text-white/40 text-xs">Oct 2, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">0Resmon's resources have transformed our FiveM server! The quality of scripts is unmatched and support is incredible.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Nail Shop</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=2" alt="Sarah Miller" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Sarah Miller</p>
+              <p class="text-white/40 text-xs">Oct 5, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Absolutely amazing quality! Every script works flawlessly and the documentation makes setup a breeze.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Vehicle System</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=3" alt="Mike Chen" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Mike Chen</p>
+              <p class="text-white/40 text-xs">Oct 8, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Very satisfied with the product quality. The scripts are well-optimized and the updates keep coming regularly.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Banking</span>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=4" alt="Emma Davis" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Emma Davis</p>
+              <p class="text-white/40 text-xs">Oct 12, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Good scripts overall. Easy to configure and the support team responds quickly to any questions.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Inventory</span>
+          </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=5" alt="James Wilson" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">James Wilson</p>
+              <p class="text-white/40 text-xs">Oct 15, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">These scripts have taken our roleplay server to the next level. Premium quality at a fair price.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Job System</span>
+          </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=6" alt="Lisa Anderson" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Lisa Anderson</p>
+              <p class="text-white/40 text-xs">Oct 18, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Great value for money. The scripts are well-documented and easy to integrate with existing setups.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Housing</span>
+          </div>
+        </div>
+
+        <!-- Review 7 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=7" alt="David Brown" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">David Brown</p>
+              <p class="text-white/40 text-xs">Oct 21, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Solid script with regular updates. The developer clearly cares about quality and customer satisfaction.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Garage System</span>
+          </div>
+        </div>
+
+        <!-- Review 8 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=8" alt="Sophie Taylor" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Sophie Taylor</p>
+              <p class="text-white/40 text-xs">Oct 24, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Impressed with how smooth everything runs. Zero performance issues and the UI is beautifully designed.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Phone</span>
+          </div>
+        </div>
+
+        <!-- Review 9 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=9" alt="Ryan Martinez" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Ryan Martinez</p>
+              <p class="text-white/40 text-xs">Oct 27, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Very professional scripts with excellent documentation. The multiplayer features work perfectly.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Shop System</span>
+          </div>
+        </div>
+
+        <!-- Review 10 -->
+        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://i.pravatar.cc/150?img=10" alt="Olivia Garcia" class="w-10 h-10 rounded-full">
+            <div>
+              <p class="text-white text-sm font-semibold">Olivia Garcia</p>
+              <p class="text-white/40 text-xs">Oct 30, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 mb-3">
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          </div>
+          <p class="text-white/60 text-sm mb-4">Best scripts on the market! Our players love the new features and everything runs without any lag.</p>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0R Dealership</span>
+          </div>
+        </div>
+
+        <!-- Duplicated reviews for seamless loop (will be cloned by JS) -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 6. WHY CHOOSE US -->
+  <!-- ============================================ -->
+  <section id="why-choose-us" class="mt-28 py-20 bg-white-grid section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          Why <span class="gradient-text">Choose Us</span>
+        </h2>
+        <p class="text-white/50 text-base max-w-2xl mx-auto">
+          We deliver optimized, reliable solutions that integrate smoothly and perform <strong class="text-white">consistently</strong> on your server.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <!-- Card 1: Support & Community -->
+        <div class="card-bg border border-white/5 rounded-lg p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+              <i class="fa-brands fa-discord text-accent text-xl"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg">Support & Community</h3>
+          </div>
+          <p class="text-white/50 text-sm mb-4">Join our active Discord community for instant support, updates, and discussions with other server owners and our development team.</p>
+          <a href="#" class="text-accent text-sm font-medium hover:underline">Join our Discord!</a>
+        </div>
+
+        <!-- Card 2: Quality & Performance -->
+        <div class="card-bg border border-white/5 rounded-lg p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+              <i class="fa-solid fa-file-lines text-accent text-xl"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg">Quality & Performance</h3>
+          </div>
+          <p class="text-white/50 text-sm mb-4">Every script is thoroughly tested and optimized to ensure minimal resource usage while delivering maximum functionality for your server.</p>
+          <a href="#" class="text-accent text-sm font-medium hover:underline">Read our Docs!</a>
+        </div>
+
+        <!-- Card 3: Easy to Use -->
+        <div class="card-bg border border-white/5 rounded-lg p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+              <i class="fa-solid fa-wand-magic-sparkles text-accent text-xl"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg">Easy to Use</h3>
+          </div>
+          <p class="text-white/50 text-sm">Our scripts come with detailed documentation and intuitive configuration files, making installation and customization simple for everyone.</p>
+        </div>
+
+        <!-- Card 4: Tebex Security -->
+        <div class="card-bg border border-white/5 rounded-lg p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+              <i class="fa-solid fa-shield-halved text-accent text-xl"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg">Tebex Security</h3>
+          </div>
+          <p class="text-white/50 text-sm">All transactions are secured through Tebex with industry-standard encryption, ensuring safe payments and instant delivery of your purchases.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 7. OUR ACHIEVEMENTS -->
+  <!-- ============================================ -->
+  <section id="achievements" class="mt-28 py-20 bg-red-grid section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          Our <span class="gradient-text">Achievements</span>
+        </h2>
+        <p class="text-white/50 text-base max-w-2xl mx-auto">
+          Started in 2020, trusted by servers worldwide for quality FiveM resources.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
+        <!-- Sales -->
+        <div class="text-center px-8 py-6 rounded-lg border border-white/10">
+          <div class="counter-value text-white" data-target="42">0</div>
+          <div class="text-white/40 text-sm mt-1 uppercase tracking-wider">K Sales</div>
+        </div>
+        <!-- Active Players -->
+        <div class="text-center px-8 py-6 rounded-lg border border-white/10">
+          <div class="counter-value text-white" data-target="150">0</div>
+          <div class="text-white/40 text-sm mt-1 uppercase tracking-wider">K Active Players</div>
+        </div>
+        <!-- Active Servers -->
+        <div class="text-center px-8 py-6 rounded-lg border border-white/10">
+          <div class="counter-value text-white" data-target="5">0</div>
+          <div class="text-white/40 text-sm mt-1 uppercase tracking-wider">K Active Servers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 8. YOUTUBE SECTION -->
+  <!-- ============================================ -->
+  <section id="youtube" class="mt-28 section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <i class="fa-brands fa-youtube text-red-600 text-3xl"></i>
+          <i class="fa-solid fa-play text-white/60 text-sm"></i>
+        </div>
+        <p class="text-white/50 text-base max-w-xl mx-auto">
+          Check out our YouTube channel to learn about features you didn't even know existed.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Video 1 -->
+        <a href="https://www.youtube.com/watch?v=LDi63eVRS0s" target="_blank" class="group">
+          <div class="card-bg border border-white/5 rounded-lg overflow-hidden">
+            <div class="aspect-video overflow-hidden relative">
+              <img src="https://img.youtube.com/vi/LDi63eVRS0s/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+              </div>
+            </div>
+            <div class="p-3">
+              <p class="text-white text-xs line-clamp-2">Fivem Multiplayer Hunting Script | GROUP SYSTEM | LEVEL XP BASED | +15 MISSONS | FULL SYNC</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Video 2 -->
+        <a href="https://www.youtube.com/watch?v=G3s4IyYNP1M" target="_blank" class="group">
+          <div class="card-bg border border-white/5 rounded-lg overflow-hidden">
+            <div class="aspect-video overflow-hidden relative">
+              <img src="https://img.youtube.com/vi/G3s4IyYNP1M/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+              </div>
+            </div>
+            <div class="p-3">
+              <p class="text-white text-xs line-clamp-2">FiveM Nail Studio Script (36 Colors, 4 Types, 11 Patterns) | 0R-Nails + Custom Map</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Video 3 -->
+        <a href="https://www.youtube.com/watch?v=Sk7nI5nt26k" target="_blank" class="group">
+          <div class="card-bg border border-white/5 rounded-lg overflow-hidden">
+            <div class="aspect-video overflow-hidden relative">
+              <img src="https://img.youtube.com/vi/Sk7nI5nt26k/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+              </div>
+            </div>
+            <div class="p-3">
+              <p class="text-white text-xs line-clamp-2">Fivem Multiplayer Pirate Ship Heist Script - Custom Ship - Minigames - Interactions [ESX/QB/QBOX]</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Video 4 -->
+        <a href="https://www.youtube.com/watch?v=GKOI-N5vfAs" target="_blank" class="group">
+          <div class="card-bg border border-white/5 rounded-lg overflow-hidden">
+            <div class="aspect-video overflow-hidden relative">
+              <img src="https://img.youtube.com/vi/GKOI-N5vfAs/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+              </div>
+            </div>
+            <div class="p-3">
+              <p class="text-white text-xs line-clamp-2">FiveM Multiplayer Towtruck Script - Custom-Built Towtruck Vehicle &amp; (NPC and Real Player Mission)</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 9. FAQ SECTION -->
+  <!-- ============================================ -->
+  <section id="faq" class="mt-28 py-20 bg-white-grid section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          Frequently Asked <span class="gradient-text">Questions</span>
+        </h2>
+        <p class="text-white/50 text-base max-w-2xl mx-auto">
+          Find answers to common questions about our FiveM resources and Tebex checkout.
+        </p>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-12 items-start">
+        <!-- Left: FAQ Image -->
+        <div class="hidden lg:block flex-shrink-0 w-[300px]">
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/faq-image.png" alt="FAQ" class="w-full">
+        </div>
+
+        <!-- Right: FAQ List -->
+        <div class="flex-1 w-full">
+          <!-- Search -->
+          <div class="flex items-center gap-4 mb-6">
+            <div class="relative flex-1">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
+              <input type="text" id="faq-search" placeholder="Search questions..." class="w-full bg-white/5 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-white text-sm placeholder-white/30 focus:outline-none focus:border-white/20 transition">
+            </div>
+            <span class="text-white/40 text-sm whitespace-nowrap" id="faq-count">16 answers</span>
+          </div>
+
+          <!-- FAQ Items -->
+          <div id="faq-list">
+            <div class="faq-item py-4 cursor-pointer" data-question="How do I install 0Resmon scripts on my FiveM server?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">How do I install 0Resmon scripts on my FiveM server?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Simply download your purchased script from Tebex, extract the files into your server's resources folder, add the resource to your server.cfg, and restart your server. Detailed installation guides are included with each script.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="What payment methods are accepted on Tebex?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">What payment methods are accepted on Tebex?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Tebex accepts a wide range of payment methods including credit/debit cards (Visa, Mastercard, American Express), PayPal, Paysafecard, and various other regional payment methods.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Are 0Resmon scripts secure to use?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Are 0Resmon scripts secure to use?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Yes, all our scripts undergo thorough security testing. We use Tebex's escrow system to protect our code while ensuring your server remains safe from vulnerabilities.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="How often are 0Resmon scripts updated?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">How often are 0Resmon scripts updated?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                We regularly update our scripts to fix bugs, add new features, and ensure compatibility with the latest FiveM updates. Major updates are typically released monthly.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Is there customer support available for 0Resmon scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Is there customer support available for 0Resmon scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Absolutely! We provide support through our Discord server where our team is available to help with installation, configuration, and troubleshooting.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Can I customize 0Resmon scripts to fit my server's needs?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Can I customize 0Resmon scripts to fit my server's needs?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Yes, all our scripts come with comprehensive configuration files that allow you to customize features, UI elements, and behavior to match your server's unique requirements.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Do 0Resmon scripts support multiple languages?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Do 0Resmon scripts support multiple languages?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Yes, our scripts include built-in localization support. You can easily add or modify language files to support any language your community needs.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="What makes 0Resmon scripts different from other FiveM scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">What makes 0Resmon scripts different from other FiveM scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Our scripts stand out through superior optimization, multiplayer synchronization, custom-built assets, and continuous updates. We focus on delivering a premium experience.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Where can I find documentation for 0Resmon scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Where can I find documentation for 0Resmon scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Full documentation is available on our website under the Documentation section. Each script also includes a README file with setup instructions.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Are 0Resmon scripts compatible with mobile devices?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Are 0Resmon scripts compatible with mobile devices?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Our scripts are designed for FiveM servers which run on PC. However, the in-game UI elements are optimized for various screen resolutions.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Do you offer discounts for bulk purchases of 0Resmon scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Do you offer discounts for bulk purchases of 0Resmon scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Yes! We regularly offer discount codes and bundle deals. Check our Discord server and the discount banner at the top of our store for current promotions.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Can I get a refund if I'm not satisfied with a 0Resmon script?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Can I get a refund if I'm not satisfied with a 0Resmon script?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Refund policies are handled through Tebex. Please refer to our Terms & Refunds page for detailed information on our refund policy.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="How do I download updates for 0Resmon scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">How do I download updates for 0Resmon scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Updates are automatically available through your Tebex account. Simply log in, go to your purchases, and download the latest version of your scripts.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Where can I get help if I encounter issues with 0Resmon scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Where can I get help if I encounter issues with 0Resmon scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Our Discord server is the fastest way to get help. Create a support ticket and our team will assist you as quickly as possible.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Do 0Resmon scripts impact server performance?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Do 0Resmon scripts impact server performance?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Our scripts are highly optimized with minimal resource usage. We use efficient coding practices to ensure your server performance remains smooth.
+              </div>
+            </div>
+
+            <div class="faq-item py-4 cursor-pointer" data-question="Can I schedule automatic updates for 0Resmon scripts?">
+              <div class="flex items-center justify-between faq-question">
+                <span class="text-white text-sm font-medium pr-4">Can I schedule automatic updates for 0Resmon scripts?</span>
+                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+              </div>
+              <div class="faq-answer text-white/50 text-sm pr-8">
+                Currently, updates need to be downloaded manually through Tebex. We recommend checking for updates regularly to ensure you have the latest features and fixes.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 10. RECENT PAYMENTS -->
+  <!-- ============================================ -->
+  <section id="recent-payments" class="mt-28 py-20 bg-red-grid section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          Recent <span class="gradient-text">Payments</span>
+        </h2>
+        <p class="text-white/50 text-base max-w-2xl mx-auto">
+          Trusted by thousands of customers with over 42,000+ successful sales worldwide.
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto card-bg border border-white/5 rounded-lg overflow-hidden">
+        <!-- Payment 1 -->
+        <div class="payment-entry flex items-center justify-between px-6 py-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">C</div>
+            <div>
+              <p class="text-white text-sm font-medium">CityOfFallenAngels</p>
+              <p class="text-white/40 text-xs">Today 01:32</p>
+            </div>
+          </div>
+          <span class="text-white font-bold text-sm">60,00 &euro;</span>
+        </div>
+
+        <!-- Payment 2 -->
+        <div class="payment-entry flex items-center justify-between px-6 py-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">T</div>
+            <div>
+              <p class="text-white text-sm font-medium">TRICRP</p>
+              <p class="text-white/40 text-xs">Today 01:15</p>
+            </div>
+          </div>
+          <span class="text-white font-bold text-sm">21,40 &euro;</span>
+        </div>
+
+        <!-- Payment 3 -->
+        <div class="payment-entry flex items-center justify-between px-6 py-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">M</div>
+            <div>
+              <p class="text-white text-sm font-medium">marlodk215</p>
+              <p class="text-white/40 text-xs">Today 23:28</p>
+            </div>
+          </div>
+          <span class="text-white font-bold text-sm">37,80 &euro;</span>
+        </div>
+
+        <!-- Payment 4 -->
+        <div class="payment-entry flex items-center justify-between px-6 py-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">B</div>
+            <div>
+              <p class="text-white text-sm font-medium">BigEx</p>
+              <p class="text-white/40 text-xs">Today 23:22</p>
+            </div>
+          </div>
+          <span class="text-white font-bold text-sm">40,00 &euro;</span>
+        </div>
+
+        <!-- Payment 5 -->
+        <div class="flex items-center justify-between px-6 py-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 text-xs font-bold">B</div>
+            <div>
+              <p class="text-white text-sm font-medium">BigEx</p>
+              <p class="text-white/40 text-xs">Today 23:14</p>
+            </div>
+          </div>
+          <span class="text-white font-bold text-sm">40,00 &euro;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 11. DISCORD CTA -->
+  <!-- ============================================ -->
+  <section id="discord-cta" class="mt-28 section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="discord-cta-border p-8 sm:p-12 flex flex-col lg:flex-row items-center gap-8">
+        <!-- Left Content -->
+        <div class="flex-1">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">Join our Discord</h2>
+          <p class="text-white/50 text-sm mb-6 max-w-md">
+            Join our Discord community to get instant support, early access to new scripts, exclusive discounts, and connect with thousands of server owners.
+          </p>
+          <a href="#" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-md text-white text-sm font-medium transition" style="background: #5865F2;">
+            <i class="fa-brands fa-discord"></i>
+            Discord
+          </a>
+          <p class="text-white/30 text-xs mt-4">By joining you agree to our community guidelines and privacy policy.</p>
+        </div>
+        <!-- Right: Banner Image -->
+        <div class="flex-shrink-0">
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/discord-banner.png" alt="Discord" class="w-full max-w-[400px] rounded-lg">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 12. FOOTER -->
+  <!-- ============================================ -->
+  <footer class="mt-28" style="background: #1B1B1B;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="flex flex-col lg:flex-row gap-12">
+        <!-- Left: Logos + Dragon -->
+        <div class="flex-shrink-0">
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/0resmon-logo-gray.png" alt="0Resmon" class="h-10 mb-4 opacity-60">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="text-white/30 text-xs">Powered by</span>
+            <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex-logo-gray.png" alt="Tebex" class="h-4 opacity-40">
+          </div>
+          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/0resmon-drag.png" alt="" class="w-32 opacity-60">
+        </div>
+
+        <!-- Link Columns -->
+        <div class="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <!-- Pages -->
+          <div>
+            <h4 class="text-white font-bold text-sm mb-4">Pages</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Open Source</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Escrow</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Map</a></li>
+            </ul>
+          </div>
+
+          <!-- Socials -->
+          <div>
+            <h4 class="text-white font-bold text-sm mb-4">Socials</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Discord</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Cfx.re</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">GitHub</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">YouTube</a></li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4 class="text-white font-bold text-sm mb-4">Legal</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Terms & Refunds</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Tebex Impressum</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Tebex Terms</a></li>
+              <li><a href="#" class="text-white/40 text-sm hover:text-white/60 transition">Tebex Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="mt-12 pt-6 border-t border-white/5">
+        <p class="text-white/20 text-xs leading-relaxed">
+          Copyright &copy; 2025 0Resmon Studio. Not affiliated with or endorsed by Rockstar North, Take-Two Interactive or other trademark holders. Tebex is a copyright and registered trademark of Tebex Interactive Software Inc. This website and its contents is operated by Tebex Limited, who handles product fulfillment, billing, and payment card information. All transactions and data storage comply with applicable laws and regulations. Trademarks and logos are the property of their respective owners. All prices are displayed including tax and may vary depending on the currency or country.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- 13. TEBEX BOTTOM BAR -->
+  <!-- ============================================ -->
+  <div class="bg-[#151515] py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex.png" alt="Tebex" class="h-4 opacity-40">
+        <span class="text-white/20 text-xs">This website and its checkout process is owned &amp; operated by Tebex Limited, who handles product fulfillment, billing requests and refunds.</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs">
+        <a href="#" class="text-white/30 hover:text-white/50 transition">Impressum</a>
+        <a href="#" class="text-white/30 hover:text-white/50 transition">Terms & Conditions</a>
+        <a href="#" class="text-white/30 hover:text-white/50 transition">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
