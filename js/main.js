@@ -362,4 +362,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---- Floating Dragon Mascot ----
+  var dragon = document.getElementById('dragon-mascot');
+  if (dragon && window.innerWidth > 768) {
+    // Entrance — fade in after hero settles
+    gsap.fromTo(dragon,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: 2 }
+    );
+
+    // Idle float — primary bob
+    var dragonFloat = gsap.to(dragon, {
+      y: -14,
+      x: 6,
+      rotation: 3,
+      duration: 4.5,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+      delay: 2.5,
+    });
+
+    // Idle float — secondary micro-drift (different frequency = organic feel)
+    var dragonDrift = gsap.to(dragon, {
+      y: -5,
+      x: -4,
+      duration: 7.2,
+      ease: 'power1.inOut',
+      repeat: -1,
+      yoyo: true,
+      delay: 3.5,
+    });
+
+    // Cursor following — quickTo for smooth trailing
+    var dragonMoveX = gsap.quickTo(dragon, 'x', { duration: 0.7, ease: 'power3.out' });
+    var dragonMoveY = gsap.quickTo(dragon, 'y', { duration: 0.7, ease: 'power3.out' });
+
+    var mouseIdleTimer = null;
+    var isDragonFollowing = false;
+
+    var clampDragonX = gsap.utils.clamp(-window.innerWidth * 0.4, window.innerWidth * 0.4);
+    var clampDragonY = gsap.utils.clamp(-window.innerHeight * 0.4, window.innerHeight * 0.4);
+
+    window.addEventListener('resize', function() {
+      clampDragonX = gsap.utils.clamp(-window.innerWidth * 0.4, window.innerWidth * 0.4);
+      clampDragonY = gsap.utils.clamp(-window.innerHeight * 0.4, window.innerHeight * 0.4);
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      // Dragon resting position (CSS: bottom 10%, right 8%)
+      var restX = window.innerWidth * 0.92 - 50;
+      var restY = window.innerHeight * 0.9 - 50;
+
+      // Move only 15% toward cursor — subtle awareness, not tracking
+      var offsetX = (e.clientX - restX) * 0.15;
+      var offsetY = (e.clientY - restY) * 0.15;
+
+      dragonMoveX(clampDragonX(offsetX));
+      dragonMoveY(clampDragonY(offsetY));
+
+      // Directional tilt
+      var tilt = gsap.utils.clamp(-4, 4, offsetX * 0.08);
+      gsap.to(dragon, { rotation: tilt, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+
+      // Slow idle float while following (don't kill — avoids jarring restart)
+      if (!isDragonFollowing) {
+        isDragonFollowing = true;
+        dragonFloat.timeScale(0.3);
+        dragonDrift.timeScale(0.3);
+      }
+
+      // Resume idle after 2s of no movement
+      clearTimeout(mouseIdleTimer);
+      mouseIdleTimer = setTimeout(function() {
+        isDragonFollowing = false;
+        dragonFloat.timeScale(1);
+        dragonDrift.timeScale(1);
+        dragonMoveX(0);
+        dragonMoveY(0);
+      }, 2000);
+    });
+  }
+
 });
