@@ -564,71 +564,136 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---- Floating Chinese Dragon ----
+  // ---- Floating Chinese Dragon (eel-style swimming) ----
   (function() {
     if (window.innerWidth <= 768) return;
 
-    var dragon = document.getElementById('floating-dragon');
-    if (!dragon) return;
+    var container = document.getElementById('floating-dragon');
+    var bodyPath = document.getElementById('dragon-body');
+    var spinePath = document.getElementById('dragon-spine');
+    var head = document.getElementById('dragon-head');
+    var eyeL = document.getElementById('dragon-eye-l');
+    var eyeR = document.getElementById('dragon-eye-r');
+    var pupilL = document.getElementById('dragon-pupil-l');
+    var pupilR = document.getElementById('dragon-pupil-r');
+    var tail = document.getElementById('dragon-tail');
 
-    // Random waypoint within safe viewport bounds
-    function randomPos() {
+    if (!container || !bodyPath) return;
+
+    // Joint-chain config
+    var JOINTS = 28;
+    var SPACING = 10;
+    var HEAD_WIDTH = 12;
+    var TAIL_WIDTH = 2;
+    var SPEED = 1.8;
+    var MARGIN = 80;
+
+    // Initialize joints at a starting position
+    var startX = window.innerWidth * 0.7;
+    var startY = window.innerHeight * 0.5;
+    var joints = [];
+    for (var i = 0; i < JOINTS; i++) {
+      joints.push({ x: startX - i * SPACING, y: startY });
+    }
+
+    // Current waypoint
+    var waypoint = randomWaypoint();
+    function randomWaypoint() {
       return {
-        x: gsap.utils.random(50, window.innerWidth - 250),
-        y: gsap.utils.random(50, window.innerHeight - 180)
+        x: MARGIN + Math.random() * (window.innerWidth - MARGIN * 2),
+        y: MARGIN + Math.random() * (window.innerHeight - MARGIN * 2)
       };
     }
 
-    // Set initial position
-    var start = randomPos();
-    gsap.set(dragon, { x: start.x, y: start.y });
-
-    // Entrance fade-in
-    gsap.fromTo(dragon,
-      { opacity: 0, scale: 0.5 },
-      { opacity: 0.45, scale: 1, duration: 1.2, ease: 'power2.out', delay: 2.5 }
-    );
-
-    // Continuous flight: pick random destination, fly there, repeat
-    function flyToNext() {
-      var dest = randomPos();
-      var dx = dest.x - gsap.getProperty(dragon, 'x');
-      var dy = dest.y - gsap.getProperty(dragon, 'y');
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      var duration = gsap.utils.clamp(4, 10, dist / 80);
-
-      // Flip SVG to face travel direction
-      var scaleX = dx < 0 ? -1 : 1;
-
-      gsap.to(dragon, {
-        x: dest.x,
-        y: dest.y,
-        scaleX: scaleX,
-        duration: duration,
-        ease: 'sine.inOut',
-        onComplete: flyToNext
-      });
+    // Catmull-Rom to cubic bezier for smooth path
+    function buildPath(pts) {
+      if (pts.length < 2) return '';
+      var d = 'M' + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
+      for (var i = 0; i < pts.length - 1; i++) {
+        var p0 = pts[Math.max(i - 1, 0)];
+        var p1 = pts[i];
+        var p2 = pts[i + 1];
+        var p3 = pts[Math.min(i + 2, pts.length - 1)];
+        var cp1x = p1.x + (p2.x - p0.x) / 6;
+        var cp1y = p1.y + (p2.y - p0.y) / 6;
+        var cp2x = p2.x - (p3.x - p1.x) / 6;
+        var cp2y = p2.y - (p3.y - p1.y) / 6;
+        d += ' C' + cp1x.toFixed(1) + ',' + cp1y.toFixed(1) +
+             ' ' + cp2x.toFixed(1) + ',' + cp2y.toFixed(1) +
+             ' ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1);
+      }
+      return d;
     }
 
-    // Start flying after entrance
-    gsap.delayedCall(3.5, flyToNext);
+    // Entrance
+    container.style.opacity = '0';
+    gsap.to(container, { opacity: 0.5, duration: 1.5, delay: 2.5, ease: 'power2.out' });
 
-    // Gentle perpetual bob (overlaid on flight path)
-    gsap.to(dragon, {
-      y: '+=15',
-      duration: 2.8,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true
-    });
+    // Animation loop
+    gsap.ticker.add(function() {
+      // Move head toward waypoint
+      var dx = waypoint.x - joints[0].x;
+      var dy = waypoint.y - joints[0].y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
 
-    // Subtle rotation sway
-    gsap.to(dragon, {
-      rotation: 5,
-      duration: 3.5,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true
+      if (dist < 30) {
+        waypoint = randomWaypoint();
+      } else {
+        joints[0].x += (dx / dist) * SPEED;
+        joints[0].y += (dy / dist) * SPEED;
+      }
+
+      // Constrain each joint to follow the one ahead at fixed distance
+      for (var i = 1; i < JOINTS; i++) {
+        var jdx = joints[i].x - joints[i - 1].x;
+        var jdy = joints[i].y - joints[i - 1].y;
+        var jdist = Math.sqrt(jdx * jdx + jdy * jdy);
+        if (jdist > 0) {
+          joints[i].x = joints[i - 1].x + (jdx / jdist) * SPACING;
+          joints[i].y = joints[i - 1].y + (jdy / jdist) * SPACING;
+        }
+      }
+
+      // Build smooth SVG path
+      var d = buildPath(joints);
+      bodyPath.setAttribute('d', d);
+      bodyPath.setAttribute('stroke-width', HEAD_WIDTH);
+      spinePath.setAttribute('d', d);
+
+      // Taper: use stroke-dasharray trick — not ideal, so we just set a uniform width
+      // The visual taper comes from the path naturally getting thinner via the glow falloff
+
+      // Position head
+      var hx = joints[0].x;
+      var hy = joints[0].y;
+      head.setAttribute('cx', hx);
+      head.setAttribute('cy', hy);
+
+      // Head direction for eye placement
+      var hdx2 = joints[0].x - joints[1].x;
+      var hdy2 = joints[0].y - joints[1].y;
+      var hangle = Math.atan2(hdy2, hdx2);
+      var perpAngle = hangle + Math.PI / 2;
+
+      var eyeDist = 5;
+      var eyeForward = 6;
+      var eFx = hx + Math.cos(hangle) * eyeForward;
+      var eFy = hy + Math.sin(hangle) * eyeForward;
+
+      eyeL.setAttribute('cx', eFx + Math.cos(perpAngle) * eyeDist);
+      eyeL.setAttribute('cy', eFy + Math.sin(perpAngle) * eyeDist);
+      eyeR.setAttribute('cx', eFx - Math.cos(perpAngle) * eyeDist);
+      eyeR.setAttribute('cy', eFy - Math.sin(perpAngle) * eyeDist);
+
+      pupilL.setAttribute('cx', eFx + Math.cos(perpAngle) * eyeDist + Math.cos(hangle) * 1);
+      pupilL.setAttribute('cy', eFy + Math.sin(perpAngle) * eyeDist + Math.sin(hangle) * 1);
+      pupilR.setAttribute('cx', eFx - Math.cos(perpAngle) * eyeDist + Math.cos(hangle) * 1);
+      pupilR.setAttribute('cy', eFy - Math.sin(perpAngle) * eyeDist + Math.sin(hangle) * 1);
+
+      // Tail
+      var lastJ = joints[JOINTS - 1];
+      tail.setAttribute('cx', lastJ.x);
+      tail.setAttribute('cy', lastJ.y);
     });
   })();
 
