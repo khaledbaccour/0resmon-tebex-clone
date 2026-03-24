@@ -133,17 +133,9 @@ body {
   display: flex;
   animation: bannerMarquee 15s linear infinite;
 }
-.banner-marquee-reverse {
-  display: flex;
-  animation: bannerMarqueeReverse 15s linear infinite;
-}
 @keyframes bannerMarquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
-}
-@keyframes bannerMarqueeReverse {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(50%); }
 }
 
 /* --- Hero Floating Logos --- */

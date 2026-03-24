@@ -35,19 +35,11 @@
   <!-- 1. DISCOUNT BANNER -->
   <!-- ============================================ -->
   <div id="discount-banner" class="discount-banner relative w-full overflow-hidden z-50" style="height: 64px;">
-    <!-- Marquee Background Images (Left Side) -->
-    <div class="absolute left-0 top-0 h-full overflow-hidden pointer-events-none" style="width: 22%;">
-      <div class="banner-marquee flex items-center h-full flex-shrink-0">
+    <!-- Marquee Background Images (Full Width) -->
+    <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
+      <div class="banner-marquee flex-shrink-0">
         <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
         <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
-      </div>
-    </div>
-
-    <!-- Marquee Background Images (Right Side) -->
-    <div class="absolute right-0 top-0 h-full overflow-hidden pointer-events-none" style="width: 22%; direction: rtl;">
-      <div class="banner-marquee-reverse flex items-center h-full flex-shrink-0">
         <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
         <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
         <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
@@ -67,12 +59,12 @@
       </div>
 
       <!-- Code Pill -->
-      <div class="discount-code-pill-new flex items-center gap-2 cursor-pointer" id="copy-code-btn" title="Click to copy">
-        <div class="flex flex-col items-center leading-none px-3 py-1.5 rounded border border-white/20 hover:border-white/40 transition-colors" style="background: rgba(0,0,0,0.3);">
-          <span class="text-white/50 text-[9px] uppercase tracking-wider font-medium">Code</span>
-          <span class="text-white text-sm font-bold tracking-wide">RES40</span>
+      <div class="discount-code-pill-new flex items-center gap-3 cursor-pointer" id="copy-code-btn" title="Click to copy">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-md border border-white/20 hover:border-white/40 transition-colors" style="background: radial-gradient(74.31% 154.58% at 50% 50%, #323232 0%, #717070 100%);">
+          <span class="text-white/60 text-[10px] uppercase tracking-widest font-semibold">Code</span>
+          <span class="text-white text-sm font-bold tracking-wider">RES40</span>
+          <i class="fa-solid fa-copy text-white/40 text-xs hover:text-white/70 transition-colors"></i>
         </div>
-        <i class="fa-solid fa-copy text-white/40 text-sm hover:text-white/70 transition-colors"></i>
       </div>
 
       <!-- Countdown Timer -->
