@@ -220,15 +220,144 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Hero logo floating (enhanced with GSAP)
-    gsap.utils.toArray('.hero-logo-float-1, .hero-logo-float-2, .hero-logo-float-3').forEach((logo, i) => {
-      gsap.to(logo, {
-        y: -15 - (i * 5),
-        rotation: 2 + i,
-        duration: 3 + i * 0.5,
+    // ---- Hero Entrance Timeline ----
+    const heroTL = gsap.timeline({ delay: 0.2 });
+
+    // Line-by-line wipe reveal
+    heroTL.to('.hero-line-inner', {
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.12,
+    });
+
+    // Subtitle fades in
+    heroTL.to('.hero-subtitle', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+    }, '-=0.3');
+
+    // Buttons slide in
+    heroTL.from('.hero-btn-browse, .hero-btn-discord', {
+      opacity: 0,
+      x: -20,
+      duration: 0.5,
+      ease: 'power2.out',
+      stagger: 0.1,
+    }, '-=0.2');
+
+    // Light streak sweep
+    heroTL.to('.hero-light-streak', {
+      x: '240%',
+      duration: 1.8,
+      ease: 'power2.inOut',
+    }, 0.5);
+
+    // Logo entrance — scale in with overshoot
+    heroTL.from('.hero-logos-container img', {
+      scale: 0,
+      opacity: 0,
+      rotation: -15,
+      duration: 0.8,
+      ease: 'back.out(1.7)',
+      stagger: 0.15,
+    }, 0.6);
+
+    // ---- Organic Dual-Layer Floating ----
+    const logoConfigs = [
+      { sel: '.hero-logo-float-1', y: -12, x: 5, rot: 4, dur: 4.2, delay: 1.4 },
+      { sel: '.hero-logo-float-2', y: -18, x: -8, rot: -3, dur: 5.7, delay: 2.2 },
+      { sel: '.hero-logo-float-3', y: -8, x: 4, rot: 1.5, dur: 6.4, delay: 2.9 },
+    ];
+
+    logoConfigs.forEach(function(cfg) {
+      var el = document.querySelector(cfg.sel);
+      if (!el) return;
+
+      // Primary float
+      gsap.to(el, {
+        y: cfg.y,
+        x: cfg.x,
+        rotation: cfg.rot,
+        duration: cfg.dur,
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
+        delay: cfg.delay,
+      });
+
+      // Secondary micro-drift at a different frequency
+      gsap.to(el, {
+        y: cfg.y * 0.3,
+        x: cfg.x * -0.5,
+        duration: cfg.dur * 1.6,
+        ease: 'power1.inOut',
+        repeat: -1,
+        yoyo: true,
+        delay: cfg.delay + 1,
+      });
+    });
+
+    // ---- Mouse Parallax on Logo Wrappers ----
+    var heroSection = document.getElementById('hero');
+    var parallaxWraps = document.querySelectorAll('.hero-logo-parallax-wrap');
+
+    if (heroSection && parallaxWraps.length) {
+      heroSection.addEventListener('mousemove', function(e) {
+        var rect = heroSection.getBoundingClientRect();
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+        var mouseX = e.clientX - rect.left - centerX;
+        var mouseY = e.clientY - rect.top - centerY;
+
+        parallaxWraps.forEach(function(wrap) {
+          var depth = parseFloat(wrap.dataset.depth);
+          gsap.to(wrap, {
+            x: mouseX * depth,
+            y: mouseY * depth,
+            duration: 0.8,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          });
+        });
+      });
+
+      heroSection.addEventListener('mouseleave', function() {
+        parallaxWraps.forEach(function(wrap) {
+          gsap.to(wrap, {
+            x: 0,
+            y: 0,
+            duration: 1.2,
+            ease: 'elastic.out(1, 0.5)',
+          });
+        });
+      });
+    }
+
+    // ---- Magnetic Buttons ----
+    document.querySelectorAll('[data-magnetic]').forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+
+        gsap.to(btn, {
+          x: x * 0.25,
+          y: y * 0.15,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+      });
+
+      btn.addEventListener('mouseleave', function() {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.4)',
+        });
       });
     });
   }
