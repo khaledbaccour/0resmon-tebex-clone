@@ -150,77 +150,19 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-/* --- Chinese Parade Dragon --- */
-#parade-dragon {
+/* --- Floating Chinese Dragon --- */
+#floating-dragon {
   position: fixed;
-  inset: 0;
-  z-index: 25;
+  z-index: 15;
   pointer-events: none;
-  overflow: hidden;
-}
-.dragon-seg {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
+  opacity: 0;
   will-change: transform;
-  transform: translate(-50%, -50%);
 }
-.dragon-seg--head {
-  width: 36px;
-  height: 34px;
-  border-radius: 50% 50% 45% 45%;
-  background: radial-gradient(circle at 40% 35%, #ff5e71 0%, #FF3A52 50%, #c1162e 100%);
-  border: 2px solid #D4A017;
-  box-shadow: 0 0 18px rgba(255, 58, 82, 0.35), 0 0 4px rgba(212, 160, 23, 0.3);
+#floating-dragon svg {
+  width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(255, 58, 82, 0.2));
 }
-.dragon-seg--head::before,
-.dragon-seg--head::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 7px;
-  background: #fff;
-  border-radius: 50%;
-  top: 8px;
-  box-shadow: inset 2px 0 0 #1a1a1a;
-}
-.dragon-seg--head::before { left: 6px; }
-.dragon-seg--head::after { right: 6px; }
-.dragon-seg--body {
-  background: radial-gradient(circle at 45% 40%, #FF3A52 0%, #b81c2e 100%);
-  border: 1.5px solid rgba(212, 160, 23, 0.4);
-  box-shadow: 0 0 10px rgba(255, 58, 82, 0.2);
-}
-.dragon-seg--body.seg-accent {
-  border-color: rgba(212, 160, 23, 0.7);
-  background: radial-gradient(circle at 45% 40%, #ff5e71 0%, #c1162e 100%);
-}
-.dragon-seg--tail {
-  background: linear-gradient(135deg, #FF3A52 0%, #8B1A2A 100%);
-  border: 1px solid rgba(212, 160, 23, 0.3);
-  border-radius: 50% 50% 20% 20%;
-  box-shadow: 0 0 8px rgba(255, 58, 82, 0.15);
-}
-.dragon-whisker {
-  position: absolute;
-  width: 14px;
-  height: 1.5px;
-  background: #D4A017;
-  top: 14px;
-  border-radius: 1px;
-}
-.dragon-whisker--l { left: -10px; transform: rotate(-20deg); }
-.dragon-whisker--r { right: -10px; transform: rotate(20deg); }
-.dragon-horn {
-  position: absolute;
-  width: 5px;
-  height: 8px;
-  background: #D4A017;
-  border-radius: 2px 2px 0 0;
-  top: -6px;
-}
-.dragon-horn--l { left: 8px; transform: rotate(-15deg); }
-.dragon-horn--r { right: 8px; transform: rotate(15deg); }
 
 /* --- Hero Floating Logos --- */
 .hero-logo-glow {
@@ -819,7 +761,7 @@ a[class*="btn-red-glow"] {
   .hero-logos-container {
     display: none;
   }
-  #parade-dragon {
+  #floating-dragon {
     display: none;
   }
 }

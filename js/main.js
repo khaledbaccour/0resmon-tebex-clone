@@ -504,153 +504,71 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---- Chinese Parade Dragon (cursor-following) ----
+  // ---- Floating Chinese Dragon ----
   (function() {
     if (window.innerWidth <= 768) return;
 
-    var container = document.getElementById('parade-dragon');
-    if (!container) return;
+    var dragon = document.getElementById('floating-dragon');
+    if (!dragon) return;
 
-    var SEG_COUNT = 10;
-    var HEAD_SIZE = 36;
-    var MIN_SIZE = 12;
-    var BASE_DUR = 0.6;
-    var DUR_STEP = 0.08;
-    var FOLLOW_STR = 0.12;
-    var OPACITY = 0.55;
-    var TRAIL_LEN = SEG_COUNT * 4;
+    // Random waypoint within safe viewport bounds
+    function randomPos() {
+      return {
+        x: gsap.utils.random(50, window.innerWidth - 250),
+        y: gsap.utils.random(50, window.innerHeight - 180)
+      };
+    }
 
-    // Build head decorations using DOM methods (no innerHTML)
-    function addHeadDetails(el) {
-      var parts = [
-        { cls: 'dragon-horn dragon-horn--l' },
-        { cls: 'dragon-horn dragon-horn--r' },
-        { cls: 'dragon-whisker dragon-whisker--l' },
-        { cls: 'dragon-whisker dragon-whisker--r' }
-      ];
-      parts.forEach(function(p) {
-        var span = document.createElement('span');
-        span.className = p.cls;
-        el.appendChild(span);
+    // Set initial position
+    var start = randomPos();
+    gsap.set(dragon, { x: start.x, y: start.y });
+
+    // Entrance fade-in
+    gsap.fromTo(dragon,
+      { opacity: 0, scale: 0.5 },
+      { opacity: 0.45, scale: 1, duration: 1.2, ease: 'power2.out', delay: 2.5 }
+    );
+
+    // Continuous flight: pick random destination, fly there, repeat
+    function flyToNext() {
+      var dest = randomPos();
+      var dx = dest.x - gsap.getProperty(dragon, 'x');
+      var dy = dest.y - gsap.getProperty(dragon, 'y');
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var duration = gsap.utils.clamp(4, 10, dist / 80);
+
+      // Flip SVG to face travel direction
+      var scaleX = dx < 0 ? -1 : 1;
+
+      gsap.to(dragon, {
+        x: dest.x,
+        y: dest.y,
+        scaleX: scaleX,
+        duration: duration,
+        ease: 'sine.inOut',
+        onComplete: flyToNext
       });
     }
 
-    // Build segments
-    var segs = [];
-    for (var i = 0; i < SEG_COUNT; i++) {
-      var el = document.createElement('div');
-      el.className = 'dragon-seg';
-      var t = i / (SEG_COUNT - 1);
-      var size = Math.round(HEAD_SIZE - (HEAD_SIZE - MIN_SIZE) * t);
+    // Start flying after entrance
+    gsap.delayedCall(3.5, flyToNext);
 
-      if (i === 0) {
-        el.classList.add('dragon-seg--head');
-        addHeadDetails(el);
-      } else if (i === SEG_COUNT - 1) {
-        el.classList.add('dragon-seg--tail');
-      } else {
-        el.classList.add('dragon-seg--body');
-        if (i % 2 === 0) el.classList.add('seg-accent');
-      }
-
-      el.style.width = size + 'px';
-      el.style.height = size + 'px';
-      el.style.opacity = '0';
-      container.appendChild(el);
-      segs.push({ el: el, size: size });
-    }
-
-    // Anchor position (bottom-right area)
-    var anchorX = window.innerWidth * 0.88;
-    var anchorY = window.innerHeight * 0.85;
-
-    // Position trail — stores recent head positions
-    var trail = [];
-    for (var j = 0; j < TRAIL_LEN; j++) {
-      trail.push({ x: anchorX, y: anchorY });
-    }
-
-    // GSAP quickTo movers for each segment
-    var movers = segs.map(function(seg, idx) {
-      var dur = BASE_DUR + idx * DUR_STEP;
-      return {
-        qx: gsap.quickTo(seg.el, 'left', { duration: dur, ease: 'power3.out' }),
-        qy: gsap.quickTo(seg.el, 'top', { duration: dur, ease: 'power3.out' })
-      };
+    // Gentle perpetual bob (overlaid on flight path)
+    gsap.to(dragon, {
+      y: '+=15',
+      duration: 2.8,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true
     });
 
-    // Mouse state
-    var cursorX = anchorX;
-    var cursorY = anchorY;
-    var mouseActive = false;
-    var mouseTimer = null;
-
-    document.addEventListener('mousemove', function(e) {
-      cursorX = e.clientX;
-      cursorY = e.clientY;
-      mouseActive = true;
-      clearTimeout(mouseTimer);
-      mouseTimer = setTimeout(function() { mouseActive = false; }, 2500);
-    });
-
-    // Idle phase for organic wave
-    var phase = 0;
-    var headX = anchorX;
-    var headY = anchorY;
-
-    // Animation loop synced with GSAP ticker
-    gsap.ticker.add(function() {
-      phase += 0.015;
-
-      // Head target
-      if (mouseActive) {
-        headX = anchorX + (cursorX - anchorX) * FOLLOW_STR;
-        headY = anchorY + (cursorY - anchorY) * FOLLOW_STR;
-      } else {
-        // Idle: lazy figure-8 drift
-        headX = anchorX + Math.sin(phase * 0.7) * 25;
-        headY = anchorY + Math.sin(phase * 1.1) * 15;
-      }
-
-      // Push head position onto trail
-      trail.unshift({ x: headX, y: headY });
-      if (trail.length > TRAIL_LEN) trail.pop();
-
-      // Position each segment from trail history
-      for (var k = 0; k < SEG_COUNT; k++) {
-        var sampleIdx = Math.min(k * 3, trail.length - 1);
-        var pos = trail[sampleIdx];
-
-        // Perpendicular wave for undulation
-        var waveAmp = mouseActive ? 3 : 8;
-        var waveOff = Math.sin(phase * 2.5 + k * 0.7) * waveAmp * (k / SEG_COUNT);
-
-        var nextIdx = Math.min(sampleIdx + 1, trail.length - 1);
-        var dx = pos.x - trail[nextIdx].x;
-        var dy = pos.y - trail[nextIdx].y;
-        var len = Math.sqrt(dx * dx + dy * dy) || 1;
-        var perpX = -dy / len;
-        var perpY = dx / len;
-
-        movers[k].qx(pos.x + perpX * waveOff);
-        movers[k].qy(pos.y + perpY * waveOff);
-      }
-
-      // Head rotation — face direction of travel
-      if (trail.length > 2) {
-        var hdx = trail[0].x - trail[2].x;
-        var hdy = trail[0].y - trail[2].y;
-        var angle = Math.atan2(hdy, hdx) * (180 / Math.PI);
-        gsap.set(segs[0].el, { rotation: angle + 90 });
-      }
-    });
-
-    // Entrance — staggered fade in
-    segs.forEach(function(seg, i) {
-      gsap.fromTo(seg.el,
-        { opacity: 0, scale: 0.3 },
-        { opacity: OPACITY, scale: 1, duration: 0.4, ease: 'back.out(1.7)', delay: 2 + i * 0.06 }
-      );
+    // Subtle rotation sway
+    gsap.to(dragon, {
+      rotation: 5,
+      duration: 3.5,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true
     });
   })();
 
