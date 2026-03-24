@@ -124,6 +124,13 @@ body {
 }
 
 /* --- Hero Floating Logos --- */
+.hero-logo-glow {
+  filter: drop-shadow(0 0 25px rgba(255, 58, 82, 0.3)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+  transition: filter 0.3s ease;
+}
+.hero-logo-glow:hover {
+  filter: drop-shadow(0 0 40px rgba(255, 58, 82, 0.5)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+}
 .hero-logo-float-1 {
   animation: heroFloat1 6s ease-in-out infinite;
 }
