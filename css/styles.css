@@ -305,8 +305,8 @@ body {
 .review-marquee-track {
   display: flex;
   gap: 1.5rem;
-  animation: reviewMarquee 40s linear infinite;
   width: max-content;
+  animation: reviewMarquee 45s linear infinite;
 }
 .review-marquee-track:hover {
   animation-play-state: paused;
@@ -316,9 +316,77 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-/* --- Star Glow --- */
-.star-glow {
-  filter: drop-shadow(0 0 6px rgba(255, 58, 82, 0.6)) drop-shadow(0 0 15px rgba(255, 58, 82, 0.3));
+/* --- Review Card Variants --- */
+.review-card {
+  flex-shrink: 0;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.review-card:hover {
+  transform: scale(1.03);
+}
+
+/* Variant A — Featured Quote */
+.review-card-a {
+  width: 400px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid rgba(255, 58, 82, 0.4);
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+.review-card-a::before {
+  content: '\201C';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 4rem;
+  line-height: 1;
+  color: rgba(255, 58, 82, 0.08);
+  font-family: Georgia, serif;
+  pointer-events: none;
+}
+
+/* Variant B — Compact */
+.review-card-b {
+  width: 300px;
+  background: var(--card-bg);
+  border-top: 1px solid rgba(255, 58, 82, 0.1);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.review-card-b .review-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Variant C — Standard */
+.review-card-c {
+  width: 340px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+.review-card-c:hover {
+  transform: scale(1.03) rotate(0.5deg);
+}
+
+/* --- Star (no glow in cards) --- */
+.star-subtle {
+  filter: drop-shadow(0 1px 3px rgba(255, 58, 82, 0.3));
+}
+
+/* --- Review section separator --- */
+.reviews-separator {
+  transform-origin: left;
 }
 
 /* --- FAQ Accordion --- */
@@ -369,6 +437,91 @@ body {
   border-top-color: rgba(255, 58, 82, 0.3);
 }
 
+/* Featured product card */
+.product-card-featured {
+  border-top: 2px solid rgba(255, 58, 82, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 58, 82, 0.1), 0 0 20px rgba(255, 58, 82, 0.07), 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.product-card-featured:hover {
+  border-top-color: rgba(255, 58, 82, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 58, 82, 0.15), 0 0 40px rgba(255, 58, 82, 0.2), 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Image hover — odd cards: brightness + red overlay from bottom */
+.product-img-odd {
+  position: relative;
+}
+.product-img-odd::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(255, 58, 82, 0.15), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.product-card:hover .product-img-odd img {
+  filter: brightness(1.1);
+  transition: filter 0.35s ease;
+}
+.product-card:hover .product-img-odd::after {
+  opacity: 1;
+}
+
+/* Image hover — even cards: subtle scale */
+.product-img-even img {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.product-card:hover .product-img-even img {
+  transform: scale(1.04);
+}
+
+/* Product button — gradient slide-in on hover */
+.product-btn {
+  background: white;
+  color: #121212;
+  cursor: pointer;
+}
+.product-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #FF3A52 0%, #ff5e71 100%);
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 0;
+  border-radius: inherit;
+}
+.product-btn:hover::before {
+  width: 100%;
+}
+.product-btn:hover .product-btn-text {
+  color: white;
+}
+.product-btn-text {
+  transition: color 0.3s ease;
+}
+
+/* View All link — animated underline */
+.view-all-link {
+  position: relative;
+}
+.view-all-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.view-all-link:hover::after {
+  width: 100%;
+}
+
 /* --- Section Animate (GSAP targets) --- */
 /* Initial state set by GSAP, not CSS, to avoid invisible sections if JS fails */
 
@@ -412,9 +565,14 @@ swiper-slide {
 
 /* --- Glow Effects --- */
 
-/* Rating pill glow */
+/* Rating pill glow — subtle pulse */
 .rating-pill-glow {
-  box-shadow: 0 0 25px rgba(255, 58, 82, 0.1), 0 0 50px rgba(255, 58, 82, 0.05);
+  box-shadow: 0 0 20px rgba(255, 58, 82, 0.08), 0 0 40px rgba(255, 58, 82, 0.04);
+  animation: ratingPulse 3s ease-in-out infinite;
+}
+@keyframes ratingPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 58, 82, 0.08), 0 0 40px rgba(255, 58, 82, 0.04); }
+  50% { box-shadow: 0 0 30px rgba(255, 58, 82, 0.15), 0 0 60px rgba(255, 58, 82, 0.08); }
 }
 
 /* Button glow on hover */
@@ -545,6 +703,59 @@ a[class*="btn-red-glow"] {
 /* Product card action buttons — generous click area */
 .product-card button {
   padding: 12px 20px;
+}
+
+/* --- Bento Grid (Why Choose Us) --- */
+.bento-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bento-row-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .bento-row-2 {
+    flex-direction: row;
+  }
+  .bento-wide {
+    flex: 3;
+  }
+  .bento-narrow {
+    flex: 2;
+  }
+}
+
+/* Bento card hover variety */
+.bento-hero {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.bento-hero:hover {
+  box-shadow: 0 0 30px rgba(88, 101, 242, 0.08), 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.bento-wide {
+  transition: border-left-width 0.3s ease, box-shadow 0.3s ease;
+}
+.bento-wide:hover {
+  border-left-width: 5px !important;
+  box-shadow: 0 0 25px rgba(255, 58, 82, 0.1), 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+.bento-narrow {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.bento-narrow:hover {
+  background-color: #1a1a1a !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 58, 82, 0.06) !important;
+}
+.bento-banner {
+  transition: border-style 0.3s ease, box-shadow 0.3s ease;
+}
+.bento-banner:hover {
+  border-style: solid !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Responsive Utilities --- */
