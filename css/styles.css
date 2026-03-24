@@ -372,6 +372,20 @@ swiper-slide {
   box-shadow: 0 2px 20px rgba(255, 58, 82, 0.06), 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* --- Global Button Padding Minimums --- */
+
+/* Ensure all interactive buttons/links have comfortable touch targets */
+button:not([class*="mobile-menu"]):not([class*="faq"]):not([class*="scripts-dropdown"]):not([class*="currency"]),
+a[class*="btn-glow-hover"],
+a[class*="btn-red-glow"] {
+  min-height: 40px;
+}
+
+/* Product card action buttons — generous click area */
+.product-card button {
+  padding: 12px 20px;
+}
+
 /* --- Responsive Utilities --- */
 @media (max-width: 768px) {
   .hero-logos-container {
