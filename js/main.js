@@ -489,86 +489,154 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---- Floating Dragon Mascot ----
-  var dragon = document.getElementById('dragon-mascot');
-  if (dragon && window.innerWidth > 768) {
-    // Entrance — fade in after hero settles
-    gsap.fromTo(dragon,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: 2 }
-    );
+  // ---- Chinese Parade Dragon (cursor-following) ----
+  (function() {
+    if (window.innerWidth <= 768) return;
 
-    // Idle float — primary bob
-    var dragonFloat = gsap.to(dragon, {
-      y: -14,
-      x: 6,
-      rotation: 3,
-      duration: 4.5,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-      delay: 2.5,
-    });
+    var container = document.getElementById('parade-dragon');
+    if (!container) return;
 
-    // Idle float — secondary micro-drift (different frequency = organic feel)
-    var dragonDrift = gsap.to(dragon, {
-      y: -5,
-      x: -4,
-      duration: 7.2,
-      ease: 'power1.inOut',
-      repeat: -1,
-      yoyo: true,
-      delay: 3.5,
-    });
+    var SEG_COUNT = 10;
+    var HEAD_SIZE = 36;
+    var MIN_SIZE = 12;
+    var BASE_DUR = 0.6;
+    var DUR_STEP = 0.08;
+    var FOLLOW_STR = 0.12;
+    var OPACITY = 0.55;
+    var TRAIL_LEN = SEG_COUNT * 4;
 
-    // Cursor following — quickTo for smooth trailing
-    var dragonMoveX = gsap.quickTo(dragon, 'x', { duration: 0.7, ease: 'power3.out' });
-    var dragonMoveY = gsap.quickTo(dragon, 'y', { duration: 0.7, ease: 'power3.out' });
+    // Build head decorations using DOM methods (no innerHTML)
+    function addHeadDetails(el) {
+      var parts = [
+        { cls: 'dragon-horn dragon-horn--l' },
+        { cls: 'dragon-horn dragon-horn--r' },
+        { cls: 'dragon-whisker dragon-whisker--l' },
+        { cls: 'dragon-whisker dragon-whisker--r' }
+      ];
+      parts.forEach(function(p) {
+        var span = document.createElement('span');
+        span.className = p.cls;
+        el.appendChild(span);
+      });
+    }
 
-    var mouseIdleTimer = null;
-    var isDragonFollowing = false;
+    // Build segments
+    var segs = [];
+    for (var i = 0; i < SEG_COUNT; i++) {
+      var el = document.createElement('div');
+      el.className = 'dragon-seg';
+      var t = i / (SEG_COUNT - 1);
+      var size = Math.round(HEAD_SIZE - (HEAD_SIZE - MIN_SIZE) * t);
 
-    var clampDragonX = gsap.utils.clamp(-window.innerWidth * 0.4, window.innerWidth * 0.4);
-    var clampDragonY = gsap.utils.clamp(-window.innerHeight * 0.4, window.innerHeight * 0.4);
-
-    window.addEventListener('resize', function() {
-      clampDragonX = gsap.utils.clamp(-window.innerWidth * 0.4, window.innerWidth * 0.4);
-      clampDragonY = gsap.utils.clamp(-window.innerHeight * 0.4, window.innerHeight * 0.4);
-    });
-
-    document.addEventListener('mousemove', function(e) {
-      // Dragon resting position (CSS: bottom 10%, right 8%)
-      var restX = window.innerWidth * 0.92 - 50;
-      var restY = window.innerHeight * 0.9 - 50;
-
-      // Move only 15% toward cursor — subtle awareness, not tracking
-      var offsetX = (e.clientX - restX) * 0.15;
-      var offsetY = (e.clientY - restY) * 0.15;
-
-      dragonMoveX(clampDragonX(offsetX));
-      dragonMoveY(clampDragonY(offsetY));
-
-      // Directional tilt
-      var tilt = gsap.utils.clamp(-4, 4, offsetX * 0.08);
-      gsap.to(dragon, { rotation: tilt, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
-
-      // Slow idle float while following (don't kill — avoids jarring restart)
-      if (!isDragonFollowing) {
-        isDragonFollowing = true;
-        dragonFloat.timeScale(0.3);
-        dragonDrift.timeScale(0.3);
+      if (i === 0) {
+        el.classList.add('dragon-seg--head');
+        addHeadDetails(el);
+      } else if (i === SEG_COUNT - 1) {
+        el.classList.add('dragon-seg--tail');
+      } else {
+        el.classList.add('dragon-seg--body');
+        if (i % 2 === 0) el.classList.add('seg-accent');
       }
 
-      // Resume idle after 2s of no movement
-      clearTimeout(mouseIdleTimer);
-      mouseIdleTimer = setTimeout(function() {
-        isDragonFollowing = false;
-        dragonFloat.timeScale(1);
-        dragonDrift.timeScale(1);
-        dragonMoveX(0);
-        dragonMoveY(0);
-      }, 2000);
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.opacity = '0';
+      container.appendChild(el);
+      segs.push({ el: el, size: size });
+    }
+
+    // Anchor position (bottom-right area)
+    var anchorX = window.innerWidth * 0.88;
+    var anchorY = window.innerHeight * 0.85;
+
+    // Position trail — stores recent head positions
+    var trail = [];
+    for (var j = 0; j < TRAIL_LEN; j++) {
+      trail.push({ x: anchorX, y: anchorY });
+    }
+
+    // GSAP quickTo movers for each segment
+    var movers = segs.map(function(seg, idx) {
+      var dur = BASE_DUR + idx * DUR_STEP;
+      return {
+        qx: gsap.quickTo(seg.el, 'left', { duration: dur, ease: 'power3.out' }),
+        qy: gsap.quickTo(seg.el, 'top', { duration: dur, ease: 'power3.out' })
+      };
     });
-  }
+
+    // Mouse state
+    var cursorX = anchorX;
+    var cursorY = anchorY;
+    var mouseActive = false;
+    var mouseTimer = null;
+
+    document.addEventListener('mousemove', function(e) {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      mouseActive = true;
+      clearTimeout(mouseTimer);
+      mouseTimer = setTimeout(function() { mouseActive = false; }, 2500);
+    });
+
+    // Idle phase for organic wave
+    var phase = 0;
+    var headX = anchorX;
+    var headY = anchorY;
+
+    // Animation loop synced with GSAP ticker
+    gsap.ticker.add(function() {
+      phase += 0.015;
+
+      // Head target
+      if (mouseActive) {
+        headX = anchorX + (cursorX - anchorX) * FOLLOW_STR;
+        headY = anchorY + (cursorY - anchorY) * FOLLOW_STR;
+      } else {
+        // Idle: lazy figure-8 drift
+        headX = anchorX + Math.sin(phase * 0.7) * 25;
+        headY = anchorY + Math.sin(phase * 1.1) * 15;
+      }
+
+      // Push head position onto trail
+      trail.unshift({ x: headX, y: headY });
+      if (trail.length > TRAIL_LEN) trail.pop();
+
+      // Position each segment from trail history
+      for (var k = 0; k < SEG_COUNT; k++) {
+        var sampleIdx = Math.min(k * 3, trail.length - 1);
+        var pos = trail[sampleIdx];
+
+        // Perpendicular wave for undulation
+        var waveAmp = mouseActive ? 3 : 8;
+        var waveOff = Math.sin(phase * 2.5 + k * 0.7) * waveAmp * (k / SEG_COUNT);
+
+        var nextIdx = Math.min(sampleIdx + 1, trail.length - 1);
+        var dx = pos.x - trail[nextIdx].x;
+        var dy = pos.y - trail[nextIdx].y;
+        var len = Math.sqrt(dx * dx + dy * dy) || 1;
+        var perpX = -dy / len;
+        var perpY = dx / len;
+
+        movers[k].qx(pos.x + perpX * waveOff);
+        movers[k].qy(pos.y + perpY * waveOff);
+      }
+
+      // Head rotation — face direction of travel
+      if (trail.length > 2) {
+        var hdx = trail[0].x - trail[2].x;
+        var hdy = trail[0].y - trail[2].y;
+        var angle = Math.atan2(hdy, hdx) * (180 / Math.PI);
+        gsap.set(segs[0].el, { rotation: angle + 90 });
+      }
+    });
+
+    // Entrance — staggered fade in
+    segs.forEach(function(seg, i) {
+      gsap.fromTo(seg.el,
+        { opacity: 0, scale: 0.3 },
+        { opacity: OPACITY, scale: 1, duration: 0.4, ease: 'back.out(1.7)', delay: 2 + i * 0.06 }
+      );
+    });
+  })();
 
 });
