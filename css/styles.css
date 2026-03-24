@@ -109,18 +109,41 @@ body {
 .discount-banner {
   background: var(--discount-banner-bg);
 }
-.discount-code-pill {
-  background: var(--discount-code-bg);
+
+/* --- Countdown Timer Units --- */
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 36px;
+  padding: 4px 6px;
+  font-variant-numeric: tabular-nums;
+}
+.countdown-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  margin-top: 1px;
 }
 
 /* --- Discount Banner Marquee --- */
 .banner-marquee {
   display: flex;
-  animation: bannerMarquee 20s linear infinite;
+  animation: bannerMarquee 15s linear infinite;
+}
+.banner-marquee-reverse {
+  display: flex;
+  animation: bannerMarqueeReverse 15s linear infinite;
 }
 @keyframes bannerMarquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+@keyframes bannerMarqueeReverse {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
 }
 
 /* --- Hero Floating Logos --- */

@@ -34,52 +34,64 @@
   <!-- ============================================ -->
   <!-- 1. DISCOUNT BANNER -->
   <!-- ============================================ -->
-  <div id="discount-banner" class="discount-banner relative w-full overflow-hidden z-50" style="height: 48px;">
-    <!-- Marquee Background Images (Left) -->
-    <div class="absolute inset-0 flex items-center overflow-hidden opacity-30 pointer-events-none">
-      <div class="banner-marquee flex-shrink-0">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[48px] object-cover">
+  <div id="discount-banner" class="discount-banner relative w-full overflow-hidden z-50" style="height: 64px;">
+    <!-- Marquee Background Images (Left Side) -->
+    <div class="absolute left-0 top-0 h-full overflow-hidden pointer-events-none" style="width: 22%;">
+      <div class="banner-marquee flex items-center h-full flex-shrink-0">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+      </div>
+    </div>
+
+    <!-- Marquee Background Images (Right Side) -->
+    <div class="absolute right-0 top-0 h-full overflow-hidden pointer-events-none" style="width: 22%; direction: rtl;">
+      <div class="banner-marquee-reverse flex items-center h-full flex-shrink-0">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/big-discount-new-banner-2.png" alt="" class="h-[64px] object-cover">
       </div>
     </div>
 
     <!-- Center Content -->
-    <div class="relative z-10 flex items-center justify-center h-full px-4 gap-4">
+    <div class="relative z-10 flex items-center justify-center h-full px-4 gap-6">
       <!-- Discount Icon + Text -->
-      <div class="hidden sm:flex items-center gap-2">
-        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/discount-banner-logo.png" alt="" class="h-6 w-6">
-        <span class="text-white font-bold text-sm">Big Discount Started</span>
-        <span class="text-white/70 text-xs hidden md:inline">The 40% discount is now valid on all scripts.</span>
+      <div class="hidden sm:flex items-center gap-3">
+        <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/discount-banner-logo.png" alt="" class="h-7 w-7">
+        <div class="flex flex-col">
+          <span class="text-white font-bold text-[15px] leading-tight">Big Discount Started</span>
+          <span class="text-white/70 text-xs hidden md:inline leading-tight">The 40% discount is now valid on all scripts.</span>
+        </div>
       </div>
 
       <!-- Code Pill -->
-      <div class="discount-code-pill flex items-center gap-2 px-3 py-1 rounded-md cursor-pointer" id="copy-code-btn" title="Click to copy">
-        <span class="text-white text-sm font-semibold">RES40</span>
-        <i class="fa-solid fa-copy text-white/70 text-xs"></i>
+      <div class="discount-code-pill-new flex items-center gap-2 cursor-pointer" id="copy-code-btn" title="Click to copy">
+        <div class="flex flex-col items-center leading-none px-3 py-1.5 rounded border border-white/20 hover:border-white/40 transition-colors" style="background: rgba(0,0,0,0.3);">
+          <span class="text-white/50 text-[9px] uppercase tracking-wider font-medium">Code</span>
+          <span class="text-white text-sm font-bold tracking-wide">RES40</span>
+        </div>
+        <i class="fa-solid fa-copy text-white/40 text-sm hover:text-white/70 transition-colors"></i>
       </div>
 
       <!-- Countdown Timer -->
-      <div class="flex items-center gap-1 text-white text-xs">
-        <div class="flex flex-col items-center">
-          <span class="font-bold text-sm" id="countdown-days">09</span>
-          <span class="text-[10px] text-white/50 uppercase">Days</span>
+      <div class="flex items-baseline gap-[3px]">
+        <div class="countdown-unit">
+          <span class="text-white font-bold text-[28px] leading-none" id="countdown-days">09</span>
+          <span class="countdown-label">Days</span>
         </div>
-        <span class="text-white/30 mx-0.5">:</span>
-        <div class="flex flex-col items-center">
-          <span class="font-bold text-sm" id="countdown-hrs">21</span>
-          <span class="text-[10px] text-white/50 uppercase">Hrs</span>
+        <div class="countdown-unit">
+          <span class="text-white font-bold text-[28px] leading-none" id="countdown-hrs">23</span>
+          <span class="countdown-label">Hrs</span>
         </div>
-        <span class="text-white/30 mx-0.5">:</span>
-        <div class="flex flex-col items-center">
-          <span class="font-bold text-sm" id="countdown-mins">26</span>
-          <span class="text-[10px] text-white/50 uppercase">Mins</span>
+        <div class="countdown-unit">
+          <span class="text-white font-bold text-[28px] leading-none" id="countdown-mins">49</span>
+          <span class="countdown-label">Mins</span>
         </div>
-        <span class="text-white/30 mx-0.5">:</span>
-        <div class="flex flex-col items-center">
-          <span class="font-bold text-sm" id="countdown-secs">04</span>
-          <span class="text-[10px] text-white/50 uppercase">Secs</span>
+        <div class="countdown-unit">
+          <span class="text-white font-bold text-[28px] leading-none" id="countdown-secs">40</span>
+          <span class="countdown-label">Secs</span>
         </div>
       </div>
     </div>
