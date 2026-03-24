@@ -186,35 +186,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const question = item.querySelector('.faq-question');
     question.addEventListener('click', () => {
       const wasActive = item.classList.contains('active');
-
-      // Close all
       faqItems.forEach(i => i.classList.remove('active'));
-
-      // Toggle current
-      if (!wasActive) {
-        item.classList.add('active');
-      }
+      if (!wasActive) item.classList.add('active');
     });
   });
 
-  // ---- FAQ Search ----
+  // ---- FAQ Search + Category Filter ----
   const faqSearch = document.getElementById('faq-search');
   const faqCount = document.getElementById('faq-count');
-  if (faqSearch) {
-    faqSearch.addEventListener('input', () => {
-      const query = faqSearch.value.toLowerCase().trim();
-      let visible = 0;
+  const faqChips = document.querySelectorAll('.faq-filter-chip');
 
-      faqItems.forEach(item => {
-        const text = item.getAttribute('data-question').toLowerCase();
-        const match = !query || text.includes(query);
-        item.style.display = match ? '' : 'none';
-        if (match) visible++;
-      });
+  function filterFAQ() {
+    const query = faqSearch ? faqSearch.value.toLowerCase().trim() : '';
+    const activeChip = document.querySelector('.faq-filter-chip.active');
+    const activeCat = activeChip ? activeChip.dataset.category : 'all';
+    let visible = 0;
 
-      faqCount.textContent = visible + ' answer' + (visible !== 1 ? 's' : '');
+    faqItems.forEach(item => {
+      const text = item.getAttribute('data-question').toLowerCase();
+      const cat = item.getAttribute('data-category');
+      const matchSearch = !query || text.includes(query);
+      const matchCat = activeCat === 'all' || cat === activeCat;
+      const show = matchSearch && matchCat;
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
     });
+
+    // Hide category groups with no visible items
+    document.querySelectorAll('.faq-category-group').forEach(group => {
+      const has = group.querySelectorAll('.faq-item[style=""], .faq-item:not([style])');
+      const visibleInGroup = Array.from(has).filter(i => i.style.display !== 'none');
+      group.style.display = visibleInGroup.length ? '' : 'none';
+    });
+
+    if (faqCount) faqCount.textContent = visible + ' answer' + (visible !== 1 ? 's' : '');
   }
+
+  faqChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      faqChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      filterFAQ();
+    });
+  });
+
+  if (faqSearch) faqSearch.addEventListener('input', filterFAQ);
 
   // ---- GSAP Animations ----
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -291,8 +307,14 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
           trigger: el, start: 'top 85%', once: true,
           onEnter: function() {
+            gsap.from(el.querySelectorAll('.faq-category-header'), {
+              opacity: 0, x: -10, duration: 0.3, ease: 'power2.out', stagger: 0.1, delay: 0.2,
+            });
             gsap.from(el.querySelectorAll('.faq-item'), {
-              opacity: 0, x: -15, duration: 0.4, ease: 'power2.out', stagger: 0.05, delay: 0.3,
+              opacity: 0, x: -15, duration: 0.4, ease: 'power2.out', stagger: 0.04, delay: 0.35,
+            });
+            gsap.from(el.querySelectorAll('.faq-filter-chip'), {
+              opacity: 0, y: 8, duration: 0.3, ease: 'power2.out', stagger: 0.06, delay: 0.1,
             });
           }
         }

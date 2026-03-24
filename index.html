@@ -890,7 +890,7 @@
   <!-- ============================================ -->
   <section id="faq" class="mt-28 py-20 bg-white-grid anim-fade-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-left mb-12 max-w-4xl mx-auto lg:mx-0">
+      <div class="text-left mb-12 max-w-4xl mx-auto">
         <span class="block text-white/40 text-lg font-light mb-1">Frequently Asked</span>
         <h2 class="text-4xl sm:text-5xl font-bold mb-4">
           <span class="gradient-text gradient-text-glow">Questions</span>
@@ -900,185 +900,200 @@
         </p>
       </div>
 
-      <div class="flex flex-col lg:flex-row gap-12 items-start">
-        <!-- Left: FAQ Image -->
-        <div class="hidden lg:block flex-shrink-0 w-[300px]">
-          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/faq-image.png" alt="FAQ" class="w-full">
+      <div class="max-w-4xl mx-auto">
+        <!-- Search + Filter -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
+            <input type="text" id="faq-search" placeholder="Search 16 questions..." class="w-full bg-white/5 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-white text-sm placeholder-white/30 focus:outline-none focus:border-white/20 transition">
+          </div>
+          <span class="text-white/40 text-sm whitespace-nowrap" id="faq-count">16 answers</span>
         </div>
 
-        <!-- Right: FAQ List -->
-        <div class="flex-1 w-full">
-          <!-- Search -->
-          <div class="flex items-center gap-4 mb-6">
-            <div class="relative flex-1">
-              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
-              <input type="text" id="faq-search" placeholder="Search questions..." class="w-full bg-white/5 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-white text-sm placeholder-white/30 focus:outline-none focus:border-white/20 transition">
+        <!-- Category Filter Chips -->
+        <div class="flex flex-wrap gap-2 mb-8" id="faq-filters">
+          <button class="faq-filter-chip active" data-category="all">All</button>
+          <button class="faq-filter-chip" data-category="getting-started"><i class="fa-solid fa-rocket text-[10px]"></i> Getting Started</button>
+          <button class="faq-filter-chip" data-category="payment"><i class="fa-solid fa-credit-card text-[10px]"></i> Payment & Refunds</button>
+          <button class="faq-filter-chip" data-category="security"><i class="fa-solid fa-shield-halved text-[10px]"></i> Security & Performance</button>
+          <button class="faq-filter-chip" data-category="support"><i class="fa-solid fa-headset text-[10px]"></i> Support & Updates</button>
+        </div>
+
+        <!-- FAQ Items grouped by category -->
+        <div id="faq-list">
+
+          <!-- Getting Started -->
+          <div class="faq-category-group" data-category="getting-started">
+            <div class="faq-category-header">
+              <i class="fa-solid fa-rocket"></i><span>Getting Started</span>
             </div>
-            <span class="text-white/40 text-sm whitespace-nowrap" id="faq-count">16 answers</span>
+
+            <div class="faq-item cursor-pointer" data-category="getting-started" data-question="How do I install 0Resmon scripts on my FiveM server?">
+              <div class="faq-question">
+                <span class="faq-num">01</span>
+                <span class="faq-question-text">How do I install 0Resmon scripts on my FiveM server?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Simply download your purchased script from Tebex, extract the files into your server's resources folder, add the resource to your server.cfg, and restart your server. Detailed installation guides are included with each script.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="getting-started" data-question="Can I customize 0Resmon scripts to fit my server's needs?">
+              <div class="faq-question">
+                <span class="faq-num">02</span>
+                <span class="faq-question-text">Can I customize 0Resmon scripts to fit my server's needs?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Yes, all our scripts come with comprehensive configuration files that allow you to customize features, UI elements, and behavior to match your server's unique requirements.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="getting-started" data-question="Do 0Resmon scripts support multiple languages?">
+              <div class="faq-question">
+                <span class="faq-num">03</span>
+                <span class="faq-question-text">Do 0Resmon scripts support multiple languages?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Yes, our scripts include built-in localization support. You can easily add or modify language files to support any language your community needs.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="getting-started" data-question="What makes 0Resmon scripts different from other FiveM scripts?">
+              <div class="faq-question">
+                <span class="faq-num">04</span>
+                <span class="faq-question-text">What makes 0Resmon scripts different from other FiveM scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Our scripts stand out through superior optimization, multiplayer synchronization, custom-built assets, and continuous updates. We focus on delivering a premium experience.</div></div>
+            </div>
           </div>
 
-          <!-- FAQ Items -->
-          <div id="faq-list">
-            <div class="faq-item py-4 cursor-pointer" data-question="How do I install 0Resmon scripts on my FiveM server?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">How do I install 0Resmon scripts on my FiveM server?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Simply download your purchased script from Tebex, extract the files into your server's resources folder, add the resource to your server.cfg, and restart your server. Detailed installation guides are included with each script.
-              </div>
+          <!-- Payment & Refunds -->
+          <div class="faq-category-group" data-category="payment">
+            <div class="faq-category-header">
+              <i class="fa-solid fa-credit-card"></i><span>Payment & Refunds</span>
             </div>
 
-            <div class="faq-item py-4 cursor-pointer" data-question="What payment methods are accepted on Tebex?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">What payment methods are accepted on Tebex?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+            <div class="faq-item cursor-pointer" data-category="payment" data-question="What payment methods are accepted on Tebex?">
+              <div class="faq-question">
+                <span class="faq-num">05</span>
+                <span class="faq-question-text">What payment methods are accepted on Tebex?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
               </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Tebex accepts a wide range of payment methods including credit/debit cards (Visa, Mastercard, American Express), PayPal, Paysafecard, and various other regional payment methods.
-              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Tebex accepts a wide range of payment methods including credit/debit cards (Visa, Mastercard, American Express), PayPal, Paysafecard, and various other regional payment methods.</div></div>
             </div>
 
-            <div class="faq-item py-4 cursor-pointer" data-question="Are 0Resmon scripts secure to use?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Are 0Resmon scripts secure to use?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+            <div class="faq-item cursor-pointer" data-category="payment" data-question="Do you offer discounts for bulk purchases of 0Resmon scripts?">
+              <div class="faq-question">
+                <span class="faq-num">06</span>
+                <span class="faq-question-text">Do you offer discounts for bulk purchases of 0Resmon scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
               </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Yes, all our scripts undergo thorough security testing. We use Tebex's escrow system to protect our code while ensuring your server remains safe from vulnerabilities.
-              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Yes! We regularly offer discount codes and bundle deals. Check our Discord server and the discount banner at the top of our store for current promotions.</div></div>
             </div>
 
-            <div class="faq-item py-4 cursor-pointer" data-question="How often are 0Resmon scripts updated?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">How often are 0Resmon scripts updated?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
+            <div class="faq-item cursor-pointer" data-category="payment" data-question="Can I get a refund if I'm not satisfied with a 0Resmon script?">
+              <div class="faq-question">
+                <span class="faq-num">07</span>
+                <span class="faq-question-text">Can I get a refund if I'm not satisfied with a 0Resmon script?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
               </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                We regularly update our scripts to fix bugs, add new features, and ensure compatibility with the latest FiveM updates. Major updates are typically released monthly.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Is there customer support available for 0Resmon scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Is there customer support available for 0Resmon scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Absolutely! We provide support through our Discord server where our team is available to help with installation, configuration, and troubleshooting.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Can I customize 0Resmon scripts to fit my server's needs?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Can I customize 0Resmon scripts to fit my server's needs?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Yes, all our scripts come with comprehensive configuration files that allow you to customize features, UI elements, and behavior to match your server's unique requirements.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Do 0Resmon scripts support multiple languages?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Do 0Resmon scripts support multiple languages?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Yes, our scripts include built-in localization support. You can easily add or modify language files to support any language your community needs.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="What makes 0Resmon scripts different from other FiveM scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">What makes 0Resmon scripts different from other FiveM scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Our scripts stand out through superior optimization, multiplayer synchronization, custom-built assets, and continuous updates. We focus on delivering a premium experience.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Where can I find documentation for 0Resmon scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Where can I find documentation for 0Resmon scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Full documentation is available on our website under the Documentation section. Each script also includes a README file with setup instructions.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Are 0Resmon scripts compatible with mobile devices?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Are 0Resmon scripts compatible with mobile devices?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Our scripts are designed for FiveM servers which run on PC. However, the in-game UI elements are optimized for various screen resolutions.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Do you offer discounts for bulk purchases of 0Resmon scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Do you offer discounts for bulk purchases of 0Resmon scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Yes! We regularly offer discount codes and bundle deals. Check our Discord server and the discount banner at the top of our store for current promotions.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Can I get a refund if I'm not satisfied with a 0Resmon script?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Can I get a refund if I'm not satisfied with a 0Resmon script?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Refund policies are handled through Tebex. Please refer to our Terms & Refunds page for detailed information on our refund policy.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="How do I download updates for 0Resmon scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">How do I download updates for 0Resmon scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Updates are automatically available through your Tebex account. Simply log in, go to your purchases, and download the latest version of your scripts.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Where can I get help if I encounter issues with 0Resmon scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Where can I get help if I encounter issues with 0Resmon scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Our Discord server is the fastest way to get help. Create a support ticket and our team will assist you as quickly as possible.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Do 0Resmon scripts impact server performance?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Do 0Resmon scripts impact server performance?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Our scripts are highly optimized with minimal resource usage. We use efficient coding practices to ensure your server performance remains smooth.
-              </div>
-            </div>
-
-            <div class="faq-item py-4 cursor-pointer" data-question="Can I schedule automatic updates for 0Resmon scripts?">
-              <div class="flex items-center justify-between faq-question">
-                <span class="text-white text-sm font-medium pr-4">Can I schedule automatic updates for 0Resmon scripts?</span>
-                <i class="fa-solid fa-plus text-white/40 text-xs faq-toggle-icon flex-shrink-0"></i>
-              </div>
-              <div class="faq-answer text-white/50 text-sm pr-8">
-                Currently, updates need to be downloaded manually through Tebex. We recommend checking for updates regularly to ensure you have the latest features and fixes.
-              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Refund policies are handled through Tebex. Please refer to our Terms & Refunds page for detailed information on our refund policy.</div></div>
             </div>
           </div>
+
+          <!-- Security & Performance -->
+          <div class="faq-category-group" data-category="security">
+            <div class="faq-category-header">
+              <i class="fa-solid fa-shield-halved"></i><span>Security & Performance</span>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="security" data-question="Are 0Resmon scripts secure to use?">
+              <div class="faq-question">
+                <span class="faq-num">08</span>
+                <span class="faq-question-text">Are 0Resmon scripts secure to use?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Yes, all our scripts undergo thorough security testing. We use Tebex's escrow system to protect our code while ensuring your server remains safe from vulnerabilities.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="security" data-question="Are 0Resmon scripts compatible with mobile devices?">
+              <div class="faq-question">
+                <span class="faq-num">09</span>
+                <span class="faq-question-text">Are 0Resmon scripts compatible with mobile devices?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Our scripts are designed for FiveM servers which run on PC. However, the in-game UI elements are optimized for various screen resolutions.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="security" data-question="Do 0Resmon scripts impact server performance?">
+              <div class="faq-question">
+                <span class="faq-num">10</span>
+                <span class="faq-question-text">Do 0Resmon scripts impact server performance?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Our scripts are highly optimized with minimal resource usage. We use efficient coding practices to ensure your server performance remains smooth.</div></div>
+            </div>
+          </div>
+
+          <!-- Support & Updates -->
+          <div class="faq-category-group" data-category="support">
+            <div class="faq-category-header">
+              <i class="fa-solid fa-headset"></i><span>Support & Updates</span>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="support" data-question="How often are 0Resmon scripts updated?">
+              <div class="faq-question">
+                <span class="faq-num">11</span>
+                <span class="faq-question-text">How often are 0Resmon scripts updated?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">We regularly update our scripts to fix bugs, add new features, and ensure compatibility with the latest FiveM updates. Major updates are typically released monthly.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="support" data-question="Is there customer support available for 0Resmon scripts?">
+              <div class="faq-question">
+                <span class="faq-num">12</span>
+                <span class="faq-question-text">Is there customer support available for 0Resmon scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Absolutely! We provide support through our Discord server where our team is available to help with installation, configuration, and troubleshooting.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="support" data-question="Where can I find documentation for 0Resmon scripts?">
+              <div class="faq-question">
+                <span class="faq-num">13</span>
+                <span class="faq-question-text">Where can I find documentation for 0Resmon scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Full documentation is available on our website under the Documentation section. Each script also includes a README file with setup instructions.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="support" data-question="How do I download updates for 0Resmon scripts?">
+              <div class="faq-question">
+                <span class="faq-num">14</span>
+                <span class="faq-question-text">How do I download updates for 0Resmon scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Updates are automatically available through your Tebex account. Simply log in, go to your purchases, and download the latest version of your scripts.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="support" data-question="Where can I get help if I encounter issues with 0Resmon scripts?">
+              <div class="faq-question">
+                <span class="faq-num">15</span>
+                <span class="faq-question-text">Where can I get help if I encounter issues with 0Resmon scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Our Discord server is the fastest way to get help. Create a support ticket and our team will assist you as quickly as possible.</div></div>
+            </div>
+
+            <div class="faq-item cursor-pointer" data-category="support" data-question="Can I schedule automatic updates for 0Resmon scripts?">
+              <div class="faq-question">
+                <span class="faq-num">16</span>
+                <span class="faq-question-text">Can I schedule automatic updates for 0Resmon scripts?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+              </div>
+              <div class="faq-answer"><div class="faq-answer-inner">Currently, updates need to be downloaded manually through Tebex. We recommend checking for updates regularly to ensure you have the latest features and fixes.</div></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
