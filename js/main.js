@@ -305,40 +305,43 @@ document.addEventListener('DOMContentLoaded', () => {
       const barFill = document.getElementById('achievement-bar-fill');
       const ringArc = document.getElementById('achievement-ring-arc');
 
-      let achievementFired = false;
+      function animateCounters() {
+        counterElements.forEach(el => {
+          const target = parseInt(el.dataset.target);
+          gsap.fromTo({ val: 0 }, { val: 0 }, {
+            val: target,
+            duration: 2.2,
+            ease: 'power2.out',
+            onUpdate: function() {
+              el.textContent = Math.floor(this.targets()[0].val);
+            },
+            onComplete: function() {
+              el.textContent = target;
+            }
+          });
+        });
+        if (barFill) {
+          gsap.fromTo(barFill, { width: '0%' }, { width: '85%', duration: 2, ease: 'power2.out', delay: 0.3 });
+        }
+        if (ringArc) {
+          gsap.fromTo(ringArc, { strokeDashoffset: 327 }, { strokeDashoffset: 88, duration: 2, ease: 'power2.out', delay: 0.4 });
+        }
+      }
+
+      function resetCounters() {
+        counterElements.forEach(el => { el.textContent = '0'; });
+        if (barFill) gsap.set(barFill, { width: '0%' });
+        if (ringArc) gsap.set(ringArc, { strokeDashoffset: 327 });
+      }
+
       ScrollTrigger.create({
         trigger: achievementSection,
         start: 'top 80%',
-        onEnter: () => {
-          if (achievementFired) return;
-          achievementFired = true;
-          // Animate all counters
-          counterElements.forEach(el => {
-            const target = parseInt(el.dataset.target);
-            gsap.to({ val: 0 }, {
-              val: target,
-              duration: 2.2,
-              ease: 'power2.out',
-              onUpdate: function() {
-                el.textContent = Math.floor(this.targets()[0].val);
-              },
-              onComplete: function() {
-                el.textContent = target;
-              }
-            });
-          });
-
-          // Progress bar fill
-          if (barFill) {
-            gsap.to(barFill, { width: '85%', duration: 2, ease: 'power2.out', delay: 0.3 });
-          }
-
-          // SVG ring stroke
-          if (ringArc) {
-            // 327 is full circumference (2*PI*52). Show ~73% = offset of ~88
-            gsap.to(ringArc, { strokeDashoffset: 88, duration: 2, ease: 'power2.out', delay: 0.4 });
-          }
-        }
+        end: 'bottom 20%',
+        onEnter: animateCounters,
+        onEnterBack: animateCounters,
+        onLeave: resetCounters,
+        onLeaveBack: resetCounters,
       });
     }
 
