@@ -169,6 +169,8 @@ body {
 /* --- Floating Chinese Dragon --- */
 #floating-dragon {
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 15;
   pointer-events: none;
   opacity: 0;
