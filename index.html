@@ -217,24 +217,24 @@
         <!-- Left Content -->
         <div class="max-w-2xl z-10">
           <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-tight mb-6 hero-heading">
-            <span class="hero-line block overflow-hidden">
+            <span class="hero-line block overflow-hidden pl-3 sm:pl-4">
               <span class="hero-line-inner block">TAKE YOUR SERVER</span>
             </span>
             <span class="hero-line block overflow-hidden">
               <span class="hero-line-inner block">BEYOND LIMITS WITH</span>
             </span>
-            <span class="hero-line block overflow-hidden">
+            <span class="hero-line block overflow-hidden -ml-0.5">
               <span class="hero-line-inner block"><span class="gradient-text gradient-text-glow">0RESMON</span> RESOURCES</span>
             </span>
           </h1>
-          <p class="hero-subtitle text-white/50 text-base sm:text-lg mb-10 max-w-md leading-relaxed">
+          <p class="hero-subtitle text-white/50 text-sm sm:text-base mb-10 max-w-md leading-relaxed tracking-wide font-light">
             Carefully crafted resources focused on performance, stability, and seamless server integration.
           </p>
           <div class="flex items-center gap-5">
-            <a href="#products" data-magnetic class="hero-btn-browse flex items-center gap-2 px-7 py-3 rounded-lg bg-white text-[#121212] text-sm font-semibold relative overflow-hidden">
+            <a href="#products" data-magnetic class="hero-btn-browse flex items-center gap-2 px-8 py-3.5 rounded-lg bg-white text-[#121212] text-sm font-semibold relative overflow-hidden">
               <span class="relative z-10 flex items-center gap-2">Browse Products <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
             </a>
-            <a href="#" data-magnetic class="hero-btn-discord flex items-center gap-2 px-7 py-3 rounded-full text-white text-sm font-semibold relative overflow-hidden" style="background: linear-gradient(135deg, #FF3A52 0%, #ff5e71 100%);">
+            <a href="#" data-magnetic class="hero-btn-discord flex items-center gap-2 px-6 py-2.5 rounded-full text-white text-sm font-semibold relative overflow-hidden" style="background: linear-gradient(135deg, #FF3A52 0%, #ff5e71 100%);">
               <span class="relative z-10 flex items-center gap-2"><i class="fa-brands fa-discord text-base"></i> Join Discord</span>
             </a>
           </div>
@@ -262,13 +262,13 @@
   <!-- ============================================ -->
   <!-- 4. TOP-SELLING PRODUCTS -->
   <!-- ============================================ -->
-  <section id="products" class="mt-28 section-animate">
+  <section id="products" class="mt-28 anim-slide-left">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Title -->
       <div class="flex items-center gap-4 mb-10">
-        <div class="section-line-left"></div>
+        <span class="text-accent text-2xl leading-none">&bull;</span>
         <h2 class="text-xl font-bold whitespace-nowrap">Top-Selling Products</h2>
-        <div class="section-line-right"></div>
+        <div class="section-line-right flex-1"></div>
       </div>
     </div>
 
@@ -277,11 +277,12 @@
       <div class="swiper product-swiper">
         <div class="swiper-wrapper">
 
-          <!-- Product 1 -->
+          <!-- Product 1 (Featured) -->
           <div class="swiper-slide" style="width: auto;">
-            <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+            <div class="product-card product-card-featured card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+              <div class="aspect-video overflow-hidden relative product-img-odd">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/eee30811b1f540c291317560e1a5d81eef504ec9.png" alt="0R-Multiplayer Heist Robbery Pack" class="w-full h-full object-cover">
+                <span class="absolute top-3 right-3 bg-accent text-white text-xs font-bold px-3 py-1 rounded-md" style="transform: rotate(-3deg);">-30%</span>
               </div>
               <div class="p-4">
                 <h3 class="text-white font-semibold text-sm mb-3 line-clamp-2">0R-Multiplayer Heist Robbery Pack (15 Robbery) Escrow</h3>
@@ -291,11 +292,12 @@
                   <span class="flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 text-[11px] text-white/60"><img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/qbox-logo.png" alt="QBox" class="h-3">QBox</span>
                 </div>
                 <div class="flex items-center gap-2 mb-4">
-                  <span class="text-white font-bold text-lg">&euro;70.00</span>
+                  <span class="text-white font-bold text-xl">&euro;70.00</span>
                   <span class="text-white/40 line-through text-sm">&euro;100.00</span>
-                  <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden">
+                  <span class="product-btn-text relative z-10">Add to Basket</span>
+                </button>
               </div>
             </div>
           </div>
@@ -303,7 +305,7 @@
           <!-- Product 2 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-even">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/c4924c0df7d3572a58ae0588f3baa2a7b0828864.png" alt="0R-Nail Studio Script" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -318,7 +320,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;42.86</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -326,7 +328,7 @@
           <!-- Product 3 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-odd">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/eac0fb0628b9f0e6386c52d331344886f8a68da9.png" alt="Frkn-Police Job Pack" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -341,7 +343,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;85.72</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -349,7 +351,7 @@
           <!-- Product 4 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-even">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/75e201dc6274db15d32f3e4fb6cd50f12b2cf040.png" alt="WAIS HUD V6" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -364,7 +366,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;60.00</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -372,7 +374,7 @@
           <!-- Product 5 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-odd">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/a0b12d38b96bd1eea3040078a84e77ced9276cc9.png" alt="0R-Multiplayer Builder Job Script" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -387,7 +389,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;50.00</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -395,7 +397,7 @@
           <!-- Product 6 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-even">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/08f23fec05195b4e5c99b8e599cc6a0a6b446030.png" alt="0R-Multiplayer Farming Job Script" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -410,7 +412,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;50.00</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -418,7 +420,7 @@
           <!-- Product 7 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-odd">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/62dbc0905b6080cb0f3b82e32ba3bbba50f750a0.png" alt="JOBPACK +20 JOB" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -433,7 +435,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;64.29</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -441,7 +443,7 @@
           <!-- Product 8 -->
           <div class="swiper-slide" style="width: auto;">
             <div class="product-card card-bg border border-white/5 rounded-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-video overflow-hidden product-img-even">
                 <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/c7f9646638e6711ceddd48af4d412b2836e4027b.png" alt="Multiplayer Illegal Job Pack" class="w-full h-full object-cover">
               </div>
               <div class="p-4">
@@ -456,7 +458,7 @@
                   <span class="text-white/40 line-through text-sm">&euro;85.72</span>
                   <span class="bg-accent/20 text-accent text-xs font-semibold px-2 py-0.5 rounded-md">-30%</span>
                 </div>
-                <button class="w-full bg-white text-black text-sm font-medium py-3 px-5 rounded-md hover:bg-white/90 transition btn-glow-hover">Add to Basket</button>
+                <button class="product-btn w-full text-sm font-medium py-3 px-5 rounded-md transition relative overflow-hidden"><span class="product-btn-text relative z-10">Add to Basket</span></button>
               </div>
             </div>
           </div>
@@ -466,10 +468,10 @@
     </div>
 
     <!-- View All Packages -->
-    <div class="flex justify-center mt-8">
-      <a href="#" class="flex items-center gap-2 px-8 py-3 rounded-md border border-white/10 text-white text-sm font-medium hover:bg-white/5 transition">
+    <div class="flex justify-end mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#" class="view-all-link text-white/60 text-sm font-medium hover:text-white transition inline-flex items-center gap-2">
         View All Packages
-        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+        <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
   </section>
@@ -477,265 +479,177 @@
   <!-- ============================================ -->
   <!-- 5. CUSTOMER REVIEWS -->
   <!-- ============================================ -->
-  <section id="reviews" class="mt-28 py-20 bg-red-grid section-animate">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
-        Customer <span class="gradient-text gradient-text-glow">Reviews</span>
-      </h2>
+  <section id="reviews" class="mt-32 py-20 bg-red-grid section-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-14" id="reviews-header">
+        <p class="text-white/30 text-sm uppercase tracking-[0.2em] font-medium mb-2">Customer</p>
+        <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Reviews</h2>
 
-      <!-- Rating Pill -->
-      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/10 mb-6 rating-pill-glow">
-        <span class="text-white text-sm">Average</span>
-        <span class="text-white font-bold text-lg">4.8</span>
-        <div class="flex items-center gap-0.5">
-          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
-          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
-          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
-          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
-          <i class="fa-solid fa-star text-accent star-glow text-sm"></i>
+        <div class="flex items-end gap-5 mb-4">
+          <span class="gradient-text text-5xl sm:text-6xl font-bold leading-none" id="reviews-rating" style="text-shadow: 0 0 40px rgba(255,58,82,0.2);">4.8</span>
+          <div class="pb-1">
+            <div class="flex items-center gap-1 mb-1" id="reviews-stars">
+              <i class="fa-solid fa-star text-accent star-subtle text-sm"></i>
+              <i class="fa-solid fa-star text-accent star-subtle text-sm"></i>
+              <i class="fa-solid fa-star text-accent star-subtle text-sm"></i>
+              <i class="fa-solid fa-star text-accent star-subtle text-sm"></i>
+              <i class="fa-solid fa-star text-accent star-subtle text-sm"></i>
+            </div>
+            <p class="text-white/30 text-xs">out of 5</p>
+          </div>
         </div>
-        <span class="text-white/50 text-sm">Based on 10.000+ reviews</span>
-      </div>
 
-      <p class="text-white/50 text-base max-w-2xl mx-auto mb-12">
-        Real feedback from our community after installing and using our <strong class="text-white">FiveM</strong> resources.
-      </p>
+        <p class="text-white/40 text-sm mb-6">Based on 10,000+ community reviews</p>
+        <p class="text-white/50 text-sm max-w-lg">
+          Real feedback from our community after installing and using our <strong class="text-white/70">FiveM</strong> resources.
+        </p>
+        <div class="reviews-separator h-px mt-8 bg-gradient-to-r from-[rgba(255,58,82,0.3)] to-transparent"></div>
+      </div>
     </div>
 
-    <!-- Review Marquee -->
-    <div class="overflow-hidden" style="-webkit-mask-image: linear-gradient(90deg, transparent 0%, #D9D9D9 10%, #D9D9D9 90%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #D9D9D9 10%, #D9D9D9 90%, transparent 100%);">
+    <div class="overflow-hidden" id="review-marquee-container" style="-webkit-mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);">
       <div class="review-marquee-track" id="review-marquee">
-        <!-- Review 1 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=1" alt="Alex Johnson" class="w-10 h-10 rounded-full">
+
+        <div class="review-card review-card-a" data-variant="a">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://i.pravatar.cc/150?img=11" alt="Alex Johnson" class="w-11 h-11 rounded-lg object-cover">
             <div>
               <p class="text-white text-sm font-semibold">Alex Johnson</p>
               <p class="text-white/40 text-xs">Oct 2, 2025</p>
             </div>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">0Resmon's resources have transformed our FiveM server! The quality of scripts is unmatched and support is incredible.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Nail Shop</span>
-          </div>
+          <p class="text-white/60 text-base mb-3"><strong class="text-white/70 font-normal">0Resmon's resources have transformed our FiveM server!</strong> The quality of scripts is unmatched and support is incredible. <span class="text-accent/60 font-medium">&mdash; 0R Nail Shop</span></p>
         </div>
 
-        <!-- Review 2 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=2" alt="Sarah Miller" class="w-10 h-10 rounded-full">
-            <div>
+        <div class="review-card review-card-b" data-variant="b">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=32" alt="Sarah Miller" class="w-8 h-8 rounded-full object-cover">
               <p class="text-white text-sm font-semibold">Sarah Miller</p>
-              <p class="text-white/40 text-xs">Oct 5, 2025</p>
             </div>
+            <span class="bg-[rgba(255,58,82,0.1)] text-accent text-xs px-1.5 py-0.5 rounded font-medium">5.0</span>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">Absolutely amazing quality! Every script works flawlessly and the documentation makes setup a breeze.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Vehicle System</span>
+          <p class="review-text text-white/60 text-sm mb-3">Absolutely amazing quality! Every script works flawlessly and the documentation makes setup a breeze.</p>
+          <div class="flex items-center justify-between text-xs text-white/30">
+            <span>Oct 5, 2025</span>
+            <span class="text-accent/50">0R Vehicle System</span>
           </div>
         </div>
 
-        <!-- Review 3 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+        <div class="review-card review-card-c" data-variant="c">
           <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=3" alt="Mike Chen" class="w-10 h-10 rounded-full">
+            <img src="https://i.pravatar.cc/150?img=15" alt="Mike Chen" class="w-12 h-12 rounded-full object-cover ring-2 ring-[rgba(255,58,82,0.2)]">
             <div>
               <p class="text-white text-sm font-semibold">Mike Chen</p>
               <p class="text-white/40 text-xs">Oct 8, 2025</p>
             </div>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          <div class="flex items-center gap-1.5 mb-3">
+            <i class="fa-solid fa-star text-accent text-xs"></i>
+            <span class="text-white/50 text-xs">5/5</span>
           </div>
-          <p class="text-white/60 text-sm mb-4">Very satisfied with the product quality. The scripts are well-optimized and the updates keep coming regularly.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Banking</span>
-          </div>
+          <p class="text-white/60 text-sm mb-3"><strong class="text-white/70 font-normal">Very satisfied with the product quality.</strong> The scripts are well-optimized and the updates keep coming regularly.</p>
+          <span class="inline-block bg-white/[0.03] px-2 py-1 rounded text-xs text-white/40">0R Banking</span>
         </div>
 
-        <!-- Review 4 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=4" alt="Emma Davis" class="w-10 h-10 rounded-full">
-            <div>
+        <div class="review-card review-card-b" data-variant="b">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=25" alt="Emma Davis" class="w-8 h-8 rounded-full object-cover">
               <p class="text-white text-sm font-semibold">Emma Davis</p>
-              <p class="text-white/40 text-xs">Oct 12, 2025</p>
             </div>
+            <span class="bg-[rgba(255,58,82,0.1)] text-accent text-xs px-1.5 py-0.5 rounded font-medium">5.0</span>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">Good scripts overall. Easy to configure and the support team responds quickly to any questions.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Inventory</span>
+          <p class="review-text text-white/60 text-sm mb-3">Good scripts overall. Easy to configure and the support team responds quickly to any questions.</p>
+          <div class="flex items-center justify-between text-xs text-white/30">
+            <span>Oct 12, 2025</span>
+            <span class="text-accent/50">0R Inventory</span>
           </div>
         </div>
 
-        <!-- Review 5 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=5" alt="James Wilson" class="w-10 h-10 rounded-full">
+        <div class="review-card review-card-a" data-variant="a">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://i.pravatar.cc/150?img=53" alt="James Wilson" class="w-11 h-11 rounded-lg object-cover">
             <div>
               <p class="text-white text-sm font-semibold">James Wilson</p>
               <p class="text-white/40 text-xs">Oct 15, 2025</p>
             </div>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">These scripts have taken our roleplay server to the next level. Premium quality at a fair price.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Job System</span>
-          </div>
+          <p class="text-white/60 text-base mb-3"><strong class="text-white/70 font-normal">These scripts have taken our roleplay server to the next level.</strong> Premium quality at a fair price. <span class="text-accent/60 font-medium">&mdash; 0R Job System</span></p>
         </div>
 
-        <!-- Review 6 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=6" alt="Lisa Anderson" class="w-10 h-10 rounded-full">
-            <div>
+        <div class="review-card review-card-b" data-variant="b">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=44" alt="Lisa Anderson" class="w-8 h-8 rounded-full object-cover">
               <p class="text-white text-sm font-semibold">Lisa Anderson</p>
-              <p class="text-white/40 text-xs">Oct 18, 2025</p>
             </div>
+            <span class="bg-[rgba(255,58,82,0.1)] text-accent text-xs px-1.5 py-0.5 rounded font-medium">5.0</span>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">Great value for money. The scripts are well-documented and easy to integrate with existing setups.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Housing</span>
+          <p class="review-text text-white/60 text-sm mb-3">Great value for money. The scripts are well-documented and easy to integrate with existing setups.</p>
+          <div class="flex items-center justify-between text-xs text-white/30">
+            <span>Oct 18, 2025</span>
+            <span class="text-accent/50">0R Housing</span>
           </div>
         </div>
 
-        <!-- Review 7 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
+        <div class="review-card review-card-c" data-variant="c">
           <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=7" alt="David Brown" class="w-10 h-10 rounded-full">
+            <img src="https://i.pravatar.cc/150?img=57" alt="David Brown" class="w-12 h-12 rounded-full object-cover ring-2 ring-[rgba(255,58,82,0.2)]">
             <div>
               <p class="text-white text-sm font-semibold">David Brown</p>
               <p class="text-white/40 text-xs">Oct 21, 2025</p>
             </div>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
+          <div class="flex items-center gap-1.5 mb-3">
+            <i class="fa-solid fa-star text-accent text-xs"></i>
+            <span class="text-white/50 text-xs">5/5</span>
           </div>
-          <p class="text-white/60 text-sm mb-4">Solid script with regular updates. The developer clearly cares about quality and customer satisfaction.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Garage System</span>
-          </div>
+          <p class="text-white/60 text-sm mb-3"><strong class="text-white/70 font-normal">Solid script with regular updates.</strong> The developer clearly cares about quality and customer satisfaction.</p>
+          <span class="inline-block bg-white/[0.03] px-2 py-1 rounded text-xs text-white/40">0R Garage System</span>
         </div>
 
-        <!-- Review 8 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=8" alt="Sophie Taylor" class="w-10 h-10 rounded-full">
-            <div>
+        <div class="review-card review-card-b" data-variant="b">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=28" alt="Sophie Taylor" class="w-8 h-8 rounded-full object-cover">
               <p class="text-white text-sm font-semibold">Sophie Taylor</p>
-              <p class="text-white/40 text-xs">Oct 24, 2025</p>
             </div>
+            <span class="bg-[rgba(255,58,82,0.1)] text-accent text-xs px-1.5 py-0.5 rounded font-medium">5.0</span>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">Impressed with how smooth everything runs. Zero performance issues and the UI is beautifully designed.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Phone</span>
+          <p class="review-text text-white/60 text-sm mb-3">Impressed with how smooth everything runs. Zero performance issues and the UI is beautifully designed.</p>
+          <div class="flex items-center justify-between text-xs text-white/30">
+            <span>Oct 24, 2025</span>
+            <span class="text-accent/50">0R Phone</span>
           </div>
         </div>
 
-        <!-- Review 9 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=9" alt="Ryan Martinez" class="w-10 h-10 rounded-full">
+        <div class="review-card review-card-a" data-variant="a">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://i.pravatar.cc/150?img=59" alt="Ryan Martinez" class="w-11 h-11 rounded-lg object-cover">
             <div>
               <p class="text-white text-sm font-semibold">Ryan Martinez</p>
               <p class="text-white/40 text-xs">Oct 27, 2025</p>
             </div>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">Very professional scripts with excellent documentation. The multiplayer features work perfectly.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Shop System</span>
-          </div>
+          <p class="text-white/60 text-base mb-3"><strong class="text-white/70 font-normal">Very professional scripts with excellent documentation.</strong> The multiplayer features work perfectly. <span class="text-accent/60 font-medium">&mdash; 0R Shop System</span></p>
         </div>
 
-        <!-- Review 10 -->
-        <div class="card-bg border border-white/5 rounded-lg p-5 w-[340px] flex-shrink-0">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="https://i.pravatar.cc/150?img=10" alt="Olivia Garcia" class="w-10 h-10 rounded-full">
-            <div>
+        <div class="review-card review-card-b" data-variant="b">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=20" alt="Olivia Garcia" class="w-8 h-8 rounded-full object-cover">
               <p class="text-white text-sm font-semibold">Olivia Garcia</p>
-              <p class="text-white/40 text-xs">Oct 30, 2025</p>
             </div>
+            <span class="bg-[rgba(255,58,82,0.1)] text-accent text-xs px-1.5 py-0.5 rounded font-medium">5.0</span>
           </div>
-          <div class="flex items-center gap-0.5 mb-3">
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-            <i class="fa-solid fa-star text-accent star-glow text-xs"></i>
-          </div>
-          <p class="text-white/60 text-sm mb-4">Best scripts on the market! Our players love the new features and everything runs without any lag.</p>
-          <div class="flex items-center gap-2 text-white/40 text-xs">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>0R Dealership</span>
+          <p class="review-text text-white/60 text-sm mb-3">Best scripts on the market! Our players love the new features and everything runs without any lag.</p>
+          <div class="flex items-center justify-between text-xs text-white/30">
+            <span>Oct 30, 2025</span>
+            <span class="text-accent/50">0R Dealership</span>
           </div>
         </div>
 
-        <!-- Duplicated reviews for seamless loop (will be cloned by JS) -->
       </div>
     </div>
   </section>
@@ -743,74 +657,64 @@
   <!-- ============================================ -->
   <!-- 6. WHY CHOOSE US -->
   <!-- ============================================ -->
-  <section id="why-choose-us" class="mt-28 py-20 bg-white-grid">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14 section-animate">
+  <section id="why-choose-us" class="mt-24 py-20 bg-white-grid anim-stagger-cards">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">
           Why <span class="gradient-text gradient-text-glow">Choose Us</span>
         </h2>
-        <p class="text-white/50 text-base max-w-xl mx-auto">
+        <p class="text-white/50 text-base max-w-2xl mx-auto">
           We deliver optimized, reliable solutions that integrate smoothly and perform <strong class="text-white">consistently</strong> on your server.
         </p>
       </div>
 
-      <!-- Asymmetric bento grid -->
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-5">
+      <div class="bento-grid max-w-5xl mx-auto">
+        <!-- Card 1: Support & Community — full-width hero card, glassmorphism -->
+        <div class="bento-card bento-hero rounded-lg p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-5" style="background: rgba(255,255,255,0.02); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08);">
+          <div class="w-12 h-12 rounded-xl bg-[#5865F2]/10 flex items-center justify-center flex-shrink-0">
+            <i class="fa-brands fa-discord text-[#5865F2] text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-lg mb-2">Support & Community</h3>
+            <p class="text-white/50 text-sm mb-4 max-w-lg">Join our active Discord community for instant support, updates, and discussions with other server owners and our development team.</p>
+            <a href="#" class="text-[#5865F2] text-sm font-medium hover:underline">Join our Discord!</a>
+          </div>
+        </div>
 
-        <!-- Card 1: Support & Community — hero card, 3 cols -->
-        <div class="bento-card bento-discord md:col-span-3 border border-white/5 rounded-lg p-7 sm:p-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(18,18,18,0.95) 0%, rgba(30,20,35,0.85) 100%);">
-          <div class="flex items-start justify-between mb-5">
-            <div>
-              <h3 class="text-white font-bold text-xl mb-1">Support & Community</h3>
-              <p class="text-white/40 text-sm">Real humans. Real help. Not a ticket queue.</p>
+        <!-- Row 2: Quality (60%) + Easy to Use (40%) -->
+        <div class="bento-row-2">
+          <!-- Card 2: Quality & Performance — card-bg + left accent line -->
+          <div class="bento-card bento-wide card-bg rounded-lg p-6 relative overflow-hidden" style="border: 1px solid rgba(255,255,255,0.05); border-left: 3px solid rgba(255,58,82,0.4);">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                <i class="fa-solid fa-file-lines text-accent text-xl"></i>
+              </div>
+              <h3 class="text-white font-bold text-lg">Quality & Performance</h3>
             </div>
-            <div class="bento-discord-badge flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium" style="background: rgba(88,101,242,0.15); border: 1px solid rgba(88,101,242,0.25); color: #7c8af4;">
-              <span class="inline-block w-2 h-2 rounded-full bg-green-500 bento-online-dot"></span>
-              127 online
+            <p class="text-white/50 text-sm mb-4">Every script is thoroughly tested and optimized to ensure minimal resource usage while delivering maximum functionality for your server.</p>
+            <a href="#" class="text-accent text-sm font-medium hover:underline">Read our Docs!</a>
+          </div>
+
+          <!-- Card 3: Easy to Use — solid dark bg, no border, shadow only -->
+          <div class="bento-card bento-narrow rounded-lg p-6" style="background: #161616; box-shadow: 0 4px 24px rgba(0,0,0,0.3), 0 0 0 0 transparent;">
+            <div class="mb-4">
+              <i class="fa-solid fa-wand-magic-sparkles text-accent text-2xl"></i>
             </div>
-          </div>
-          <p class="text-white/50 text-sm leading-relaxed mb-5 max-w-md">Join our active Discord community for instant support, updates, and discussions with other server owners and our development team.</p>
-          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium transition-colors" style="color: #7c8af4;">
-            <i class="fa-brands fa-discord"></i>
-            Join our Discord
-            <span class="text-white/20">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Card 2: Quality & Performance — stat-led, 2 cols -->
-        <div class="bento-card bento-perf md:col-span-2 border-l-2 border border-white/5 rounded-lg p-6 relative" style="background: linear-gradient(180deg, rgba(18,18,18,0.95) 0%, rgba(16,24,20,0.9) 100%); border-left-color: rgba(16,185,129,0.35);">
-          <div class="mb-4">
-            <span class="bento-perf-stat font-mono text-3xl font-bold tracking-tight" style="color: #34d399;">0.01<span class="text-lg">ms</span></span>
-            <p class="text-white/30 text-xs mt-1 font-mono tracking-wide uppercase">avg. resource usage</p>
-          </div>
-          <h3 class="text-white font-semibold text-base mb-2">Quality & Performance</h3>
-          <p class="text-white/40 text-sm leading-relaxed mb-4">Every script is thoroughly tested and optimized to ensure minimal resource usage while delivering maximum functionality.</p>
-          <a href="#" class="text-accent text-sm font-medium hover:underline">Read our Docs &rarr;</a>
-        </div>
-
-        <!-- Card 3: Easy to Use — compact, declarative, 2 cols -->
-        <div class="bento-card bento-easy md:col-span-2 border border-white/5 rounded-lg p-5 relative" style="background: #161616;">
-          <h3 class="text-white font-semibold text-base mb-3">Easy to Use</h3>
-          <p class="text-white/60 text-sm font-medium leading-snug mb-4">Install in minutes.<br>Configure in seconds.</p>
-          <div class="font-mono text-xs px-3 py-2 rounded" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.45);">
-            <span style="color: #FF3A52;">$</span> ensure 0r-vehicle<span class="bento-cursor">|</span>
+            <h3 class="text-white font-bold text-lg mb-3">Easy to Use</h3>
+            <p class="text-white/50 text-sm">Detailed docs and intuitive configs make installation and customization simple for everyone.</p>
           </div>
         </div>
 
-        <!-- Card 4: Tebex Security — wide banner, 3 cols -->
-        <div class="bento-card bento-tebex md:col-span-3 border border-dashed border-white/10 rounded-lg px-6 py-4 flex items-center gap-5" style="background: rgba(18,18,18,0.9);">
-          <img src="https://r2.fivemanage.com/ATZ00IXjgOwoZjH5kxuUl/tebex.png" alt="Tebex" class="w-8 h-8 opacity-60 shrink-0">
-          <div class="flex-1 min-w-0">
-            <span class="text-white font-semibold text-sm">Tebex Security</span>
-            <span class="text-white/30 mx-2">&middot;</span>
-            <span class="text-white/40 text-sm">Industry-standard encryption. Safe payments. Instant delivery.</span>
+        <!-- Card 4: Tebex Security — banner-style, dotted border -->
+        <div class="bento-card bento-banner rounded-lg px-6 py-5 flex items-center gap-4" style="border: 1px dashed rgba(255,255,255,0.1); background: transparent;">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-shield-halved text-emerald-400 text-xl"></i>
           </div>
-          <div class="hidden sm:flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded" style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15); color: rgba(16,185,129,0.6);">
-            <i class="fa-solid fa-lock text-[10px]"></i>
-            SECURED
+          <div>
+            <h3 class="text-white font-bold text-sm inline">Tebex Security</h3>
+            <span class="text-white/40 text-sm ml-1">&mdash; All transactions secured with industry-standard encryption. Safe payments, instant delivery.</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -818,7 +722,7 @@
   <!-- ============================================ -->
   <!-- 7. OUR ACHIEVEMENTS -->
   <!-- ============================================ -->
-  <section id="achievements" class="mt-28 py-20 bg-red-grid section-animate">
+  <section id="achievements" class="mt-20 py-20 bg-red-grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">
@@ -829,21 +733,21 @@
         </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
-        <!-- Sales -->
-        <div class="text-center px-8 py-6 rounded-lg border border-white/10 feature-card-glow">
-          <div class="counter-value text-white" data-target="42">0</div>
-          <div class="text-white/40 text-sm mt-1 uppercase tracking-wider">K Sales</div>
+      <div class="flex flex-col sm:flex-row items-end justify-center gap-8 sm:gap-14">
+        <!-- Sales — large, heavy -->
+        <div class="text-center px-10 py-7 rounded-lg border border-white/10 feature-card-glow">
+          <div class="counter-value text-white" data-target="42" data-ease="linear" style="font-size: 4rem;">0</div>
+          <div class="text-white/40 text-sm mt-2 uppercase tracking-wider">K Sales</div>
         </div>
-        <!-- Active Players -->
-        <div class="text-center px-8 py-6 rounded-lg border border-white/10 feature-card-glow">
-          <div class="counter-value text-white" data-target="150">0</div>
-          <div class="text-white/40 text-sm mt-1 uppercase tracking-wider">K Active Players</div>
+        <!-- Active Players — offset up, gradient, smaller -->
+        <div class="text-center px-8 py-6 rounded-lg border border-white/10 feature-card-glow sm:-mb-5">
+          <div class="counter-value gradient-text" data-target="150" data-ease="elastic" style="font-size: 2.5rem; filter: drop-shadow(0 0 20px rgba(255,58,82,0.3));">0</div>
+          <div class="text-white/40 text-xs mt-2 uppercase tracking-widest">K Active Players</div>
         </div>
-        <!-- Active Servers -->
-        <div class="text-center px-8 py-6 rounded-lg border border-white/10 feature-card-glow">
-          <div class="counter-value text-white" data-target="5">0</div>
-          <div class="text-white/40 text-sm mt-1 uppercase tracking-wider">K Active Servers</div>
+        <!-- Active Servers — medium, text-shadow glow -->
+        <div class="text-center px-9 py-6 rounded-lg border border-white/10 feature-card-glow">
+          <div class="counter-value text-white" data-target="5" data-ease="power4" style="font-size: 3.25rem; text-shadow: 0 0 40px rgba(255,58,82,0.4), 0 0 80px rgba(255,58,82,0.15);">0</div>
+          <div class="text-white/40 text-sm mt-2 uppercase tracking-wider">K Active Servers</div>
         </div>
       </div>
     </div>
@@ -852,7 +756,7 @@
   <!-- ============================================ -->
   <!-- 8. YOUTUBE SECTION -->
   <!-- ============================================ -->
-  <section id="youtube" class="mt-28 section-animate">
+  <section id="youtube" class="mt-36 anim-slide-right">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <div class="flex items-center justify-center gap-3 mb-4">
@@ -864,18 +768,20 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Video 1 -->
-        <a href="https://www.youtube.com/watch?v=LDi63eVRS0s" target="_blank" class="group">
-          <div class="card-bg border border-white/5 rounded-lg overflow-hidden">
-            <div class="aspect-video overflow-hidden relative">
-              <img src="https://img.youtube.com/vi/LDi63eVRS0s/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
-                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <!-- Video 1 (Featured) -->
+        <a href="https://www.youtube.com/watch?v=LDi63eVRS0s" target="_blank" class="group lg:col-span-2 lg:row-span-2">
+          <div class="card-bg border border-white/5 rounded-lg overflow-hidden h-full">
+            <div class="aspect-video lg:aspect-auto lg:h-full overflow-hidden relative min-h-[200px]">
+              <img src="https://img.youtube.com/vi/LDi63eVRS0s/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500">
+              <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition">
+                <div class="w-16 h-16 rounded-full bg-accent/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <i class="fa-solid fa-play text-white text-xl ml-1"></i>
+                </div>
               </div>
-            </div>
-            <div class="p-3">
-              <p class="text-white text-xs line-clamp-2">Fivem Multiplayer Hunting Script | GROUP SYSTEM | LEVEL XP BASED | +15 MISSONS | FULL SYNC</p>
+              <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent">
+                <p class="text-white text-sm font-medium line-clamp-2">Fivem Multiplayer Hunting Script | GROUP SYSTEM | LEVEL XP BASED | +15 MISSONS | FULL SYNC</p>
+              </div>
             </div>
           </div>
         </a>
@@ -886,7 +792,7 @@
             <div class="aspect-video overflow-hidden relative">
               <img src="https://img.youtube.com/vi/G3s4IyYNP1M/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
               <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
-                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+                <i class="fa-solid fa-play text-white text-lg opacity-70"></i>
               </div>
             </div>
             <div class="p-3">
@@ -901,22 +807,22 @@
             <div class="aspect-video overflow-hidden relative">
               <img src="https://img.youtube.com/vi/Sk7nI5nt26k/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
               <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
-                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+                <i class="fa-solid fa-play text-white text-lg opacity-70"></i>
               </div>
             </div>
             <div class="p-3">
-              <p class="text-white text-xs line-clamp-2">Fivem Multiplayer Pirate Ship Heist Script - Custom Ship - Minigames - Interactions [ESX/QB/QBOX]</p>
+              <p class="text-white text-xs line-clamp-2">Fivem Multiplayer Pirate Ship Heist Script - Custom Ship - Minigames [ESX/QB/QBOX]</p>
             </div>
           </div>
         </a>
 
         <!-- Video 4 -->
-        <a href="https://www.youtube.com/watch?v=GKOI-N5vfAs" target="_blank" class="group">
+        <a href="https://www.youtube.com/watch?v=GKOI-N5vfAs" target="_blank" class="group lg:col-start-3">
           <div class="card-bg border border-white/5 rounded-lg overflow-hidden">
             <div class="aspect-video overflow-hidden relative">
               <img src="https://img.youtube.com/vi/GKOI-N5vfAs/maxresdefault.jpg" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
               <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
-                <i class="fa-solid fa-play text-white text-2xl opacity-80"></i>
+                <i class="fa-solid fa-play text-white text-lg opacity-70"></i>
               </div>
             </div>
             <div class="p-3">
@@ -931,13 +837,14 @@
   <!-- ============================================ -->
   <!-- 9. FAQ SECTION -->
   <!-- ============================================ -->
-  <section id="faq" class="mt-28 py-20 bg-white-grid section-animate">
+  <section id="faq" class="mt-24 py-20 bg-white-grid anim-fade-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
-          Frequently Asked <span class="gradient-text gradient-text-glow">Questions</span>
+      <div class="text-left mb-12 max-w-4xl mx-auto lg:mx-0">
+        <span class="block text-white/40 text-lg font-light mb-1">Frequently Asked</span>
+        <h2 class="text-4xl sm:text-5xl font-bold mb-4">
+          <span class="gradient-text gradient-text-glow">Questions</span>
         </h2>
-        <p class="text-white/50 text-base max-w-2xl mx-auto">
+        <p class="text-white/50 text-base max-w-xl">
           Find answers to common questions about our FiveM resources and Tebex checkout.
         </p>
       </div>
@@ -1129,9 +1036,10 @@
   <!-- ============================================ -->
   <!-- 10. RECENT PAYMENTS -->
   <!-- ============================================ -->
-  <section id="recent-payments" class="mt-28 py-20 bg-red-grid section-animate">
+  <section id="recent-payments" class="mt-20 py-20 bg-red-grid anim-payment-feed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
+        <span class="block text-xs tracking-[0.25em] text-white/30 uppercase mb-2">Live</span>
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">
           Recent <span class="gradient-text gradient-text-glow">Payments</span>
         </h2>
@@ -1207,7 +1115,7 @@
   <!-- ============================================ -->
   <!-- 11. DISCORD CTA -->
   <!-- ============================================ -->
-  <section id="discord-cta" class="mt-28 section-animate">
+  <section id="discord-cta" class="mt-32 anim-scale-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="discord-cta-border p-8 sm:p-12 flex flex-col lg:flex-row items-center gap-8">
         <!-- Left Content -->
@@ -1233,7 +1141,7 @@
   <!-- ============================================ -->
   <!-- 12. FOOTER -->
   <!-- ============================================ -->
-  <footer class="mt-28" style="background: #1B1B1B;">
+  <footer class="mt-20" style="background: #1B1B1B;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="flex flex-col lg:flex-row gap-12">
         <!-- Left: Logos + Dragon -->

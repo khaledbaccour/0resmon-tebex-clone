@@ -130,14 +130,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ---- Review Marquee (clone nodes for seamless loop) ----
+  // ---- Review Marquee (GSAP-driven) ----
   const reviewMarquee = document.getElementById('review-marquee');
-  if (reviewMarquee) {
+  const reviewContainer = document.getElementById('review-marquee-container');
+  if (reviewMarquee && reviewContainer) {
     const children = Array.from(reviewMarquee.children);
-    children.forEach(child => {
-      const clone = child.cloneNode(true);
-      reviewMarquee.appendChild(clone);
-    });
+    children.forEach(child => reviewMarquee.appendChild(child.cloneNode(true)));
+
+    const totalWidth = reviewMarquee.scrollWidth / 2;
+    const marqueeAnim = gsap.to(reviewMarquee, { x: -totalWidth, duration: 50, ease: 'none', repeat: -1 });
+
+    reviewContainer.addEventListener('mouseenter', () => gsap.to(marqueeAnim, { timeScale: 0.15, duration: 0.6 }));
+    reviewContainer.addEventListener('mouseleave', () => gsap.to(marqueeAnim, { timeScale: 1, duration: 0.8 }));
+  }
+
+  // ---- Reviews Entrance Animation ----
+  const reviewsHeader = document.getElementById('reviews-header');
+  if (reviewsHeader) {
+    const ratingEl = document.getElementById('reviews-rating');
+    const starsEl = document.getElementById('reviews-stars');
+    const separator = reviewsHeader.querySelector('.reviews-separator');
+    const rtl = gsap.timeline({ scrollTrigger: { trigger: '#reviews', start: 'top 80%', once: true } });
+
+    rtl.from(reviewsHeader.querySelectorAll('p:first-child, h2'), { x: -20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
+
+    if (ratingEl) {
+      rtl.from(ratingEl, { opacity: 0, duration: 0.4 }, '-=0.3');
+      rtl.add(() => {
+        gsap.to({ val: 0 }, { val: 4.8, duration: 1.2, ease: 'power2.out', onUpdate: function() { ratingEl.textContent = this.targets()[0].val.toFixed(1); } });
+      }, '-=0.3');
+    }
+    if (starsEl) rtl.from(starsEl.children, { opacity: 0, scale: 0, duration: 0.3, stagger: 0.08, ease: 'back.out(2)' }, '-=0.8');
+    if (separator) rtl.from(separator, { scaleX: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
+    if (reviewContainer) rtl.from(reviewContainer, { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2');
   }
 
   // ---- FAQ Accordion ----
@@ -180,41 +205,73 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Section fade-in + slide-up on scroll
-    gsap.utils.toArray('.section-animate').forEach(section => {
-      gsap.from(section, {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power2.out',
+    // --- Per-section entrance animations (varied, not uniform) ---
+
+    // Products: slide from left
+    gsap.utils.toArray('.anim-slide-left').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, x: -40, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // Reviews: fade with scale
+    gsap.utils.toArray('.anim-scale-in').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, scale: 0.97, duration: 1, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // Why Choose Us: stagger child cards
+    gsap.utils.toArray('.anim-stagger-cards').forEach(section => {
+      var cards = section.querySelectorAll('.bento-card');
+      if (!cards.length) cards = section.querySelectorAll('.feature-card-glow, .card-bg');
+      gsap.from(cards, {
+        opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', stagger: 0.15,
+        scrollTrigger: { trigger: section, start: 'top 80%', once: true }
+      });
+    });
+
+    // YouTube: slide from right
+    gsap.utils.toArray('.anim-slide-right').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, x: 40, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // FAQ: fade up then stagger items
+    gsap.utils.toArray('.anim-fade-up').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
         scrollTrigger: {
-          trigger: section,
-          start: 'top 85%',
-          once: true,
+          trigger: el, start: 'top 85%', once: true,
+          onEnter: function() {
+            gsap.from(el.querySelectorAll('.faq-item'), {
+              opacity: 0, x: -15, duration: 0.4, ease: 'power2.out', stagger: 0.05, delay: 0.3,
+            });
+          }
         }
       });
     });
 
-    // Bento "Why Choose Us" choreographed entrance
-    const bentoSection = document.querySelector('#why-choose-us');
-    if (bentoSection) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: bentoSection,
-          start: 'top 80%',
-          once: true,
-        }
+    // Recent Payments: entries slide in from right as "live feed"
+    gsap.utils.toArray('.anim-payment-feed').forEach(section => {
+      var entries = section.querySelectorAll('.payment-entry, .payment-entry ~ div');
+      gsap.from(entries, {
+        opacity: 0, x: 30, duration: 0.5, ease: 'power2.out', stagger: 0.12,
+        scrollTrigger: { trigger: section, start: 'top 80%', once: true }
       });
-      const discord = bentoSection.querySelector('.bento-discord');
-      const perf = bentoSection.querySelector('.bento-perf');
-      const easy = bentoSection.querySelector('.bento-easy');
-      const tebex = bentoSection.querySelector('.bento-tebex');
+    });
 
-      if (discord) tl.from(discord, { y: 40, opacity: 0, duration: 0.7, ease: 'power2.out' });
-      if (perf) tl.from(perf, { y: 30, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.35');
-      if (easy) tl.from(easy, { y: 20, opacity: 0, duration: 0.5, ease: 'back.out(1.4)' }, '-=0.25');
-      if (tebex) tl.from(tebex, { y: 15, opacity: 0, duration: 0.4, ease: 'power1.out' }, '-=0.15');
-    }
+    // Discord CTA: scale up from center
+    gsap.utils.toArray('.anim-scale-up').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, scale: 0.94, duration: 1, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
 
     // Achievement counter animation
     const counterElements = document.querySelectorAll('.counter-value[data-target]');
@@ -285,6 +342,22 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'back.out(1.7)',
       stagger: 0.15,
     }, 0.6);
+
+    // ---- Hero logo scroll exit ----
+    var heroLogosContainer = document.querySelector('.hero-logos-container');
+    if (heroLogosContainer) {
+      gsap.to(heroLogosContainer, {
+        opacity: 0.3,
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'bottom 80%',
+          end: 'bottom 20%',
+          scrub: 1,
+        }
+      });
+    }
 
     // ---- Organic Dual-Layer Floating ----
     const logoConfigs = [
@@ -380,6 +453,39 @@ document.addEventListener('DOMContentLoaded', () => {
           ease: 'elastic.out(1, 0.4)',
         });
       });
+    });
+
+    // ---- Background parallax on grid sections ----
+    document.querySelectorAll('.bg-red-grid, .bg-white-grid').forEach(function(section) {
+      gsap.to(section, {
+        backgroundPositionY: '10%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      });
+    });
+  }
+
+  // ---- Cursor trail (desktop only) ----
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var trailDot = document.createElement('div');
+    trailDot.className = 'cursor-trail-dot';
+    document.body.appendChild(trailDot);
+
+    var trailTimeout;
+    document.addEventListener('mousemove', function(e) {
+      trailDot.style.opacity = '1';
+      trailDot.style.left = e.clientX - 4 + 'px';
+      trailDot.style.top = e.clientY - 4 + 'px';
+
+      clearTimeout(trailTimeout);
+      trailTimeout = setTimeout(function() {
+        trailDot.style.opacity = '0';
+      }, 200);
     });
   }
 
